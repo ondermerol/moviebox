@@ -11,10 +11,10 @@
 //
 
 import UIKit
-import Alamofire
+import SCLAlertView
 
 protocol DashboardViewBusinessLogic {
-    func getMovies()
+    func getPopularMovies(forpage page:Int)
 }
 
 protocol DashboardViewDataStore {
@@ -23,15 +23,17 @@ protocol DashboardViewDataStore {
 
 class DashboardViewInteractor: DashboardViewBusinessLogic, DashboardViewDataStore {
     var presenter: DashboardViewPresentationLogic?
-    var worker: DashboardViewWorker?
+    var worker: DashboardViewWorker? = DashboardViewWorker()
   
-  // MARK: Do something
-  
-    func getMovies() {
-        let request = AF.request("https://api.themoviedb.org/3/movie/popular/?api_key=8c42cdf8179116388dd8fb6ca5a7046d&page=1")
-            // 2
-        request.responseJSON { (data) in
-              print(data)
-        }
+    func getPopularMovies(forpage page:Int) {
+        
+        worker?.getPopularMovies(forpage: page, completionHandler: { (movieList, error) in
+            
+            if let movieList = movieList, error == nil  {
+                self.presenter?.presentPopularMovies(movieListViewModel: movieList)
+            } else {
+                DialogBoxUtility.showError(message: Constants.errorMessage)
+            }
+        })
     }
 }

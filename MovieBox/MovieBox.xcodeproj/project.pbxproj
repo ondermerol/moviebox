@@ -15,14 +15,9 @@
 		B05EA4762686329B00BCC124 /* DashboardViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05EA46E2686329B00BCC124 /* DashboardViewRouter.swift */; };
 		B05EA4772686329B00BCC124 /* DashboardViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05EA46E2686329B00BCC124 /* DashboardViewRouter.swift */; };
 		B05EA4782686329B00BCC124 /* DashboardViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05EA46F2686329B00BCC124 /* DashboardViewModels.swift */; };
-		B05EA4792686329B00BCC124 /* DashboardViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05EA46F2686329B00BCC124 /* DashboardViewModels.swift */; };
-		B05EA47A2686329B00BCC124 /* DashboardViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05EA4702686329B00BCC124 /* DashboardViewViewController.swift */; };
-		B05EA47B2686329B00BCC124 /* DashboardViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05EA4702686329B00BCC124 /* DashboardViewViewController.swift */; };
 		B05EA47C2686329B00BCC124 /* DashboardViewInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05EA4712686329B00BCC124 /* DashboardViewInteractor.swift */; };
 		B05EA47D2686329B00BCC124 /* DashboardViewInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05EA4712686329B00BCC124 /* DashboardViewInteractor.swift */; };
-		B0E96E5126863AD100BFF38E /* BaseInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E96E5026863AD100BFF38E /* BaseInteractor.swift */; };
 		B0EEB382268621EA00EF5BEC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EEB381268621EA00EF5BEC /* AppDelegate.swift */; };
-		B0EEB386268621EA00EF5BEC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EEB385268621EA00EF5BEC /* ViewController.swift */; };
 		B0EEB389268621EA00EF5BEC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0EEB387268621EA00EF5BEC /* Main.storyboard */; };
 		B0EEB38B268621EA00EF5BEC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B0EEB38A268621EA00EF5BEC /* Assets.xcassets */; };
 		B0EEB38E268621EA00EF5BEC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B0EEB38C268621EA00EF5BEC /* LaunchScreen.storyboard */; };
@@ -30,6 +25,19 @@
 		B0EEB3A4268621EB00EF5BEC /* MovieBoxUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EEB3A3268621EB00EF5BEC /* MovieBoxUITests.swift */; };
 		B7C301F5EE811045551DBC30 /* Pods_MovieBox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDCB6FE01D76CD4029FCE5D4 /* Pods_MovieBox.framework */; };
 		EF78E1A2D6EC4B5F6351C3B3 /* Pods_MovieBoxTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05BA9D668EF444A1A8F1AEA3 /* Pods_MovieBoxTests.framework */; };
+		F4B347032687090700AB6899 /* DashboardViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05EA46C2686329B00BCC124 /* DashboardViewPresenter.swift */; };
+		F4B347042687090900AB6899 /* DashboardViewWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05EA46D2686329B00BCC124 /* DashboardViewWorker.swift */; };
+		F4B347072687090F00AB6899 /* DashboardViewInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05EA4712686329B00BCC124 /* DashboardViewInteractor.swift */; };
+		F4B3470A2687091900AB6899 /* DashboardViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05EA46E2686329B00BCC124 /* DashboardViewRouter.swift */; };
+		F4B3470B2687091F00AB6899 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EEB381268621EA00EF5BEC /* AppDelegate.swift */; };
+		F4B3470C2687091F00AB6899 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0EEB381268621EA00EF5BEC /* AppDelegate.swift */; };
+		F4B3471026871AA100AB6899 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B3470F26871AA100AB6899 /* DashboardViewController.swift */; };
+		F4B3471226871B3F00AB6899 /* DashboardViewController+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B3471126871B3F00AB6899 /* DashboardViewController+CollectionView.swift */; };
+		F4B34714268751A800AB6899 /* TransactionURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B34713268751A800AB6899 /* TransactionURL.swift */; };
+		F4B34716268752F600AB6899 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B34715268752F600AB6899 /* Constants.swift */; };
+		F4B34718268755A200AB6899 /* DialogBoxUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B34717268755A200AB6899 /* DialogBoxUtility.swift */; };
+		F4B3471B2687605300AB6899 /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B3471A2687605300AB6899 /* MovieCell.swift */; };
+		F4B3471D2687624D00AB6899 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B3471C2687624D00AB6899 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,12 +67,9 @@
 		B05EA46D2686329B00BCC124 /* DashboardViewWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewWorker.swift; sourceTree = "<group>"; };
 		B05EA46E2686329B00BCC124 /* DashboardViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewRouter.swift; sourceTree = "<group>"; };
 		B05EA46F2686329B00BCC124 /* DashboardViewModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModels.swift; sourceTree = "<group>"; };
-		B05EA4702686329B00BCC124 /* DashboardViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewViewController.swift; sourceTree = "<group>"; };
 		B05EA4712686329B00BCC124 /* DashboardViewInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewInteractor.swift; sourceTree = "<group>"; };
-		B0E96E5026863AD100BFF38E /* BaseInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseInteractor.swift; sourceTree = "<group>"; };
 		B0EEB37E268621EA00EF5BEC /* MovieBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0EEB381268621EA00EF5BEC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B0EEB385268621EA00EF5BEC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		B0EEB388268621EA00EF5BEC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B0EEB38A268621EA00EF5BEC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B0EEB38D268621EA00EF5BEC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -79,6 +84,13 @@
 		BDCB6FE01D76CD4029FCE5D4 /* Pods_MovieBox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MovieBox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2A7EFB8FBBDC11BAE072236 /* Pods-MovieBoxTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieBoxTests.debug.xcconfig"; path = "Target Support Files/Pods-MovieBoxTests/Pods-MovieBoxTests.debug.xcconfig"; sourceTree = "<group>"; };
 		F4A770701894B5DAB24A1AD5 /* Pods-MovieBox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieBox.release.xcconfig"; path = "Target Support Files/Pods-MovieBox/Pods-MovieBox.release.xcconfig"; sourceTree = "<group>"; };
+		F4B3470F26871AA100AB6899 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewController.swift; sourceTree = "<group>"; };
+		F4B3471126871B3F00AB6899 /* DashboardViewController+CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DashboardViewController+CollectionView.swift"; sourceTree = "<group>"; };
+		F4B34713268751A800AB6899 /* TransactionURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionURL.swift; sourceTree = "<group>"; };
+		F4B34715268752F600AB6899 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		F4B34717268755A200AB6899 /* DialogBoxUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogBoxUtility.swift; sourceTree = "<group>"; };
+		F4B3471A2687605300AB6899 /* MovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
+		F4B3471C2687624D00AB6899 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,14 +134,6 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		B0E96E4F26863A8200BFF38E /* Base */ = {
-			isa = PBXGroup;
-			children = (
-				B0E96E5026863AD100BFF38E /* BaseInteractor.swift */,
-			);
-			path = Base;
-			sourceTree = "<group>";
-		};
 		B0EEB375268621EA00EF5BEC = {
 			isa = PBXGroup;
 			children = (
@@ -155,10 +159,9 @@
 		B0EEB380268621EA00EF5BEC /* MovieBox */ = {
 			isa = PBXGroup;
 			children = (
-				B0E96E4F26863A8200BFF38E /* Base */,
+				F4B346FE268708B000AB6899 /* Common */,
 				B0EEB3B126862FAA00EF5BEC /* Dashboard */,
 				B0EEB381268621EA00EF5BEC /* AppDelegate.swift */,
-				B0EEB385268621EA00EF5BEC /* ViewController.swift */,
 				B0EEB387268621EA00EF5BEC /* Main.storyboard */,
 				B0EEB38A268621EA00EF5BEC /* Assets.xcassets */,
 				B0EEB38C268621EA00EF5BEC /* LaunchScreen.storyboard */,
@@ -188,12 +191,14 @@
 		B0EEB3B126862FAA00EF5BEC /* Dashboard */ = {
 			isa = PBXGroup;
 			children = (
-				B05EA46C2686329B00BCC124 /* DashboardViewPresenter.swift */,
-				B05EA46D2686329B00BCC124 /* DashboardViewWorker.swift */,
-				B05EA46E2686329B00BCC124 /* DashboardViewRouter.swift */,
+				F4B347192687603000AB6899 /* Cells */,
 				B05EA46F2686329B00BCC124 /* DashboardViewModels.swift */,
-				B05EA4702686329B00BCC124 /* DashboardViewViewController.swift */,
+				B05EA46D2686329B00BCC124 /* DashboardViewWorker.swift */,
 				B05EA4712686329B00BCC124 /* DashboardViewInteractor.swift */,
+				B05EA46C2686329B00BCC124 /* DashboardViewPresenter.swift */,
+				F4B3470F26871AA100AB6899 /* DashboardViewController.swift */,
+				F4B3471126871B3F00AB6899 /* DashboardViewController+CollectionView.swift */,
+				B05EA46E2686329B00BCC124 /* DashboardViewRouter.swift */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -206,6 +211,25 @@
 				05BA9D668EF444A1A8F1AEA3 /* Pods_MovieBoxTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F4B346FE268708B000AB6899 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				F4B34713268751A800AB6899 /* TransactionURL.swift */,
+				F4B34715268752F600AB6899 /* Constants.swift */,
+				F4B34717268755A200AB6899 /* DialogBoxUtility.swift */,
+				F4B3471C2687624D00AB6899 /* Extensions.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		F4B347192687603000AB6899 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				F4B3471A2687605300AB6899 /* MovieCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -446,15 +470,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4B3471B2687605300AB6899 /* MovieCell.swift in Sources */,
+				F4B34714268751A800AB6899 /* TransactionURL.swift in Sources */,
+				F4B34716268752F600AB6899 /* Constants.swift in Sources */,
 				B05EA4742686329B00BCC124 /* DashboardViewWorker.swift in Sources */,
-				B0E96E5126863AD100BFF38E /* BaseInteractor.swift in Sources */,
-				B0EEB386268621EA00EF5BEC /* ViewController.swift in Sources */,
-				B05EA47A2686329B00BCC124 /* DashboardViewViewController.swift in Sources */,
 				B05EA47C2686329B00BCC124 /* DashboardViewInteractor.swift in Sources */,
+				F4B34718268755A200AB6899 /* DialogBoxUtility.swift in Sources */,
 				B05EA4762686329B00BCC124 /* DashboardViewRouter.swift in Sources */,
 				B0EEB382268621EA00EF5BEC /* AppDelegate.swift in Sources */,
+				F4B3471226871B3F00AB6899 /* DashboardViewController+CollectionView.swift in Sources */,
 				B05EA4722686329B00BCC124 /* DashboardViewPresenter.swift in Sources */,
+				F4B3471026871AA100AB6899 /* DashboardViewController.swift in Sources */,
 				B05EA4782686329B00BCC124 /* DashboardViewModels.swift in Sources */,
+				F4B3471D2687624D00AB6899 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -462,12 +490,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B05EA47B2686329B00BCC124 /* DashboardViewViewController.swift in Sources */,
-				B05EA4792686329B00BCC124 /* DashboardViewModels.swift in Sources */,
 				B05EA47D2686329B00BCC124 /* DashboardViewInteractor.swift in Sources */,
 				B05EA4772686329B00BCC124 /* DashboardViewRouter.swift in Sources */,
 				B05EA4732686329B00BCC124 /* DashboardViewPresenter.swift in Sources */,
 				B05EA4752686329B00BCC124 /* DashboardViewWorker.swift in Sources */,
+				F4B3470B2687091F00AB6899 /* AppDelegate.swift in Sources */,
 				B0EEB399268621EB00EF5BEC /* MovieBoxTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -476,7 +503,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4B347072687090F00AB6899 /* DashboardViewInteractor.swift in Sources */,
+				F4B347032687090700AB6899 /* DashboardViewPresenter.swift in Sources */,
+				F4B347042687090900AB6899 /* DashboardViewWorker.swift in Sources */,
 				B0EEB3A4268621EB00EF5BEC /* MovieBoxUITests.swift in Sources */,
+				F4B3470C2687091F00AB6899 /* AppDelegate.swift in Sources */,
+				F4B3470A2687091900AB6899 /* DashboardViewRouter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -12,49 +12,24 @@
 
 import UIKit
 
-@objc protocol DashboardViewRoutingLogic
-{
-  //func routeToSomewhere(segue: UIStoryboardSegue?)
+@objc protocol DashboardViewRoutingLogic {
+  
 }
 
-protocol DashboardViewDataPassing
-{
-  var dataStore: DashboardViewDataStore? { get }
+protocol DashboardViewDataPassing {
+    var dataStore: DashboardViewDataStore? { get }
 }
 
-class DashboardViewRouter: NSObject, DashboardViewRoutingLogic, DashboardViewDataPassing
-{
-  weak var viewController: DashboardViewViewController?
-  var dataStore: DashboardViewDataStore?
+class DashboardViewRouter: NSObject, DashboardViewRoutingLogic, DashboardViewDataPassing {
+    weak var viewController: DashboardViewController?
+    var dataStore: DashboardViewDataStore?
   
-  // MARK: Routing
+    // MARK: Routing
   
-  //func routeToSomewhere(segue: UIStoryboardSegue?)
-  //{
-  //  if let segue = segue {
-  //    let destinationVC = segue.destination as! SomewhereViewController
-  //    var destinationDS = destinationVC.router!.dataStore!
-  //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-  //  } else {
-  //    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-  //    let destinationVC = storyboard.instantiateViewController(withIdentifier: "SomewhereViewController") as! SomewhereViewController
-  //    var destinationDS = destinationVC.router!.dataStore!
-  //    passDataToSomewhere(source: dataStore!, destination: &destinationDS)
-  //    navigateToSomewhere(source: viewController!, destination: destinationVC)
-  //  }
-  //}
 
-  // MARK: Navigation
+    // MARK: Navigation
   
-  //func navigateToSomewhere(source: DashboardViewViewController, destination: SomewhereViewController)
-  //{
-  //  source.show(destination, sender: nil)
-  //}
   
-  // MARK: Passing data
+    // MARK: Passing data
   
-  //func passDataToSomewhere(source: DashboardViewDataStore, destination: inout SomewhereDataStore)
-  //{
-  //  destination.name = source.name
-  //}
 }

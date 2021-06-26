@@ -12,20 +12,15 @@
 
 import UIKit
 
-protocol DashboardViewPresentationLogic
-{
-  func presentSomething(response: DashboardView.Something.Response)
+protocol DashboardViewPresentationLogic {
+    func presentPopularMovies(movieListViewModel: MovieListViewModel)
 }
 
 class DashboardViewPresenter: DashboardViewPresentationLogic
 {
-  weak var viewController: DashboardViewDisplayLogic?
+    weak var viewController: DashboardViewDisplayLogic?
   
-  // MARK: Do something
-  
-  func presentSomething(response: DashboardView.Something.Response)
-  {
-    let viewModel = DashboardView.Something.ViewModel()
-    viewController?.displaySomething(viewModel: viewModel)
-  }
+    func presentPopularMovies(movieListViewModel: MovieListViewModel) {
+        viewController?.displayPopularMovies(movieListViewModel: movieListViewModel)
+    }
 }

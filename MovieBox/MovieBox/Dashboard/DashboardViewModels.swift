@@ -12,20 +12,49 @@
 
 import UIKit
 
-enum DashboardView
-{
-  // MARK: Use cases
-  
-  enum Something
-  {
-    struct Request
-    {
+enum DashboardSections: Int {
+    case Movie
+    case Person
+}
+
+struct Person: Decodable {
+    let id: Int
+    let biography: String
+    let alsoKnownAs: [String]
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case biography
+        case alsoKnownAs = "also_known_as"
     }
-    struct Response
-    {
+}
+
+struct Movie: Decodable {
+    let id: Int
+    let title: String?
+    let descripton: String?
+    let posterPath: String?
+    let backdropPath: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case title = "original_title"
+        case descripton = "overview"
+        case posterPath = "poster_path"
+        case backdropPath = "backdrop_path"
     }
-    struct ViewModel
-    {
+}
+
+struct MovieListViewModel: Decodable {
+    let items: [Movie]
+    let totalPages: Int
+    let totalResults: Int
+    let page: Int
+    
+    enum CodingKeys: String, CodingKey {
+        case items = "results"
+        case totalPages = "total_pages"
+        case totalResults = "total_results"
+        case page = "page"
     }
-  }
 }
