@@ -15,6 +15,9 @@ import UIKit
 protocol DashboardViewDisplayLogic: class {
     func displayPopularMovies(movieListViewModel: MovieListViewModel)
     func displaySearchedMovies(movieListViewModel: MovieListViewModel)
+    func displaySearchedPeople(peopleListViewModel: PeopleListViewModel)
+    func displayBothSearchedPeopleAndMovie(movieListViewModel: MovieListViewModel,
+                                           peopleListViewModel: PeopleListViewModel)
 }
 
 class DashboardViewController: BaseViewControlller, DashboardViewDisplayLogic {
@@ -26,6 +29,7 @@ class DashboardViewController: BaseViewControlller, DashboardViewDisplayLogic {
     
     var movieListViewModel: MovieListViewModel?
     var searchedMovieListViewModel: MovieListViewModel?
+    var searchedPeopleListViewModel: PeopleListViewModel?
     var hasActivePaginationServiceCall: Bool = false
     
     var isSearching: Bool = false
@@ -150,6 +154,31 @@ class DashboardViewController: BaseViewControlller, DashboardViewDisplayLogic {
         } else {
             self.searchedMovieListViewModel?.items.append(contentsOf: movieListViewModel.items)
         }
+        
+        isSearching = true
+        hasActivePaginationServiceCall = false
+        collectionView?.reloadData()
+    }
+    
+    func displaySearchedPeople(peopleListViewModel: PeopleListViewModel) {
+        
+        if self.searchedPeopleListViewModel == nil || self.searchedPeopleListViewModel?.items.count == 0 {
+            self.searchedPeopleListViewModel = peopleListViewModel
+        } else {
+            self.searchedPeopleListViewModel?.items.append(contentsOf: peopleListViewModel.items)
+        }
+        
+        isSearching = true
+        hasActivePaginationServiceCall = false
+        collectionView?.reloadData()
+    }
+    
+    func displayBothSearchedPeopleAndMovie(movieListViewModel: MovieListViewModel,
+                                           peopleListViewModel: PeopleListViewModel) {
+        
+        self.searchedMovieListViewModel = movieListViewModel
+        
+        self.searchedPeopleListViewModel = peopleListViewModel
         
         isSearching = true
         hasActivePaginationServiceCall = false

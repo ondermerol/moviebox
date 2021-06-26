@@ -12,14 +12,16 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
     // MARK: UICollectionViewDataSource protocol
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return Constants.sectionNumber
+        return isSearching ? 2 : 1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         print("isSearching 1 = \(isSearching)")
-        let moviewList = isSearching ? searchedMovieListViewModel : movieListViewModel
         
-        if (moviewList?.items.count).intValue == 0 {
+        if isSearching
+            && (searchedMovieListViewModel?.items.count).intValue == 0
+            && (searchedPeopleListViewModel?.items.count).intValue == 0 {
+            
             collectionView.setEmptyMessage(message: "There is no any result.")
         } else {
             collectionView.restore()
@@ -27,9 +29,10 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
         
         switch DashboardSections(rawValue: section) {
         case .Movie:
-            return (moviewList?.items.count).intValue // TODO:Mock
+            let moviewList = isSearching ? searchedMovieListViewModel : movieListViewModel
+            return (moviewList?.items.count).intValue
         case .Person:
-            return 0
+            return (searchedPeopleListViewModel?.items.count).intValue
         case .none:
             return .zero
         }
@@ -41,23 +44,41 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         print("isSearching 2 = \(isSearching)")
-        let moviewList = isSearching ? searchedMovieListViewModel : movieListViewModel
-        
-        if (moviewList?.page).intValue < (moviewList?.totalPages).intValue
-            && indexPath.row == ((moviewList?.items.count).intValue * (moviewList?.page).intValue) - 1 {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ActivityIndicatorCell", for: indexPath)
-            return cell
-        }
         
         switch DashboardSections(rawValue: indexPath.section) {
         case .Movie:
+            
+            let moviewList = isSearching ? searchedMovieListViewModel : movieListViewModel
+            
+            if (moviewList?.page).intValue < (moviewList?.totalPages).intValue
+                && indexPath.row == ((moviewList?.items.count).intValue * (moviewList?.page).intValue) - 1 {
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ActivityIndicatorCell", for: indexPath)
+                return cell
+            }
+            
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! MovieCell
             let movie = moviewList?.items[indexPath.row]
             cell.viewModel = CustomCellViewModel(name: (movie?.title).stringValue,
                                                  imageUrl: (movie?.posterPath).stringValue)
             return cell
         case .Person:
-            break
+            
+            if isSearching {
+                let moviewList = searchedPeopleListViewModel
+                
+                if (moviewList?.page).intValue < (moviewList?.totalPages).intValue
+                    && indexPath.row == ((moviewList?.items.count).intValue * (moviewList?.page).intValue) - 1 {
+                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ActivityIndicatorCell", for: indexPath)
+                    return cell
+                }
+                
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! MovieCell
+                let movie = moviewList?.items[indexPath.row]
+                cell.viewModel = CustomCellViewModel(name: (movie?.title).stringValue,
+                                                     imageUrl: (movie?.posterPath).stringValue)
+                return cell
+            }
+    
         case .none:
             break
         }
@@ -69,22 +90,28 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         print("isSearching 3 = \(isSearching)")
-        let moviewList = isSearching ? searchedMovieListViewModel : movieListViewModel
         
         if kind == UICollectionView.elementKindSectionHeader {
              let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "header", for: indexPath) as! SectionHeader
             
-            if (moviewList?.items.count).intValue == 0 {
-                sectionHeader.label.text = ""
-            } else {
-                switch DashboardSections(rawValue: indexPath.section) {
-                case .Movie:
-                    sectionHeader.label.text = "Students"
-                case .Person:
-                    sectionHeader.label.text = "Cars"
-                case .none:
-                    break
+            switch DashboardSections(rawValue: indexPath.section) {
+            case .Movie:
+                let moviewList = isSearching ? searchedMovieListViewModel : movieListViewModel
+                
+                if (moviewList?.items.count).intValue == 0 {
+                    sectionHeader.label.text = ""
+                } else {
+                    sectionHeader.label.text = "Movies"
                 }
+            case .Person:
+                if isSearching {
+                    sectionHeader.label.text = "People"
+                } else {
+                    sectionHeader.label.text = ""
+                }
+                
+            case .none:
+                break
             }
             
              return sectionHeader
@@ -98,21 +125,40 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        print("Index path = \(indexPath)  --  hasActivePaginationServiceCall = \(hasActivePaginationServiceCall)")
-        print("isSearching 4 = \(isSearching)")
-        let moviewList = isSearching ? searchedMovieListViewModel : movieListViewModel
         
-        if (moviewList?.page).intValue < (moviewList?.totalPages).intValue
-            && indexPath.row == ((moviewList?.items.count).intValue * (moviewList?.page).intValue) - 1
-            && !hasActivePaginationServiceCall {
-            hasActivePaginationServiceCall = true
+        switch DashboardSections(rawValue: indexPath.section) {
+        case .Movie:
+            let moviewList = isSearching ? searchedMovieListViewModel : movieListViewModel
             
-            if isSearching {
-                interactor?.searchMovies(forpage: (moviewList?.page).intValue + 1, queryString: searchText)
-            } else {
-                interactor?.getPopularMovies(forpage: (moviewList?.page).intValue + 1)
+            if (moviewList?.page).intValue < (moviewList?.totalPages).intValue
+                && indexPath.row == ((moviewList?.items.count).intValue * (moviewList?.page).intValue) - 1
+                && !hasActivePaginationServiceCall {
+                hasActivePaginationServiceCall = true
+                
+                if isSearching {
+                    interactor?.searchMovies(forpage: (moviewList?.page).intValue + 1, queryString: searchText)
+                } else {
+                    interactor?.getPopularMovies(forpage: (moviewList?.page).intValue + 1)
+                }
             }
+            
+        case .Person:
+            if isSearching {
+                let moviewList = searchedPeopleListViewModel
+                
+                if (moviewList?.page).intValue < (moviewList?.totalPages).intValue
+                    && indexPath.row == ((moviewList?.items.count).intValue * (moviewList?.page).intValue) - 1
+                    && !hasActivePaginationServiceCall {
+                    hasActivePaginationServiceCall = true
+                    
+                    interactor?.searchPeople(forpage: (moviewList?.page).intValue + 1, queryString: searchText)
+                }
+            }
+        case .none:
+            break
         }
+        
+        
     }
     
     // MARK: - UICollectionViewDelegate protocol

@@ -17,15 +17,30 @@ enum DashboardSections: Int {
     case Person
 }
 
+
 struct Person: Decodable {
     let id: Int
-    let biography: String
-    let alsoKnownAs: [String]
+    let name: String
+    let image: [String]
     
     enum CodingKeys: String, CodingKey {
         case id
-        case biography
-        case alsoKnownAs = "also_known_as"
+        case name
+        case image = "profile_path  "
+    }
+}
+
+struct PeopleListViewModel: Decodable {
+    var items: [Movie]
+    let totalPages: Int
+    let totalResults: Int
+    let page: Int
+    
+    enum CodingKeys: String, CodingKey {
+        case items = "results"
+        case totalPages = "total_pages"
+        case totalResults = "total_results"
+        case page = "page"
     }
 }
 
