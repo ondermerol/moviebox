@@ -39,6 +39,12 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
+        if (movieListViewModel?.page).intValue < (movieListViewModel?.totalPages).intValue
+            && indexPath.row == ((movieListViewModel?.items.count).intValue * (movieListViewModel?.page).intValue) - 1 {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ActivityIndicatorCell", for: indexPath)
+            return cell
+        }
+        
         switch DashboardSections(rawValue: indexPath.section) {
         case .Movie:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! MovieCell
@@ -82,6 +88,16 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: collectionView.frame.width, height: 40)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        print("Index path = \(indexPath)")
+        if (movieListViewModel?.page).intValue < (movieListViewModel?.totalPages).intValue
+            && indexPath.row == ((movieListViewModel?.items.count).intValue * (movieListViewModel?.page).intValue) - 1
+            && !hasActivePaginationServiceCall {
+            hasActivePaginationServiceCall = true
+            interactor?.getPopularMovies(forpage: (movieListViewModel?.page).intValue + 1)
+        }
     }
     
     // MARK: - UICollectionViewDelegate protocol

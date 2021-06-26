@@ -46,7 +46,7 @@ struct Movie: Decodable {
 }
 
 struct MovieListViewModel: Decodable {
-    let items: [Movie]
+    var items: [Movie]
     let totalPages: Int
     let totalResults: Int
     let page: Int

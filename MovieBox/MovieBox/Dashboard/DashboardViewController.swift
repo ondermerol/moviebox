@@ -25,6 +25,7 @@ class DashboardViewController: BaseViewControlller, DashboardViewDisplayLogic {
     var router: (NSObjectProtocol & DashboardViewRoutingLogic & DashboardViewDataPassing)?
     
     var movieListViewModel: MovieListViewModel?
+    var hasActivePaginationServiceCall: Bool = false
     
     fileprivate let collectionView:UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -33,6 +34,7 @@ class DashboardViewController: BaseViewControlller, DashboardViewDisplayLogic {
         cv.translatesAutoresizingMaskIntoConstraints = false
         cv.register(MovieCell.self, forCellWithReuseIdentifier: "cell")
         cv.register(SectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "header")
+        cv.register(ActivityIndicatorCell.self, forCellWithReuseIdentifier: "ActivityIndicatorCell")
         return cv
     }()
     
@@ -106,7 +108,14 @@ class DashboardViewController: BaseViewControlller, DashboardViewDisplayLogic {
     // MARK: DashboardViewDisplayLogic
     
     func displayPopularMovies(movieListViewModel: MovieListViewModel) {
-        self.movieListViewModel = movieListViewModel
+        
+        if self.movieListViewModel == nil || self.movieListViewModel?.items.count == 0 {
+            self.movieListViewModel = movieListViewModel
+        } else {
+            self.movieListViewModel?.items.append(contentsOf: movieListViewModel.items)
+        }
+        
+        hasActivePaginationServiceCall = false
         collectionView.reloadData()
     }
 }
