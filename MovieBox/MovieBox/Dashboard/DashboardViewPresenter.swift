@@ -14,8 +14,6 @@ import UIKit
 
 protocol DashboardViewPresentationLogic {
     func presentPopularMovies(movieListViewModel: MovieListViewModel)
-    func presentSearchedMovies(movieListViewModel: MovieListViewModel)
-    func presentSearchedPeople(peopleListViewModel: PeopleListViewModel)
     func presentBothSearchedPeopleAndMovie(movieListViewModel: MovieListViewModel,
                                            peopleListViewModel: PeopleListViewModel)
 }
@@ -26,14 +24,6 @@ class DashboardViewPresenter: DashboardViewPresentationLogic
   
     func presentPopularMovies(movieListViewModel: MovieListViewModel) {
         viewController?.displayPopularMovies(movieListViewModel: movieListViewModel)
-    }
-    
-    func presentSearchedMovies(movieListViewModel: MovieListViewModel) {
-        viewController?.displaySearchedMovies(movieListViewModel: movieListViewModel)
-    }
-    
-    func presentSearchedPeople(peopleListViewModel: PeopleListViewModel) {
-        viewController?.displaySearchedPeople(peopleListViewModel: peopleListViewModel)
     }
     
     func presentBothSearchedPeopleAndMovie(movieListViewModel: MovieListViewModel,

@@ -50,13 +50,14 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
             
             let moviewList = isSearching ? searchedMovieListViewModel : movieListViewModel
             
-            if (moviewList?.page).intValue < (moviewList?.totalPages).intValue
+            if !isSearching
+                && (moviewList?.page).intValue < (moviewList?.totalPages).intValue
                 && indexPath.row == ((moviewList?.items.count).intValue * (moviewList?.page).intValue) - 1 {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ActivityIndicatorCell", for: indexPath)
                 return cell
             }
             
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! MovieCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as! MovieCell
             let movie = moviewList?.items[indexPath.row]
             cell.viewModel = CustomCellViewModel(name: (movie?.title).stringValue,
                                                  imageUrl: (movie?.posterPath).stringValue)
@@ -66,16 +67,10 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
             if isSearching {
                 let moviewList = searchedPeopleListViewModel
                 
-                if (moviewList?.page).intValue < (moviewList?.totalPages).intValue
-                    && indexPath.row == ((moviewList?.items.count).intValue * (moviewList?.page).intValue) - 1 {
-                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ActivityIndicatorCell", for: indexPath)
-                    return cell
-                }
-                
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! MovieCell
-                let movie = moviewList?.items[indexPath.row]
-                cell.viewModel = CustomCellViewModel(name: (movie?.title).stringValue,
-                                                     imageUrl: (movie?.posterPath).stringValue)
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PeopleCell", for: indexPath) as! PeopleCell
+                let poeple = moviewList?.items[indexPath.row]
+                cell.viewModel = CustomCellViewModel(name: (poeple?.name).stringValue,
+                                                     imageUrl: (poeple?.image).stringValue)
                 return cell
             }
     
@@ -121,44 +116,23 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: 40)
+        return CGSize(width: collectionView.frame.width, height: 60)
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         
-        switch DashboardSections(rawValue: indexPath.section) {
-        case .Movie:
-            let moviewList = isSearching ? searchedMovieListViewModel : movieListViewModel
-            
-            if (moviewList?.page).intValue < (moviewList?.totalPages).intValue
-                && indexPath.row == ((moviewList?.items.count).intValue * (moviewList?.page).intValue) - 1
-                && !hasActivePaginationServiceCall {
-                hasActivePaginationServiceCall = true
-                
-                if isSearching {
-                    interactor?.searchMovies(forpage: (moviewList?.page).intValue + 1, queryString: searchText)
-                } else {
-                    interactor?.getPopularMovies(forpage: (moviewList?.page).intValue + 1)
-                }
-            }
-            
-        case .Person:
-            if isSearching {
-                let moviewList = searchedPeopleListViewModel
-                
-                if (moviewList?.page).intValue < (moviewList?.totalPages).intValue
-                    && indexPath.row == ((moviewList?.items.count).intValue * (moviewList?.page).intValue) - 1
-                    && !hasActivePaginationServiceCall {
-                    hasActivePaginationServiceCall = true
-                    
-                    interactor?.searchPeople(forpage: (moviewList?.page).intValue + 1, queryString: searchText)
-                }
-            }
-        case .none:
-            break
+        if isSearching {
+            return
         }
         
+        let moviewList = isSearching ? searchedMovieListViewModel : movieListViewModel
         
+        if (moviewList?.page).intValue < (moviewList?.totalPages).intValue
+            && indexPath.row == ((moviewList?.items.count).intValue * (moviewList?.page).intValue) - 1
+            && !hasActivePaginationServiceCall {
+            hasActivePaginationServiceCall = true
+            interactor?.getPopularMovies(forpage: (moviewList?.page).intValue + 1)
+        }
     }
     
     // MARK: - UICollectionViewDelegate protocol
@@ -185,7 +159,7 @@ class SectionHeader: UICollectionReusableView {
          addSubview(label)
 
          label.translatesAutoresizingMaskIntoConstraints = false
-         label.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+         label.topAnchor.constraint(equalTo: self.topAnchor, constant: 20).isActive = true
          label.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 20).isActive = true
          label.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
     }

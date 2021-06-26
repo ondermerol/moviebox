@@ -14,8 +14,6 @@ import UIKit
 
 protocol DashboardViewDisplayLogic: class {
     func displayPopularMovies(movieListViewModel: MovieListViewModel)
-    func displaySearchedMovies(movieListViewModel: MovieListViewModel)
-    func displaySearchedPeople(peopleListViewModel: PeopleListViewModel)
     func displayBothSearchedPeopleAndMovie(movieListViewModel: MovieListViewModel,
                                            peopleListViewModel: PeopleListViewModel)
 }
@@ -84,7 +82,8 @@ class DashboardViewController: BaseViewControlller, DashboardViewDisplayLogic {
         layout.scrollDirection = .vertical
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.translatesAutoresizingMaskIntoConstraints = false
-        cv.register(MovieCell.self, forCellWithReuseIdentifier: "cell")
+        cv.register(MovieCell.self, forCellWithReuseIdentifier: "MovieCell")
+        cv.register(PeopleCell.self, forCellWithReuseIdentifier: "PeopleCell")
         cv.register(SectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "header")
         cv.register(ActivityIndicatorCell.self, forCellWithReuseIdentifier: "ActivityIndicatorCell")
         collectionView = cv
@@ -147,41 +146,15 @@ class DashboardViewController: BaseViewControlller, DashboardViewDisplayLogic {
         collectionView?.reloadData()
     }
     
-    func displaySearchedMovies(movieListViewModel: MovieListViewModel) {
-        
-        if self.searchedMovieListViewModel == nil || self.searchedMovieListViewModel?.items.count == 0 {
-            self.searchedMovieListViewModel = movieListViewModel
-        } else {
-            self.searchedMovieListViewModel?.items.append(contentsOf: movieListViewModel.items)
-        }
-        
-        isSearching = true
-        hasActivePaginationServiceCall = false
-        collectionView?.reloadData()
-    }
-    
-    func displaySearchedPeople(peopleListViewModel: PeopleListViewModel) {
-        
-        if self.searchedPeopleListViewModel == nil || self.searchedPeopleListViewModel?.items.count == 0 {
-            self.searchedPeopleListViewModel = peopleListViewModel
-        } else {
-            self.searchedPeopleListViewModel?.items.append(contentsOf: peopleListViewModel.items)
-        }
-        
-        isSearching = true
-        hasActivePaginationServiceCall = false
-        collectionView?.reloadData()
-    }
-    
     func displayBothSearchedPeopleAndMovie(movieListViewModel: MovieListViewModel,
                                            peopleListViewModel: PeopleListViewModel) {
         
         self.searchedMovieListViewModel = movieListViewModel
-        
         self.searchedPeopleListViewModel = peopleListViewModel
         
         isSearching = true
         hasActivePaginationServiceCall = false
+        collectionView?.setContentOffset(.zero, animated: false)
         collectionView?.reloadData()
     }
 }

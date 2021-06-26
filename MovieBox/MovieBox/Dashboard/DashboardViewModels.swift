@@ -20,18 +20,18 @@ enum DashboardSections: Int {
 
 struct Person: Decodable {
     let id: Int
-    let name: String
-    let image: [String]
+    let name: String?
+    let image: String?
     
     enum CodingKeys: String, CodingKey {
         case id
         case name
-        case image = "profile_path  "
+        case image = "profile_path"
     }
 }
 
 struct PeopleListViewModel: Decodable {
-    var items: [Movie]
+    var items: [Person]
     let totalPages: Int
     let totalResults: Int
     let page: Int

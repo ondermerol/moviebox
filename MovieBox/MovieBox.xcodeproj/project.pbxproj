@@ -43,6 +43,7 @@
 		F4B34726268774A600AB6899 /* LoadingViewUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B34725268774A600AB6899 /* LoadingViewUtility.swift */; };
 		F4B347282687848900AB6899 /* ActivityIndicatorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B347272687848900AB6899 /* ActivityIndicatorCell.swift */; };
 		F4B3472A26879F0600AB6899 /* DashboardViewController+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B3472926879F0600AB6899 /* DashboardViewController+Search.swift */; };
+		F4B3472C2687BF5D00AB6899 /* PeopleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B3472B2687BF5D00AB6899 /* PeopleCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,6 +102,7 @@
 		F4B34725268774A600AB6899 /* LoadingViewUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewUtility.swift; sourceTree = "<group>"; };
 		F4B347272687848900AB6899 /* ActivityIndicatorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorCell.swift; sourceTree = "<group>"; };
 		F4B3472926879F0600AB6899 /* DashboardViewController+Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DashboardViewController+Search.swift"; sourceTree = "<group>"; };
+		F4B3472B2687BF5D00AB6899 /* PeopleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -242,6 +244,7 @@
 			children = (
 				F4B3471A2687605300AB6899 /* MovieCell.swift */,
 				F4B347272687848900AB6899 /* ActivityIndicatorCell.swift */,
+				F4B3472B2687BF5D00AB6899 /* PeopleCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -524,6 +527,7 @@
 				B0EEB382268621EA00EF5BEC /* AppDelegate.swift in Sources */,
 				F4B3471226871B3F00AB6899 /* DashboardViewController+CollectionView.swift in Sources */,
 				B05EA4722686329B00BCC124 /* DashboardViewPresenter.swift in Sources */,
+				F4B3472C2687BF5D00AB6899 /* PeopleCell.swift in Sources */,
 				F4B3471026871AA100AB6899 /* DashboardViewController.swift in Sources */,
 				B05EA4782686329B00BCC124 /* DashboardViewModels.swift in Sources */,
 				F4B3471D2687624D00AB6899 /* Extensions.swift in Sources */,
