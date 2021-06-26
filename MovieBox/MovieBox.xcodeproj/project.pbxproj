@@ -42,6 +42,7 @@
 		F4B34723268773E800AB6899 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B34722268773E800AB6899 /* BaseViewController.swift */; };
 		F4B34726268774A600AB6899 /* LoadingViewUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B34725268774A600AB6899 /* LoadingViewUtility.swift */; };
 		F4B347282687848900AB6899 /* ActivityIndicatorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B347272687848900AB6899 /* ActivityIndicatorCell.swift */; };
+		F4B3472A26879F0600AB6899 /* DashboardViewController+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B3472926879F0600AB6899 /* DashboardViewController+Search.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,6 +100,7 @@
 		F4B34722268773E800AB6899 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		F4B34725268774A600AB6899 /* LoadingViewUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewUtility.swift; sourceTree = "<group>"; };
 		F4B347272687848900AB6899 /* ActivityIndicatorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorCell.swift; sourceTree = "<group>"; };
+		F4B3472926879F0600AB6899 /* DashboardViewController+Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DashboardViewController+Search.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -209,6 +211,7 @@
 				B05EA46C2686329B00BCC124 /* DashboardViewPresenter.swift */,
 				F4B3470F26871AA100AB6899 /* DashboardViewController.swift */,
 				F4B3471126871B3F00AB6899 /* DashboardViewController+CollectionView.swift */,
+				F4B3472926879F0600AB6899 /* DashboardViewController+Search.swift */,
 				B05EA46E2686329B00BCC124 /* DashboardViewRouter.swift */,
 			);
 			path = Dashboard;
@@ -513,6 +516,7 @@
 				F4B34716268752F600AB6899 /* Constants.swift in Sources */,
 				F4B347202687702E00AB6899 /* CollectionView+Extension.swift in Sources */,
 				B05EA4742686329B00BCC124 /* DashboardViewWorker.swift in Sources */,
+				F4B3472A26879F0600AB6899 /* DashboardViewController+Search.swift in Sources */,
 				F4B34723268773E800AB6899 /* BaseViewController.swift in Sources */,
 				B05EA47C2686329B00BCC124 /* DashboardViewInteractor.swift in Sources */,
 				F4B34718268755A200AB6899 /* DialogBoxUtility.swift in Sources */,

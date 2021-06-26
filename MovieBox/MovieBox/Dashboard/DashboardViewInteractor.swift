@@ -14,7 +14,8 @@ import UIKit
 import SCLAlertView
 
 protocol DashboardViewBusinessLogic {
-    func getPopularMovies(forpage page:Int)
+    func getPopularMovies(forpage page: Int)
+    func searchMovies(forpage page: Int, queryString: String?)
 }
 
 protocol DashboardViewDataStore {
@@ -32,6 +33,19 @@ class DashboardViewInteractor: DashboardViewBusinessLogic, DashboardViewDataStor
             
             if let movieList = movieList, error == nil  {
                 self.presenter?.presentPopularMovies(movieListViewModel: movieList)
+            } else {
+                DialogBoxUtility.showError(message: Constants.errorMessage)
+            }
+        })
+    }
+    
+    func searchMovies(forpage page: Int, queryString: String?) {
+        LoadingViewUtility.showLoadingView()
+        worker?.searchMovies(forpage: page, queryString: queryString, completionHandler: { (movieList, error) in
+            LoadingViewUtility.hideLoadingView()
+            
+            if let movieList = movieList, error == nil  {
+                self.presenter?.presentSearchedMovies(movieListViewModel: movieList)
             } else {
                 DialogBoxUtility.showError(message: Constants.errorMessage)
             }

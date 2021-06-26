@@ -11,10 +11,10 @@
 //
 
 import UIKit
-import SnapKit
 
 protocol DashboardViewDisplayLogic: class {
     func displayPopularMovies(movieListViewModel: MovieListViewModel)
+    func displaySearchedMovies(movieListViewModel: MovieListViewModel)
 }
 
 class DashboardViewController: BaseViewControlller, DashboardViewDisplayLogic {
@@ -25,18 +25,13 @@ class DashboardViewController: BaseViewControlller, DashboardViewDisplayLogic {
     var router: (NSObjectProtocol & DashboardViewRoutingLogic & DashboardViewDataPassing)?
     
     var movieListViewModel: MovieListViewModel?
+    var searchedMovieListViewModel: MovieListViewModel?
     var hasActivePaginationServiceCall: Bool = false
     
-    fileprivate let collectionView:UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.translatesAutoresizingMaskIntoConstraints = false
-        cv.register(MovieCell.self, forCellWithReuseIdentifier: "cell")
-        cv.register(SectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "header")
-        cv.register(ActivityIndicatorCell.self, forCellWithReuseIdentifier: "ActivityIndicatorCell")
-        return cv
-    }()
+    var isSearching: Bool = false
+    var searchText: String?
+    
+    var collectionView: UICollectionView?
     
     // MARK: Constants
     
@@ -80,6 +75,15 @@ class DashboardViewController: BaseViewControlller, DashboardViewDisplayLogic {
         router.dataStore = interactor
         
        // initCollectionView()
+        
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        cv.translatesAutoresizingMaskIntoConstraints = false
+        cv.register(MovieCell.self, forCellWithReuseIdentifier: "cell")
+        cv.register(SectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "header")
+        cv.register(ActivityIndicatorCell.self, forCellWithReuseIdentifier: "ActivityIndicatorCell")
+        collectionView = cv
     }
 
 //    private func initCollectionView() {
@@ -91,18 +95,38 @@ class DashboardViewController: BaseViewControlller, DashboardViewDisplayLogic {
 //    }
     
     private func setupCollectionView() {
+        
+        let navBarHeight = navigationController?.navigationBar.frame.height ?? CGFloat(0)
+        let statusBarHeight = UIApplication.shared.statusBarFrame.height
+        let total = navBarHeight + statusBarHeight
+        
+        let searchBar:UISearchBar = UISearchBar(frame: .zero)
+        searchBar.searchBarStyle = UISearchBar.Style.default
+        searchBar.placeholder = "Search movies or person"
+        searchBar.isTranslucent = false
+        searchBar.backgroundImage = UIImage()
+        searchBar.delegate = self
+        
+        view.addSubview(searchBar)
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        searchBar.topAnchor.constraint(equalTo: view.topAnchor, constant: total).isActive = true
+        searchBar.bottomAnchor.constraint(equalTo: view.topAnchor, constant: total + 60).isActive = true
+        searchBar.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        searchBar.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        
+        guard let collectionView = collectionView else {
+            return
+        }
         view.addSubview(collectionView)
+        
         collectionView.backgroundColor = .white
         collectionView.delegate = self
         collectionView.dataSource = self
         
-        collectionView.snp.makeConstraints({ (make) in
-            make.trailing.equalToSuperview()
-            make.bottom.equalToSuperview()
-            make.top.equalToSuperview()
-            make.leading.equalTo(view.snp.trailing)
-            make.width.equalTo(view.snp.width)
-        })
+        collectionView.topAnchor.constraint(equalTo: view.topAnchor, constant: total + 60).isActive = true
+        collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        collectionView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        collectionView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
     }
     
     // MARK: DashboardViewDisplayLogic
@@ -116,6 +140,19 @@ class DashboardViewController: BaseViewControlller, DashboardViewDisplayLogic {
         }
         
         hasActivePaginationServiceCall = false
-        collectionView.reloadData()
+        collectionView?.reloadData()
+    }
+    
+    func displaySearchedMovies(movieListViewModel: MovieListViewModel) {
+        
+        if self.searchedMovieListViewModel == nil || self.searchedMovieListViewModel?.items.count == 0 {
+            self.searchedMovieListViewModel = movieListViewModel
+        } else {
+            self.searchedMovieListViewModel?.items.append(contentsOf: movieListViewModel.items)
+        }
+        
+        isSearching = true
+        hasActivePaginationServiceCall = false
+        collectionView?.reloadData()
     }
 }

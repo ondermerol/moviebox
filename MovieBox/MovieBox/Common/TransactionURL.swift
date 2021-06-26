@@ -9,6 +9,7 @@ import Foundation
 
 enum TransactionURL: String {
     case getPopularMovies = "https://api.themoviedb.org/3/movie/popular/"
+    case searchMovies = "https://api.themoviedb.org/3/search/movie"
     
     var urlString: String {
         return self.rawValue
