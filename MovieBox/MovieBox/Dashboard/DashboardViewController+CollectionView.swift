@@ -16,9 +16,16 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        if (movieListViewModel?.items.count).intValue == 0 {
+            collectionView.setEmptyMessage(message: "There is no any result.")
+        } else {
+            collectionView.restore()
+        }
+        
         switch DashboardSections(rawValue: section) {
         case .Movie:
-            return (movieListViewModel?.items.count).intValue
+            return (movieListViewModel?.items.count).intValue // TODO:Mock
         case .Person:
             return 0
         case .none:
@@ -54,13 +61,17 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
         if kind == UICollectionView.elementKindSectionHeader {
              let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "header", for: indexPath) as! SectionHeader
             
-            switch DashboardSections(rawValue: indexPath.section) {
-            case .Movie:
-                sectionHeader.label.text = "Students"
-            case .Person:
-                sectionHeader.label.text = "Cars"
-            case .none:
-                break
+            if (movieListViewModel?.items.count).intValue == 0 {
+                sectionHeader.label.text = ""
+            } else {
+                switch DashboardSections(rawValue: indexPath.section) {
+                case .Movie:
+                    sectionHeader.label.text = "Students"
+                case .Person:
+                    sectionHeader.label.text = "Cars"
+                case .none:
+                    break
+                }
             }
             
              return sectionHeader

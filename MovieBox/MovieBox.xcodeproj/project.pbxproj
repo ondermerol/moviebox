@@ -38,6 +38,9 @@
 		F4B34718268755A200AB6899 /* DialogBoxUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B34717268755A200AB6899 /* DialogBoxUtility.swift */; };
 		F4B3471B2687605300AB6899 /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B3471A2687605300AB6899 /* MovieCell.swift */; };
 		F4B3471D2687624D00AB6899 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B3471C2687624D00AB6899 /* Extensions.swift */; };
+		F4B347202687702E00AB6899 /* CollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B3471F2687702E00AB6899 /* CollectionView+Extension.swift */; };
+		F4B34723268773E800AB6899 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B34722268773E800AB6899 /* BaseViewController.swift */; };
+		F4B34726268774A600AB6899 /* LoadingViewUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B34725268774A600AB6899 /* LoadingViewUtility.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +94,9 @@
 		F4B34717268755A200AB6899 /* DialogBoxUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogBoxUtility.swift; sourceTree = "<group>"; };
 		F4B3471A2687605300AB6899 /* MovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
 		F4B3471C2687624D00AB6899 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		F4B3471F2687702E00AB6899 /* CollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollectionView+Extension.swift"; sourceTree = "<group>"; };
+		F4B34722268773E800AB6899 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		F4B34725268774A600AB6899 /* LoadingViewUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewUtility.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +165,9 @@
 		B0EEB380268621EA00EF5BEC /* MovieBox */ = {
 			isa = PBXGroup;
 			children = (
+				F4B347242687748300AB6899 /* Utility */,
+				F4B34721268773D100AB6899 /* Base */,
+				F4B3471E2687701C00AB6899 /* Extension */,
 				F4B346FE268708B000AB6899 /* Common */,
 				B0EEB3B126862FAA00EF5BEC /* Dashboard */,
 				B0EEB381268621EA00EF5BEC /* AppDelegate.swift */,
@@ -218,7 +227,6 @@
 			children = (
 				F4B34713268751A800AB6899 /* TransactionURL.swift */,
 				F4B34715268752F600AB6899 /* Constants.swift */,
-				F4B34717268755A200AB6899 /* DialogBoxUtility.swift */,
 				F4B3471C2687624D00AB6899 /* Extensions.swift */,
 			);
 			path = Common;
@@ -230,6 +238,31 @@
 				F4B3471A2687605300AB6899 /* MovieCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		F4B3471E2687701C00AB6899 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				F4B3471F2687702E00AB6899 /* CollectionView+Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		F4B34721268773D100AB6899 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				F4B34722268773E800AB6899 /* BaseViewController.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		F4B347242687748300AB6899 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				F4B34717268755A200AB6899 /* DialogBoxUtility.swift */,
+				F4B34725268774A600AB6899 /* LoadingViewUtility.swift */,
+			);
+			path = Utility;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -470,10 +503,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4B34726268774A600AB6899 /* LoadingViewUtility.swift in Sources */,
 				F4B3471B2687605300AB6899 /* MovieCell.swift in Sources */,
 				F4B34714268751A800AB6899 /* TransactionURL.swift in Sources */,
 				F4B34716268752F600AB6899 /* Constants.swift in Sources */,
+				F4B347202687702E00AB6899 /* CollectionView+Extension.swift in Sources */,
 				B05EA4742686329B00BCC124 /* DashboardViewWorker.swift in Sources */,
+				F4B34723268773E800AB6899 /* BaseViewController.swift in Sources */,
 				B05EA47C2686329B00BCC124 /* DashboardViewInteractor.swift in Sources */,
 				F4B34718268755A200AB6899 /* DialogBoxUtility.swift in Sources */,
 				B05EA4762686329B00BCC124 /* DashboardViewRouter.swift in Sources */,

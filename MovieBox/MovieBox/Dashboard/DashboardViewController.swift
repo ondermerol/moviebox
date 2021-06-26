@@ -17,7 +17,7 @@ protocol DashboardViewDisplayLogic: class {
     func displayPopularMovies(movieListViewModel: MovieListViewModel)
 }
 
-class DashboardViewController: UIViewController, DashboardViewDisplayLogic {
+class DashboardViewController: BaseViewControlller, DashboardViewDisplayLogic {
 
     // MARK: Properties
     
