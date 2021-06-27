@@ -2,7 +2,7 @@
 //  DashboardViewController+Search.swift
 //  MovieBox
 //
-//  Created by Wolverin Mm on 26.06.2021.
+//  Created by Önder Murat Erol on 26.06.2021.
 //
 
 import UIKit
@@ -18,6 +18,10 @@ extension DashboardViewController: UISearchBarDelegate {
                                                   forPeoplePage: 1,
                                                   queryString: searchText)
         } else {
+            DispatchQueue.main.async {
+                searchBar.endEditing(true)
+            }
+            
             isSearching = false
             collectionView?.setContentOffset(.zero, animated: false)
             collectionView?.reloadData()

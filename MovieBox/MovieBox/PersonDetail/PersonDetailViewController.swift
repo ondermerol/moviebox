@@ -2,7 +2,7 @@
 //  PersonDetailViewController.swift
 //  MovieBox
 //
-//  Created by Wolverin Mm on 27.06.2021.
+//  Created by Önder Murat Erol on 27.06.2021.
 //
 
 import UIKit
@@ -106,7 +106,7 @@ class PersonDetailViewController: BaseViewControlller, PersonDetailViewDisplayLo
         DispatchQueue.main.async {
             let url = "https://image.tmdb.org/t/p/w500" +  (self.personDetailViewModel?.imageUrl).stringValue
             imageView.sd_setImage(with: URL(string: url),
-                                       placeholderImage: UIImage(named: "picture_placeholder"))
+                                       placeholderImage: UIImage(named: "avatar"))
         }
         
         contentSizeHeight = contentSizeHeight + 200 + 50

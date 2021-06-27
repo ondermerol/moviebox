@@ -2,7 +2,7 @@
 //  PersonDetailRouter.swift
 //  MovieBox
 //
-//  Created by Wolverin Mm on 27.06.2021.
+//  Created by Önder Murat Erol on 27.06.2021.
 //
 
 import UIKit
@@ -16,6 +16,7 @@ protocol PersonDetailViewDataPassing {
 }
 
 class PersonDetailViewRouter: NSObject, PersonDetailViewRoutingLogic, PersonDetailViewDataPassing {
+    
     weak var viewController: PersonDetailViewController?
     var dataStore: PersonDetailViewDataStore?
   

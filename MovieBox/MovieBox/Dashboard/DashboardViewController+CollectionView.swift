@@ -2,7 +2,7 @@
 //  DashboardViewController+CollectionView.swift
 //  MovieBox
 //
-//  Created by Wolverin Mm on 26.06.2021.
+//  Created by Önder Murat Erol on 26.06.2021.
 //
 
 import UIKit
@@ -12,25 +12,21 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
     // MARK: UICollectionViewDataSource protocol
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return isSearching ? 2 : 1
+        return !isSearching || showEmptyState()  ? 1 : 2
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print("isSearching 1 = \(isSearching)")
-        
-        if isSearching
-            && (searchedMovieListViewModel?.items.count).intValue == 0
-            && (searchedPeopleListViewModel?.items.count).intValue == 0 {
-            
-            collectionView.setEmptyMessage(message: "There is no any result.")
+    
+        if showEmptyState() {
+            collectionView.setEmptyMessage(message: "No Results")
         } else {
             collectionView.restore()
         }
         
         switch DashboardSections(rawValue: section) {
         case .Movie:
-            let moviewList = isSearching ? searchedMovieListViewModel : movieListViewModel
-            return (moviewList?.items.count).intValue
+            let itemList = isSearching ? searchedMovieListViewModel : movieListViewModel
+            return (itemList?.items.count).intValue
         case .Person:
             return (searchedPeopleListViewModel?.items.count).intValue
         case .none:
@@ -43,34 +39,30 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        print("isSearching 2 = \(isSearching)")
         
         switch DashboardSections(rawValue: indexPath.section) {
         case .Movie:
             
-            let moviewList = isSearching ? searchedMovieListViewModel : movieListViewModel
+            let itemList = isSearching ? searchedMovieListViewModel : movieListViewModel
             
             if !isSearching
-                && (moviewList?.page).intValue < (moviewList?.totalPages).intValue
-                && indexPath.row == ((moviewList?.items.count).intValue * (moviewList?.page).intValue) - 1 {
+                && (itemList?.page).intValue < (itemList?.totalPages).intValue
+                && indexPath.row == ((itemList?.items.count).intValue * (itemList?.page).intValue) - 1 {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ActivityIndicatorCell", for: indexPath)
                 return cell
             }
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as! MovieCell
-            let movie = moviewList?.items[indexPath.row]
-            cell.viewModel = CustomCellViewModel(name: (movie?.title).stringValue,
-                                                 imageUrl: (movie?.posterPath).stringValue)
+            cell.viewModel = itemList?.items[indexPath.row]
+            cell.configureCell((itemList?.items.count).intValue - 1 == indexPath.row)
             return cell
         case .Person:
             
             if isSearching {
-                let moviewList = searchedPeopleListViewModel
-                
+                let itemList = searchedPeopleListViewModel
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PersonCell", for: indexPath) as! PersonCell
-                let poeple = moviewList?.items[indexPath.row]
-                cell.viewModel = CustomCellViewModel(name: (poeple?.name).stringValue,
-                                                     imageUrl: (poeple?.image).stringValue)
+                cell.viewModel = itemList?.items[indexPath.row]
+                cell.configureCell((itemList?.items.count).intValue - 1 == indexPath.row)
                 return cell
             }
     
@@ -84,16 +76,15 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
     // MARK: Section Title
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        print("isSearching 3 = \(isSearching)")
         
         if kind == UICollectionView.elementKindSectionHeader {
              let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "header", for: indexPath) as! SectionHeader
             
             switch DashboardSections(rawValue: indexPath.section) {
             case .Movie:
-                let moviewList = isSearching ? searchedMovieListViewModel : movieListViewModel
+                let itemList = isSearching ? searchedMovieListViewModel : movieListViewModel
                 
-                if (moviewList?.items.count).intValue == 0 {
+                if (itemList?.items.count).intValue == 0 {
                     sectionHeader.label.text = ""
                 } else {
                     sectionHeader.label.text = "Movies"
@@ -110,13 +101,17 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
             }
             
              return sectionHeader
-        } else { //No footer in this case but can add option for that
+        } else { 
              return UICollectionReusableView()
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: 60)
+        if showEmptyState() {
+            return .zero
+        }
+        
+        return CGSize(width: collectionView.frame.width, height: 100)
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
@@ -125,13 +120,13 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
             return
         }
         
-        let moviewList = isSearching ? searchedMovieListViewModel : movieListViewModel
+        let itemList = isSearching ? searchedMovieListViewModel : movieListViewModel
         
-        if (moviewList?.page).intValue < (moviewList?.totalPages).intValue
-            && indexPath.row == ((moviewList?.items.count).intValue * (moviewList?.page).intValue) - 1
+        if (itemList?.page).intValue < (itemList?.totalPages).intValue
+            && indexPath.row == ((itemList?.items.count).intValue * (itemList?.page).intValue) - 1
             && !hasActivePaginationServiceCall {
             hasActivePaginationServiceCall = true
-            interactor?.getPopularMovies(forpage: (moviewList?.page).intValue + 1)
+            interactor?.getPopularMovies(forpage: (itemList?.page).intValue + 1)
         }
     }
     
@@ -141,8 +136,8 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
         
         switch DashboardSections(rawValue: indexPath.section) {
         case .Movie:
-            let moviewList = isSearching ? searchedMovieListViewModel : movieListViewModel
-            let movie = moviewList?.items[indexPath.row]
+            let itemList = isSearching ? searchedMovieListViewModel : movieListViewModel
+            let movie = itemList?.items[indexPath.row]
             
             if let id = movie?.id {
                 router?.routeToMovieDetail(movieId: id)
@@ -159,30 +154,13 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
         }
     }
     
-}
-
-class SectionHeader: UICollectionReusableView {
-     
-    var label: UILabel = {
-         let label: UILabel = UILabel()
-         label.textColor = .red
-         label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-         label.sizeToFit()
-         return label
-     }()
-
-     override init(frame: CGRect) {
-         super.init(frame: frame)
-
-         addSubview(label)
-
-         label.translatesAutoresizingMaskIntoConstraints = false
-         label.topAnchor.constraint(equalTo: self.topAnchor, constant: 20).isActive = true
-         label.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 20).isActive = true
-         label.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        searchBar?.endEditing(true)
     }
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    
+    private func showEmptyState() -> Bool {
+        return isSearching
+            && (searchedMovieListViewModel?.items.count).intValue == 0
+            && (searchedPeopleListViewModel?.items.count).intValue == 0
     }
 }

@@ -2,34 +2,31 @@
 //  MovieCell.swift
 //  MovieBox
 //
-//  Created by Wolverin Mm on 26.06.2021.
+//  Created by Önder Murat Erol on 26.06.2021.
 //
 
 import UIKit
 import SDWebImage
 
-struct CustomCellViewModel {
-    let name: String
-    let imageUrl: String
-}
-
 class MovieCell: UICollectionViewCell {
     
-    var viewModel: CustomCellViewModel? {
+    var viewModel: Movie? {
         didSet {
             guard let viewModel = viewModel else { return }
             
             DispatchQueue.main.async {
-                let url = "https://image.tmdb.org/t/p/w500" +  viewModel.imageUrl
+                let url = "https://image.tmdb.org/t/p/w500" +  viewModel.posterPath.stringValue
                 self.imageView.sd_setImage(with: URL(string: url),
-                                           placeholderImage: UIImage(named: "picture_placeholder"))
+                                           placeholderImage: UIImage(named: "movie"))
             }
             
-            nameLabel.text = viewModel.name
+            titleLabel.text = viewModel.title
+            releaseDateLabel.text = viewModel.releaseDate
+            averageVoteLabel.text = (viewModel.averageVote?.description).stringValue + " ✭"
         }
     }
     
-    fileprivate let imageView: UIImageView = {
+    private let imageView: UIImageView = {
         let iv = UIImageView()
         iv.translatesAutoresizingMaskIntoConstraints = false
         iv.contentMode = .scaleAspectFill
@@ -38,27 +35,84 @@ class MovieCell: UICollectionViewCell {
         return iv
     }()
     
-    fileprivate let nameLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 20)
+        label.font = FontUtility.titleFont()
+        label.textColor = ColorUtility.titleColor()
+        label.numberOfLines = 0
         return label
     }()
     
+    private let releaseDateLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = FontUtility.descriptionFont()
+        label.textColor = ColorUtility.decriptionColor()
+        return label
+    }()
+    
+    private let averageVoteLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = FontUtility.voteFont()
+        label.textColor = ColorUtility.appTopColor()
+        return label
+    }()
+    
+    private let seperatorView: UIView = {
+        let view: UIView = UIView()
+        view.backgroundColor = ColorUtility.grayLight()
+        return view
+     }()
+    
     override init(frame: CGRect) {
         super.init(frame: .zero)
+    }
+    
+    func configureCell(_ isLastItem: Bool) {
+        
         contentView.addSubview(imageView)
-        contentView.addSubview(nameLabel)
+        contentView.addSubview(titleLabel)
         
         imageView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20).isActive = true
-        imageView.widthAnchor.constraint(equalToConstant: 150).isActive = true
-        imageView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        imageView.widthAnchor.constraint(equalToConstant: Constants.listedImageWidth).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: Constants.listedImageHeight).isActive = true
         imageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
         
-        nameLabel.topAnchor.constraint(equalTo: imageView.topAnchor).isActive = true
-        nameLabel.leftAnchor.constraint(equalTo: imageView.rightAnchor, constant: 20).isActive = true
-        nameLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: 20).isActive = true
-        nameLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        titleLabel.topAnchor.constraint(equalTo: imageView.topAnchor).isActive = true
+        titleLabel.leftAnchor.constraint(equalTo: imageView.rightAnchor, constant: 20).isActive = true
+        titleLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10).isActive = true
+        titleLabel.heightAnchor.constraint(equalToConstant: 70).isActive = true
+        
+        if (viewModel?.releaseDate) != nil {
+            addSubview(releaseDateLabel)
+            releaseDateLabel.translatesAutoresizingMaskIntoConstraints = false
+            releaseDateLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10).isActive = true
+            releaseDateLabel.leftAnchor.constraint(equalTo: imageView.rightAnchor, constant: 20).isActive = true
+            releaseDateLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10).isActive = true
+            releaseDateLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        }
+        
+        if (viewModel?.averageVote) != nil {
+            addSubview(averageVoteLabel)
+            averageVoteLabel.translatesAutoresizingMaskIntoConstraints = false
+            averageVoteLabel.bottomAnchor.constraint(equalTo: imageView.bottomAnchor).isActive = true
+            averageVoteLabel.leftAnchor.constraint(equalTo: imageView.rightAnchor, constant: 20).isActive = true
+            averageVoteLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10).isActive = true
+            averageVoteLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        }
+        
+        if !isLastItem {
+            addSubview(seperatorView)
+            seperatorView.translatesAutoresizingMaskIntoConstraints = false
+            seperatorView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+            seperatorView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
+            seperatorView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+            seperatorView.heightAnchor.constraint(equalToConstant: 5).isActive = true
+        } else {
+            seperatorView.removeFromSuperview()
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {

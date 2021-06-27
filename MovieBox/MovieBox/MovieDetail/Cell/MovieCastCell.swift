@@ -2,7 +2,7 @@
 //  MovieCastCell.swift
 //  MovieBox
 //
-//  Created by Wolverin Mm on 27.06.2021.
+//  Created by Önder Murat Erol on 27.06.2021.
 //
 
 import UIKit
@@ -17,14 +17,14 @@ class MovieCastCell: UICollectionViewCell {
             DispatchQueue.main.async {
                 let url = "https://image.tmdb.org/t/p/w500" +  viewModel.imageUrl.stringValue
                 self.imageView.sd_setImage(with: URL(string: url),
-                                           placeholderImage: UIImage(named: "picture_placeholder"))
+                                           placeholderImage: UIImage(named: "avatar"))
             }
             
             nameLabel.text = viewModel.name
         }
     }
     
-    fileprivate let imageView: UIImageView = {
+    private let imageView: UIImageView = {
        let iv = UIImageView()
         iv.translatesAutoresizingMaskIntoConstraints = false
         iv.contentMode = .scaleAspectFill
@@ -33,7 +33,7 @@ class MovieCastCell: UICollectionViewCell {
         return iv
     }()
     
-    fileprivate let nameLabel: UILabel = {
+    private let nameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 20)
@@ -54,7 +54,7 @@ class MovieCastCell: UICollectionViewCell {
         imageView.heightAnchor.constraint(equalToConstant: 200).isActive = true
         
         nameLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 10).isActive = true
-        nameLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: 5).isActive = true
+        nameLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -5).isActive = true
         nameLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 5).isActive = true
         nameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
     }

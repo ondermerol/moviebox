@@ -2,7 +2,7 @@
 //  LoadingViewUtility.swift
 //  MovieBox
 //
-//  Created by Wolverin Mm on 26.06.2021.
+//  Created by Önder Murat Erol on 26.06.2021.
 //
 
 import UIKit
@@ -16,6 +16,11 @@ class LoadingViewUtility {
     }()
     
     static func showLoadingView(onView: UIView? = nil) {
+        
+        if isShowingLoadingView() {
+            return
+        }
+        
         let indicatorView = UIView(frame: CGRect(origin: .zero, size: UIScreen.main.bounds.size))
         indicatorView.alpha = 0.3
         indicatorView.backgroundColor = .black
@@ -47,10 +52,12 @@ class LoadingViewUtility {
     }
     
     static func hideLoadingView() {
-        shared.loadingView?.removeFromSuperview()
-        shared.loadingView = nil
+        
+        DispatchQueue.main.async {
+            shared.loadingView?.removeFromSuperview()
+            shared.loadingView = nil
+        }
     }
-    
     
     static func isShowingLoadingView() -> Bool {
         return shared.loadingView != nil

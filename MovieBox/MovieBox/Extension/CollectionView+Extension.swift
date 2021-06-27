@@ -2,7 +2,7 @@
 //  TableView+Extension.swift
 //  MovieBox
 //
-//  Created by Wolverin Mm on 26.06.2021.
+//  Created by Önder Murat Erol on 26.06.2021.
 //
 
 import UIKit
@@ -17,18 +17,18 @@ extension UICollectionView {
         
         let messageLabel = UILabel(frame: .zero)
         messageLabel.text = message
-        messageLabel.textColor = .black
+        messageLabel.textColor = ColorUtility.titleColor()
         messageLabel.numberOfLines = 0
         messageLabel.textAlignment = .center
-        messageLabel.font = UIFont(name: "TrebuchetMS", size: 15)
+        messageLabel.font = UIFont(name: "HelveticaNeue-Medium", size: 20.0)
         messageLabel.sizeToFit()
         
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
         epmtyStateview.addSubview(messageLabel)
         
-        messageLabel.centerYAnchor.constraint(equalTo: epmtyStateview.centerYAnchor).isActive = true
+        messageLabel.topAnchor.constraint(equalTo: epmtyStateview.topAnchor, constant: 40).isActive = true
         messageLabel.centerXAnchor.constraint(equalTo: epmtyStateview.centerXAnchor).isActive = true
-        self.backgroundView = messageLabel
+        self.backgroundView = epmtyStateview
     }
 
     func restore() {

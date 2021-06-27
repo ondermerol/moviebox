@@ -2,7 +2,7 @@
 //  PersonDetailViewController+CollectionView.swift
 //  MovieBox
 //
-//  Created by Wolverin Mm on 27.06.2021.
+//  Created by Önder Murat Erol on 27.06.2021.
 //
 
 import UIKit
@@ -35,7 +35,7 @@ extension PersonDetailViewController: UICollectionViewDelegate, UICollectionView
     }
     
     
-    // MARK: - UICollectionViewDelegate protocol
+    // MARK: UICollectionViewDelegate protocol
         
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         

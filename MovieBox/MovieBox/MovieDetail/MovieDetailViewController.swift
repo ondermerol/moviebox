@@ -2,7 +2,7 @@
 //  MovieDetailViewController.swift
 //  MovieBox
 //
-//  Created by Wolverin Mm on 27.06.2021.
+//  Created by Önder Murat Erol on 27.06.2021.
 //
 
 import UIKit
@@ -106,7 +106,7 @@ class MovieDetailViewController: BaseViewControlller, MovieDetailViewDisplayLogi
         DispatchQueue.main.async {
             let url = "https://image.tmdb.org/t/p/w500" +  (self.movieDetailViewModel?.imageUrl).stringValue
             imageView.sd_setImage(with: URL(string: url),
-                                       placeholderImage: UIImage(named: "picture_placeholder"))
+                                       placeholderImage: UIImage(named: "movie"))
         }
         
         contentSizeHeight = contentSizeHeight + 200 + 50
@@ -139,7 +139,7 @@ class MovieDetailViewController: BaseViewControlller, MovieDetailViewDisplayLogi
         scrollView.contentSize = CGSize(width: view.frame.width, height: contentSizeHeight)
     }
     
-    // MARK:
+    // MARK: MovieDetailViewDisplayLogic
     
     func displayMovieDetail(movieDetail: MovieDetailViewModel, castMembers: CastMembersViewModel) {
         movieDetailViewModel = movieDetail
