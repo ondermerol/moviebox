@@ -36,8 +36,10 @@ class MovieCastCell: UICollectionViewCell {
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 20)
+        label.font = FontUtility.castFont()
         label.numberOfLines = 0
+        label.backgroundColor = .clear
+        label.textAlignment = .center
         return label
     }()
     
@@ -48,12 +50,12 @@ class MovieCastCell: UICollectionViewCell {
         
         contentView.backgroundColor = .clear
         
-        imageView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
-        imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
-        imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-        imageView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        imageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 1).isActive = true
+        imageView.widthAnchor.constraint(equalToConstant: Constants.listedImageWidth).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: Constants.listedImageHeight).isActive = true
+        imageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         
-        nameLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 10).isActive = true
+        nameLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 3).isActive = true
         nameLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -5).isActive = true
         nameLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 5).isActive = true
         nameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
