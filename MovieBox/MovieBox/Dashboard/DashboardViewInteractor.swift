@@ -29,7 +29,9 @@ class DashboardViewInteractor: DashboardViewBusinessLogic, DashboardViewDataStor
         worker?.getPopularMovies(forpage: page, completionHandler: { (movieList, error) in
             
             if let movieList = movieList, error == nil  {
+                
                 self.worker?.getGenres(completionHandler: { (genreList, error) in
+                    
                     LoadingViewUtility.hideLoadingView()
                     self.presenter?.presentPopularMovies(movieListViewModel: movieList, genreViewModel: genreList)
                 })

@@ -6,12 +6,15 @@
 //
 
 import UIKit
+import WebKit
 
 protocol MovieDetailViewDisplayLogic: class {
-    func displayMovieDetail(movieDetail: MovieDetailViewModel, castMembers: CastMembersViewModel)
+    func displayMovieDetail(movieDetail: MovieDetailViewModel,
+                            castMembers: CastMembersViewModel,
+                            videoViewModel: VideoViewModel?)
 }
 
-class MovieDetailViewController: BaseViewControlller, MovieDetailViewDisplayLogic {
+class MovieDetailViewController: BaseViewControlller, MovieDetailViewDisplayLogic, WKNavigationDelegate {
 
     // MARK: Properties
     
@@ -20,6 +23,7 @@ class MovieDetailViewController: BaseViewControlller, MovieDetailViewDisplayLogi
     
     var movieDetailViewModel: MovieDetailViewModel?
     var castMembersViewModel: CastMembersViewModel?
+    var videoViewModel: VideoViewModel?
     
     var scrollView: UIScrollView?
     
@@ -216,9 +220,13 @@ class MovieDetailViewController: BaseViewControlller, MovieDetailViewDisplayLogi
     
     // MARK: MovieDetailViewDisplayLogic
     
-    func displayMovieDetail(movieDetail: MovieDetailViewModel, castMembers: CastMembersViewModel) {
-        movieDetailViewModel = movieDetail
-        castMembersViewModel = castMembers
+    func displayMovieDetail(movieDetail: MovieDetailViewModel,
+                            castMembers: CastMembersViewModel,
+                            videoViewModel: VideoViewModel?) {
+        
+        self.movieDetailViewModel = movieDetail
+        self.castMembersViewModel = castMembers
+        self.videoViewModel = videoViewModel
         
         title = movieDetailViewModel?.title.stringValue
         

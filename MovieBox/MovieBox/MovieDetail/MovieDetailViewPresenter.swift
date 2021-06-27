@@ -8,14 +8,18 @@
 import UIKit
 
 protocol MovieDetailViewPresentationLogic {
-    func presentMovieDetail(movieDetail: MovieDetailViewModel, castMembers: CastMembersViewModel)
+    func presentMovieDetail(movieDetail: MovieDetailViewModel,
+                            castMembers: CastMembersViewModel,
+                            videoViewModel: VideoViewModel?)
 }
 
 class MovieDetailViewPresenter: MovieDetailViewPresentationLogic {
     
     weak var viewController: MovieDetailViewDisplayLogic?
     
-    func presentMovieDetail(movieDetail: MovieDetailViewModel, castMembers: CastMembersViewModel) {
-        viewController?.displayMovieDetail(movieDetail: movieDetail, castMembers: castMembers)
+    func presentMovieDetail(movieDetail: MovieDetailViewModel,
+                            castMembers: CastMembersViewModel,
+                            videoViewModel: VideoViewModel?) {
+        viewController?.displayMovieDetail(movieDetail: movieDetail, castMembers: castMembers, videoViewModel: videoViewModel)
     }
 }

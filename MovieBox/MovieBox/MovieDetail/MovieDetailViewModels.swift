@@ -28,7 +28,7 @@ struct MovieDetailViewModel: Decodable {
     let id: Int
     let title: String?
     let overview: String?
-    let averageVote: Float // vote_average
+    let averageVote: Float
     let genres: [Genre]?
     let video: Bool?
     let imageUrl: String?
@@ -43,5 +43,25 @@ struct MovieDetailViewModel: Decodable {
         case video
         case imageUrl = "poster_path"
         case imbdId = "imdb_id"
+    }
+}
+
+struct VideoModel: Decodable {
+    let id: String?
+    let name: String?
+    let key: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case name
+        case key
+    }
+}
+
+struct VideoViewModel: Decodable {
+    let results: [VideoModel]?
+    
+    enum CodingKeys: String, CodingKey {
+        case results
     }
 }

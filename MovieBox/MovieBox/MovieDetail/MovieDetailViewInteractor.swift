@@ -31,11 +31,18 @@ class MovieDetailViewInteractor: MovieDetailViewBusinessLogic, MovieDetailViewDa
                 
                 self.worker?.getMovieCastMembers(withMovieId: id, completionHandler: { (castMembers, error) in
                     
-                    LoadingViewUtility.hideLoadingView()
-                    
                     if let castMembers = castMembers, error == nil  {
-                        self.presenter?.presentMovieDetail(movieDetail: movieDetail, castMembers: castMembers)
+                        
+                        self.worker?.getMovieVideos(withMovieId: id, completionHandler: { (videoViewModel, error) in
+                            
+                            LoadingViewUtility.hideLoadingView()
+                            self.presenter?.presentMovieDetail(movieDetail: movieDetail,
+                                                               castMembers: castMembers,
+                                                               videoViewModel: videoViewModel)
+                        })
+                        
                     } else {
+                        LoadingViewUtility.hideLoadingView()
                         DialogBoxUtility.showError(message: Constants.errorMessage)
                     }
                 })
