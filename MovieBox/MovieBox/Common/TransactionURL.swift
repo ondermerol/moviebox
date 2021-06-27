@@ -15,6 +15,7 @@ enum TransactionURL: String {
     case getPersonMovieCredit = "https://api.themoviedb.org/3/person/%@/movie_credits"
     case getMovieDetail = "https://api.themoviedb.org/3/movie/%@"
     case getMovieCastMembers = "https://api.themoviedb.org/3/movie/%@/credits"
+    case getGenres = "https://api.themoviedb.org/3/genre/movie/list"
     
     var urlString: String {
         return self.rawValue

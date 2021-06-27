@@ -28,11 +28,13 @@ class DashboardViewInteractor: DashboardViewBusinessLogic, DashboardViewDataStor
         
         worker?.getPopularMovies(forpage: page, completionHandler: { (movieList, error) in
             
-            LoadingViewUtility.hideLoadingView()
-            
             if let movieList = movieList, error == nil  {
-                self.presenter?.presentPopularMovies(movieListViewModel: movieList)
+                self.worker?.getGenres(completionHandler: { (genreList, error) in
+                    LoadingViewUtility.hideLoadingView()
+                    self.presenter?.presentPopularMovies(movieListViewModel: movieList, genreViewModel: genreList)
+                })
             } else {
+                LoadingViewUtility.hideLoadingView()
                 DialogBoxUtility.showError(message: Constants.errorMessage)
             }
         })

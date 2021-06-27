@@ -54,6 +54,11 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as! MovieCell
             cell.viewModel = itemList?.items[indexPath.row]
+            
+            if let genreIds = cell.viewModel?.genreIds {
+                cell.viewModel?.genreString = getGenreString(genreList: genreIds)
+            }
+            
             cell.configureCell((itemList?.items.count).intValue - 1 == indexPath.row)
             return cell
         case .Person:
@@ -158,9 +163,34 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
         searchBar?.endEditing(true)
     }
     
+    // MARK: Private Helpers
+    
     private func showEmptyState() -> Bool {
         return isSearching
             && (searchedMovieListViewModel?.items.count).intValue == 0
             && (searchedPeopleListViewModel?.items.count).intValue == 0
+    }
+    
+    private func getGenreString(genreList: [Int]) -> String? {
+        var resultStr: String?
+        var filteredArray: [String] = []
+        
+        for genreId in genreList {
+            
+            if let name = self.genreViewModel?.genres?.filter({$0.id == genreId}).first?.name {
+                filteredArray.append(name)
+            }
+        }
+        
+        for (index, name) in filteredArray.enumerated() {
+            
+            if index == 0 {
+                resultStr = name
+            } else {
+                resultStr = resultStr.stringValue + ", " + name
+            }
+        }
+        
+        return resultStr
     }
 }

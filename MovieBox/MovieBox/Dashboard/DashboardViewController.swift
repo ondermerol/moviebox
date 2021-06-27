@@ -8,7 +8,7 @@
 import UIKit
 
 protocol DashboardViewDisplayLogic: class {
-    func displayPopularMovies(movieListViewModel: MovieListViewModel)
+    func displayPopularMovies(movieListViewModel: MovieListViewModel, genreViewModel: GenreViewModel?)
     func displayBothSearchedPeopleAndMovie(movieListViewModel: MovieListViewModel,
                                            peopleListViewModel: PeopleListViewModel)
 }
@@ -23,6 +23,7 @@ class DashboardViewController: BaseViewControlller, DashboardViewDisplayLogic {
     var movieListViewModel: MovieListViewModel?
     var searchedMovieListViewModel: MovieListViewModel?
     var searchedPeopleListViewModel: PeopleListViewModel?
+    var genreViewModel: GenreViewModel?
     var hasActivePaginationServiceCall: Bool = false
     
     var isSearching: Bool = false
@@ -117,13 +118,15 @@ class DashboardViewController: BaseViewControlller, DashboardViewDisplayLogic {
     
     // MARK: DashboardViewDisplayLogic
     
-    func displayPopularMovies(movieListViewModel: MovieListViewModel) {
+    func displayPopularMovies(movieListViewModel: MovieListViewModel, genreViewModel: GenreViewModel?) {
         
         if self.movieListViewModel == nil || self.movieListViewModel?.items.count == 0 {
             self.movieListViewModel = movieListViewModel
         } else {
             self.movieListViewModel?.items.append(contentsOf: movieListViewModel.items)
         }
+        
+        self.genreViewModel = genreViewModel
         
         hasActivePaginationServiceCall = false
         collectionView?.reloadData()

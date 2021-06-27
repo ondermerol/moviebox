@@ -19,6 +19,8 @@ protocol DashboardViewWorkerProtocol {
     func searchPeople(forpage page:Int,
                       queryString: String?,
                       completionHandler:@escaping (PeopleListViewModel?, Error?) -> Void)
+    
+    func getGenres(completionHandler:@escaping (GenreViewModel?, Error?) -> Void) 
 }
 
 final class DashboardViewWorker {
@@ -95,6 +97,29 @@ final class DashboardViewWorker {
                 switch response.result {
                     case .success(let peopleListViewModel):
                         completionHandler(peopleListViewModel, nil)
+                        
+                    case .failure(let error):
+                        completionHandler(nil, error)
+                }
+        }
+    }
+    
+    func getGenres(completionHandler:@escaping (GenreViewModel?, Error?) -> Void) {
+        
+        let params: Parameters = [
+            "api_key": Constants.apiKey
+            ]
+        
+        AF.request(TransactionURL.getGenres.urlString,
+                   method: .get,
+                   parameters: params,
+                   encoding: URLEncoding.queryString)
+            
+            .responseDecodable(of: GenreViewModel.self) { response in
+                
+                switch response.result {
+                    case .success(let genreViewModel):
+                        completionHandler(genreViewModel, nil)
                         
                     case .failure(let error):
                         completionHandler(nil, error)

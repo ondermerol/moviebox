@@ -66,6 +66,11 @@ class PersonDetailViewController: BaseViewControlller, PersonDetailViewDisplayLo
     
     private func setupView() {
         
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Home",
+                                                            style: .plain,
+                                                            target: self,
+                                                            action: #selector(homeButtonAction))
+        
         // ScrollView
         
         scrollView = UIScrollView(frame: .zero)
@@ -146,5 +151,11 @@ class PersonDetailViewController: BaseViewControlller, PersonDetailViewDisplayLo
         movieCreditViewModel = movieCredit
         
         setupView()
+    }
+    
+    // MARK: Action
+    
+    @objc func homeButtonAction(sender: UIBarButtonItem) {
+        self.navigationController?.popToRootViewController(animated: true)
     }
 }

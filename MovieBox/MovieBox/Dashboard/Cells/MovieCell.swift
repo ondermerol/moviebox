@@ -23,6 +23,7 @@ class MovieCell: UICollectionViewCell {
             titleLabel.text = viewModel.title
             releaseDateLabel.text = viewModel.releaseDate
             averageVoteLabel.text = (viewModel.averageVote?.description).stringValue + " ✭"
+            genreLabel.text = viewModel.genreString
         }
     }
     
@@ -60,6 +61,15 @@ class MovieCell: UICollectionViewCell {
         return label
     }()
     
+    private let genreLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = FontUtility.descriptionFont()
+        label.textColor = ColorUtility.decriptionColor()
+        label.numberOfLines = 0
+        return label
+    }()
+    
     private let seperatorView: UIView = {
         let view: UIView = UIView()
         view.backgroundColor = ColorUtility.grayLight()
@@ -80,27 +90,36 @@ class MovieCell: UICollectionViewCell {
         imageView.heightAnchor.constraint(equalToConstant: Constants.listedImageHeight).isActive = true
         imageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
         
-        titleLabel.topAnchor.constraint(equalTo: imageView.topAnchor).isActive = true
+        titleLabel.topAnchor.constraint(equalTo: imageView.topAnchor, constant: 0).isActive = true
         titleLabel.leftAnchor.constraint(equalTo: imageView.rightAnchor, constant: 20).isActive = true
         titleLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10).isActive = true
-        titleLabel.heightAnchor.constraint(equalToConstant: 70).isActive = true
+        titleLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
         if (viewModel?.releaseDate) != nil {
             addSubview(releaseDateLabel)
             releaseDateLabel.translatesAutoresizingMaskIntoConstraints = false
-            releaseDateLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10).isActive = true
+            releaseDateLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 3.3).isActive = true
             releaseDateLabel.leftAnchor.constraint(equalTo: imageView.rightAnchor, constant: 20).isActive = true
             releaseDateLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10).isActive = true
-            releaseDateLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
+            releaseDateLabel.heightAnchor.constraint(equalToConstant: 25).isActive = true
         }
         
         if (viewModel?.averageVote) != nil {
             addSubview(averageVoteLabel)
             averageVoteLabel.translatesAutoresizingMaskIntoConstraints = false
-            averageVoteLabel.bottomAnchor.constraint(equalTo: imageView.bottomAnchor).isActive = true
+            averageVoteLabel.bottomAnchor.constraint(equalTo: imageView.bottomAnchor, constant: -43.3).isActive = true
             averageVoteLabel.leftAnchor.constraint(equalTo: imageView.rightAnchor, constant: 20).isActive = true
             averageVoteLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10).isActive = true
-            averageVoteLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
+            averageVoteLabel.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        }
+        
+        if (viewModel?.genreString) != nil {
+            addSubview(genreLabel)
+            genreLabel.translatesAutoresizingMaskIntoConstraints = false
+            genreLabel.bottomAnchor.constraint(equalTo: imageView.bottomAnchor).isActive = true
+            genreLabel.leftAnchor.constraint(equalTo: imageView.rightAnchor, constant: 20).isActive = true
+            genreLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10).isActive = true
+            genreLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
         }
         
         if !isLastItem {

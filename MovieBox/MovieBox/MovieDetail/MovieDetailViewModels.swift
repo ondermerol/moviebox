@@ -24,12 +24,6 @@ struct CastMembersViewModel: Decodable {
     let cast: [CastMemberViewModel]?
 }
 
-
-struct Genre: Decodable {
-    let id: Int
-    let name: String?
-}
-
 struct MovieDetailViewModel: Decodable {
     let id: Int
     let title: String?

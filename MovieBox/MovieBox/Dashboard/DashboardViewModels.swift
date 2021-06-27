@@ -12,6 +12,15 @@ enum DashboardSections: Int {
     case Person
 }
 
+struct Genre: Decodable {
+    let id: Int
+    let name: String?
+}
+
+struct GenreViewModel: Decodable {
+    let genres: [Genre]?
+}
+
 struct Person: Decodable {
     let id: Int
     let name: String?
@@ -46,6 +55,8 @@ struct Movie: Decodable {
     let posterPath: String?
     let releaseDate: String?
     let averageVote: CGFloat?
+    let genreIds: [Int]?
+    var genreString: String?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -53,6 +64,8 @@ struct Movie: Decodable {
         case posterPath = "poster_path"
         case releaseDate = "release_date"
         case averageVote = "vote_average"
+        case genreIds = "genre_ids"
+        case genreString
     }
 }
 

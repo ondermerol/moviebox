@@ -8,7 +8,7 @@
 import UIKit
 
 protocol DashboardViewPresentationLogic {
-    func presentPopularMovies(movieListViewModel: MovieListViewModel)
+    func presentPopularMovies(movieListViewModel: MovieListViewModel, genreViewModel: GenreViewModel?)
     func presentBothSearchedPeopleAndMovie(movieListViewModel: MovieListViewModel,
                                            peopleListViewModel: PeopleListViewModel)
 }
@@ -17,8 +17,8 @@ class DashboardViewPresenter: DashboardViewPresentationLogic {
     
     weak var viewController: DashboardViewDisplayLogic?
   
-    func presentPopularMovies(movieListViewModel: MovieListViewModel) {
-        viewController?.displayPopularMovies(movieListViewModel: movieListViewModel)
+    func presentPopularMovies(movieListViewModel: MovieListViewModel, genreViewModel: GenreViewModel?) {
+        viewController?.displayPopularMovies(movieListViewModel: movieListViewModel, genreViewModel: genreViewModel)
     }
     
     func presentBothSearchedPeopleAndMovie(movieListViewModel: MovieListViewModel,
