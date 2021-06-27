@@ -9,35 +9,48 @@ import UIKit
 
 // cover photo, title, overview, average vote, cast members, videos at least
 
-struct CastMember: Decodable {
+struct CastMemberViewModel: Decodable {
     let id: Int
     let name: String?
+    let imageUrl: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case name
+        case imageUrl = "profile_path"
+    }
 }
+
+struct CastMembersViewModel: Decodable {
+    let id: Int
+    let cast: [CastMemberViewModel]?
+}
+
 
 struct Genre: Decodable {
     let id: Int
     let name: String?
 }
 
-struct MovieDetail: Decodable {
+struct MovieDetailViewModel: Decodable {
     let id: Int
     let title: String?
     let overview: String?
-    let averageVote: String? // vote_average
-    var castMembers: [CastMember]?
+    let averageVote: Float // vote_average
     let genres: [Genre]?
-    let video: String?
-    let image: String?
+    let video: Bool?
+    let imageUrl: String?
+    let imbdId: String?
     
     enum CodingKeys: String, CodingKey {
         case id
         case title
         case overview
         case averageVote = "vote_average"
-        case castMembers
         case genres
         case video
-        case image = "poster_path"
+        case imageUrl = "poster_path"
+        case imbdId = "imdb_id"
     }
 }
 

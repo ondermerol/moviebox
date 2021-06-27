@@ -1,5 +1,5 @@
 //
-//  CastCell.swift
+//  PersonCastCell.swift
 //  MovieBox
 //
 //  Created by Wolverin Mm on 27.06.2021.
@@ -8,7 +8,7 @@
 import UIKit
 import SDWebImage
 
-class CastCell: UICollectionViewCell {
+class PersonCastCell: UICollectionViewCell {
     
     var viewModel: MovieCreditViewModel? {
         didSet {

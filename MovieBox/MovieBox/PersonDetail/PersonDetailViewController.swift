@@ -62,7 +62,6 @@ class PersonDetailViewController: BaseViewControlller, PersonDetailViewDisplayLo
         presenter.viewController = viewController
         router.viewController = viewController
         router.dataStore = interactor
-
     }
     
     private func setupView() {
@@ -122,7 +121,7 @@ class PersonDetailViewController: BaseViewControlller, PersonDetailViewDisplayLo
         collectionview = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
         collectionview.dataSource = self
         collectionview.delegate = self
-        collectionview.register(CastCell.self, forCellWithReuseIdentifier: "CastCell")
+        collectionview.register(PersonCastCell.self, forCellWithReuseIdentifier: "PersonCastCell")
         collectionview.showsHorizontalScrollIndicator = true
         collectionview.backgroundColor = UIColor.white
         self.view.addSubview(collectionview)

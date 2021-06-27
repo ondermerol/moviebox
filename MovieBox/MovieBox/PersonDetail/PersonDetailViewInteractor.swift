@@ -28,6 +28,7 @@ class PersonDetailViewInteractor: PersonDetailViewBusinessLogic, PersonDetailVie
         worker?.getPersonDetail(withPersonId: id, completionHandler: { (personDetail, error) in
             
             if let personDetail = personDetail, error == nil  {
+                
                 self.worker?.getPersonMovieCredits(withPersonId: id, completionHandler: { (personMovieCredit, error) in
                     
                     LoadingViewUtility.hideLoadingView()

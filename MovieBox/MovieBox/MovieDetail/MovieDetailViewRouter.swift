@@ -8,7 +8,7 @@
 import UIKit
 
 @objc protocol MovieDetailViewRoutingLogic {
-  
+    func routeToPersonDetail(personId: Int)
 }
 
 protocol MovieDetailViewDataPassing {
@@ -21,10 +21,22 @@ class MovieDetailViewRouter: NSObject, MovieDetailViewRoutingLogic, MovieDetailV
   
     // MARK: Routing
   
+    func routeToPersonDetail(personId: Int) {
+        let destinationVC = PersonDetailViewController()
+        var destinationDS = destinationVC.router!.dataStore!
+        passDataToPersonDetailPage(personId, destination: &destinationDS)
+        navigateToPage(destinationVC: destinationVC)
+    }
 
     // MARK: Navigation
   
+    private func navigateToPage(destinationVC: BaseViewControlller) {
+        viewController?.navigationController?.pushViewController(destinationVC, animated: true)
+    }
   
     // MARK: Passing data
   
+    private func passDataToPersonDetailPage(_ personId: Int, destination: inout PersonDetailViewDataStore) {
+        destination.personId = personId
+    }
 }
