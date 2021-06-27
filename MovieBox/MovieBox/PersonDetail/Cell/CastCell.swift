@@ -1,26 +1,26 @@
 //
-//  MovieCell.swift
+//  CastCell.swift
 //  MovieBox
 //
-//  Created by Wolverin Mm on 26.06.2021.
+//  Created by Wolverin Mm on 27.06.2021.
 //
 
 import UIKit
 import SDWebImage
 
-class PeopleCell: UICollectionViewCell {
+class CastCell: UICollectionViewCell {
     
-    var viewModel: CustomCellViewModel? {
+    var viewModel: MovieCreditViewModel? {
         didSet {
             guard let viewModel = viewModel else { return }
             
             DispatchQueue.main.async {
-                let url = "https://image.tmdb.org/t/p/w500" +  viewModel.imageUrl
+                let url = "https://image.tmdb.org/t/p/w500" +  viewModel.imageUrl.stringValue
                 self.imageView.sd_setImage(with: URL(string: url),
                                            placeholderImage: UIImage(named: "picture_placeholder"))
             }
             
-            nameLabel.text = viewModel.name
+            nameLabel.text = viewModel.title
         }
     }
     
@@ -29,7 +29,7 @@ class PeopleCell: UICollectionViewCell {
         iv.translatesAutoresizingMaskIntoConstraints = false
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
-                iv.layer.cornerRadius = 12
+        iv.layer.cornerRadius = 12
         return iv
     }()
     
@@ -37,6 +37,7 @@ class PeopleCell: UICollectionViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 20)
+        label.numberOfLines = 0
         return label
     }()
     
@@ -45,15 +46,17 @@ class PeopleCell: UICollectionViewCell {
         contentView.addSubview(imageView)
         contentView.addSubview(nameLabel)
         
-        imageView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 20).isActive = true
-        imageView.widthAnchor.constraint(equalToConstant: 150).isActive = true
-        imageView.heightAnchor.constraint(equalToConstant: 200).isActive = true
-        imageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        contentView.backgroundColor = .yellow
         
-        nameLabel.topAnchor.constraint(equalTo: imageView.topAnchor).isActive = true
-        nameLabel.leftAnchor.constraint(equalTo: imageView.rightAnchor, constant: 20).isActive = true
-        nameLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: 20).isActive = true
-        nameLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        imageView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+        imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+        imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        
+        nameLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 10).isActive = true
+        nameLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: 5).isActive = true
+        nameLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 5).isActive = true
+        nameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -18,8 +18,8 @@ protocol DashboardViewPresentationLogic {
                                            peopleListViewModel: PeopleListViewModel)
 }
 
-class DashboardViewPresenter: DashboardViewPresentationLogic
-{
+class DashboardViewPresenter: DashboardViewPresentationLogic {
+    
     weak var viewController: DashboardViewDisplayLogic?
   
     func presentPopularMovies(movieListViewModel: MovieListViewModel) {

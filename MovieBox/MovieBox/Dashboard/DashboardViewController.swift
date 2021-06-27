@@ -35,12 +35,6 @@ class DashboardViewController: BaseViewControlller, DashboardViewDisplayLogic {
     
     var collectionView: UICollectionView?
     
-    // MARK: Constants
-    
-    enum Constants {
-        static let sectionNumber: Int = 2
-    }
-    
     // MARK: Object lifecycle
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -83,7 +77,7 @@ class DashboardViewController: BaseViewControlller, DashboardViewDisplayLogic {
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.translatesAutoresizingMaskIntoConstraints = false
         cv.register(MovieCell.self, forCellWithReuseIdentifier: "MovieCell")
-        cv.register(PeopleCell.self, forCellWithReuseIdentifier: "PeopleCell")
+        cv.register(PersonCell.self, forCellWithReuseIdentifier: "PersonCell")
         cv.register(SectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "header")
         cv.register(ActivityIndicatorCell.self, forCellWithReuseIdentifier: "ActivityIndicatorCell")
         collectionView = cv
@@ -99,9 +93,7 @@ class DashboardViewController: BaseViewControlller, DashboardViewDisplayLogic {
     
     private func setupCollectionView() {
         
-        let navBarHeight = navigationController?.navigationBar.frame.height ?? CGFloat(0)
-        let statusBarHeight = UIApplication.shared.statusBarFrame.height
-        let total = navBarHeight + statusBarHeight
+        let totalBarHeight = getTotalTopBarHeight()
         
         let searchBar:UISearchBar = UISearchBar(frame: .zero)
         searchBar.searchBarStyle = UISearchBar.Style.default
@@ -112,8 +104,8 @@ class DashboardViewController: BaseViewControlller, DashboardViewDisplayLogic {
         
         view.addSubview(searchBar)
         searchBar.translatesAutoresizingMaskIntoConstraints = false
-        searchBar.topAnchor.constraint(equalTo: view.topAnchor, constant: total).isActive = true
-        searchBar.bottomAnchor.constraint(equalTo: view.topAnchor, constant: total + 60).isActive = true
+        searchBar.topAnchor.constraint(equalTo: view.topAnchor, constant: totalBarHeight).isActive = true
+        searchBar.bottomAnchor.constraint(equalTo: view.topAnchor, constant: totalBarHeight + 60).isActive = true
         searchBar.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         searchBar.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         
@@ -126,7 +118,7 @@ class DashboardViewController: BaseViewControlller, DashboardViewDisplayLogic {
         collectionView.delegate = self
         collectionView.dataSource = self
         
-        collectionView.topAnchor.constraint(equalTo: view.topAnchor, constant: total + 60).isActive = true
+        collectionView.topAnchor.constraint(equalTo: view.topAnchor, constant: totalBarHeight + 60).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         collectionView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         collectionView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true

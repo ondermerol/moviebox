@@ -8,12 +8,7 @@
 import UIKit
 import SDWebImage
 
-struct CustomCellViewModel {
-    let name: String
-    let imageUrl: String
-}
-
-class MovieCell: UICollectionViewCell {
+class PersonCell: UICollectionViewCell {
     
     var viewModel: CustomCellViewModel? {
         didSet {
@@ -30,11 +25,11 @@ class MovieCell: UICollectionViewCell {
     }
     
     fileprivate let imageView: UIImageView = {
-        let iv = UIImageView()
+       let iv = UIImageView()
         iv.translatesAutoresizingMaskIntoConstraints = false
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
-        iv.layer.cornerRadius = 12
+                iv.layer.cornerRadius = 12
         return iv
     }()
     

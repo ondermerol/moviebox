@@ -67,7 +67,7 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
             if isSearching {
                 let moviewList = searchedPeopleListViewModel
                 
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PeopleCell", for: indexPath) as! PeopleCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PersonCell", for: indexPath) as! PersonCell
                 let poeple = moviewList?.items[indexPath.row]
                 cell.viewModel = CustomCellViewModel(name: (poeple?.name).stringValue,
                                                      imageUrl: (poeple?.image).stringValue)
@@ -138,7 +138,25 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
     // MARK: - UICollectionViewDelegate protocol
         
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("You selected cell #\(indexPath.item)!")
+        
+        switch DashboardSections(rawValue: indexPath.section) {
+        case .Movie:
+            let moviewList = isSearching ? searchedMovieListViewModel : movieListViewModel
+            let movie = moviewList?.items[indexPath.row]
+            
+            if let id = movie?.id {
+                router?.routeToMovieDetail(movieId: id)
+            }
+            
+        case .Person:
+            let peopleItem = searchedPeopleListViewModel?.items[indexPath.row]
+            
+            if let id = peopleItem?.id {
+                router?.routeToPersonDetail(personId: id)
+            }
+        case .none:
+            break
+        }
     }
     
 }
