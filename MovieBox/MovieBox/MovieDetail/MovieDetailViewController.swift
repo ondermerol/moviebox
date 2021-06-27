@@ -103,10 +103,9 @@ class MovieDetailViewController: BaseViewControlller, MovieDetailViewDisplayLogi
         contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
         contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
         
-        contentView.heightAnchor.constraint(equalTo: scrollView.heightAnchor).isActive = true
-//        let heightConst = contentView.heightAnchor.constraint(equalTo: scrollView.heightAnchor)
-//        heightConst.priority = UILayoutPriority(250)
-//        heightConst.isActive = true
+        let heightConst = contentView.heightAnchor.constraint(equalTo: scrollView.heightAnchor)
+        heightConst.priority = UILayoutPriority(250)
+        heightConst.isActive = true
         
         // Name
         
