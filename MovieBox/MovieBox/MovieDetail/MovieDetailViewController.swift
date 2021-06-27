@@ -176,6 +176,10 @@ class MovieDetailViewController: BaseViewControlller, MovieDetailViewDisplayLogi
         labelOverview.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
         labelOverview.bottomAnchor.constraint(equalTo: imageView.bottomAnchor).isActive = true
         
+        let tap = UITapGestureRecognizer(target: self, action: #selector(overViewAction))
+        labelOverview.isUserInteractionEnabled = true
+        labelOverview.addGestureRecognizer(tap)
+        
         // Movie Credits Title
         
         let movieCreditsLabel = UILabel()
@@ -236,5 +240,12 @@ class MovieDetailViewController: BaseViewControlller, MovieDetailViewDisplayLogi
     
     @objc func homeButtonAction(sender: UIBarButtonItem) {
         self.navigationController?.popToRootViewController(animated: true)
+    }
+    
+    @objc func overViewAction(sender: UIBarButtonItem) {
+        
+        if let name = movieDetailViewModel?.title, let overview = movieDetailViewModel?.overview {
+            router?.routeToOverviewPage(overview: overview, movieName: name)
+        }
     }
 }
