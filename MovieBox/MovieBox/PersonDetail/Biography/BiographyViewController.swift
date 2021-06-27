@@ -29,6 +29,8 @@ class BiographyViewController: BaseViewControlller {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = ColorUtility.appViewColor()
+        
         if let biographyText = router?.dataStore?.biographyText, let name = router?.dataStore?.name {
             setupLabel(biographyText, name)
         } else {

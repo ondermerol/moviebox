@@ -46,7 +46,7 @@ class MovieCastCell: UICollectionViewCell {
         contentView.addSubview(imageView)
         contentView.addSubview(nameLabel)
         
-        contentView.backgroundColor = .yellow
+        contentView.backgroundColor = .clear
         
         imageView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
         imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true

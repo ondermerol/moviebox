@@ -25,4 +25,8 @@ class FontUtility {
     static func voteFont() -> UIFont? {
         return UIFont(name: "HelveticaNeue-Bold", size: 16.0)
     }
+    
+    static func castFont() -> UIFont? {
+        return UIFont(name: "HelveticaNeue-Medium", size: 14.0)
+    }
 }
