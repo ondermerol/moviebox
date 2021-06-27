@@ -37,7 +37,6 @@ class PersonDetailViewController: BaseViewControlller, PersonDetailViewDisplayLo
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Person Detail"
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -81,7 +80,7 @@ class PersonDetailViewController: BaseViewControlller, PersonDetailViewDisplayLo
             return
         }
         
-        scrollView.backgroundColor = .systemPink
+        scrollView.backgroundColor = ColorUtility.appViewColor()
         view.addSubview(scrollView)
         
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -91,6 +90,42 @@ class PersonDetailViewController: BaseViewControlller, PersonDetailViewDisplayLo
         scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         
         contentSizeHeight = contentSizeHeight + getTotalTopBarHeight()
+        
+        // Name
+        
+        let labelName = UILabel()
+        labelName.font = FontUtility.titleFont()
+        labelName.textColor = ColorUtility.titleColor()
+        labelName.numberOfLines = 0
+        labelName.text = self.personDetailViewModel?.name
+        
+        scrollView.addSubview(labelName)
+        
+        labelName.translatesAutoresizingMaskIntoConstraints = false
+        labelName.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 20).isActive = true
+        labelName.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 20).isActive = true
+        labelName.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -10).isActive = true
+        labelName.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        
+        contentSizeHeight = contentSizeHeight + 40 + 20
+        
+        // Known For Department
+        
+        let labelDepartmant = UILabel()
+        labelDepartmant.font = FontUtility.descriptionFont()
+        labelDepartmant.textColor = ColorUtility.decriptionColor()
+        labelDepartmant.numberOfLines = 0
+        labelDepartmant.text = self.personDetailViewModel?.knownForDepartment
+        
+        scrollView.addSubview(labelDepartmant)
+        
+        labelDepartmant.translatesAutoresizingMaskIntoConstraints = false
+        labelDepartmant.topAnchor.constraint(equalTo: labelName.bottomAnchor, constant: 2).isActive = true
+        labelDepartmant.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 20).isActive = true
+        labelDepartmant.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -10).isActive = true
+        labelDepartmant.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        
+        contentSizeHeight = contentSizeHeight + 25 + 2
         
         // ImageView
         
@@ -106,7 +141,7 @@ class PersonDetailViewController: BaseViewControlller, PersonDetailViewDisplayLo
         imageView.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 20).isActive = true
         imageView.widthAnchor.constraint(equalToConstant: 150).isActive = true
         imageView.heightAnchor.constraint(equalToConstant: 200).isActive = true
-        imageView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 50).isActive = true
+        imageView.topAnchor.constraint(equalTo: labelDepartmant.bottomAnchor, constant: 20).isActive = true
         
         DispatchQueue.main.async {
             let url = "https://image.tmdb.org/t/p/w500" +  (self.personDetailViewModel?.imageUrl).stringValue
@@ -114,7 +149,27 @@ class PersonDetailViewController: BaseViewControlller, PersonDetailViewDisplayLo
                                        placeholderImage: UIImage(named: "avatar"))
         }
         
-        contentSizeHeight = contentSizeHeight + 200 + 50
+        contentSizeHeight = contentSizeHeight + 200 + 20
+        
+        // Biography
+        
+        let labelBiography = UILabel()
+        labelBiography.font = FontUtility.descriptionFont()
+        labelBiography.textColor = ColorUtility.decriptionColor()
+        labelBiography.numberOfLines = 0
+        labelBiography.text = self.personDetailViewModel?.biography
+        
+        scrollView.addSubview(labelBiography)
+        
+        labelBiography.translatesAutoresizingMaskIntoConstraints = false
+        labelBiography.topAnchor.constraint(equalTo: imageView.topAnchor).isActive = true
+        labelBiography.leftAnchor.constraint(equalTo: imageView.rightAnchor, constant: 20).isActive = true
+        labelBiography.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
+        labelBiography.bottomAnchor.constraint(equalTo: imageView.bottomAnchor).isActive = true
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(biographyAction))
+        labelBiography.isUserInteractionEnabled = true
+        labelBiography.addGestureRecognizer(tap)
         
         // Collectionview
         
@@ -150,6 +205,8 @@ class PersonDetailViewController: BaseViewControlller, PersonDetailViewDisplayLo
         personDetailViewModel = personDetail
         movieCreditViewModel = movieCredit
         
+        title = personDetailViewModel?.name.stringValue
+        
         setupView()
     }
     
@@ -157,5 +214,12 @@ class PersonDetailViewController: BaseViewControlller, PersonDetailViewDisplayLo
     
     @objc func homeButtonAction(sender: UIBarButtonItem) {
         self.navigationController?.popToRootViewController(animated: true)
+    }
+    
+    @objc func biographyAction(sender: UIBarButtonItem) {
+        
+        if let name = personDetailViewModel?.name, let biography = personDetailViewModel?.biography {
+            router?.routeToBiographyDetail(biography: biography, actorName: name)
+        }
     }
 }

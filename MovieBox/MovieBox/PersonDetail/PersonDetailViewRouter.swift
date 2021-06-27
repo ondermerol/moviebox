@@ -9,6 +9,7 @@ import UIKit
 
 @objc protocol PersonDetailViewRoutingLogic {
     func routeToMovieDetail(movieId: Int)
+    func routeToBiographyDetail(biography: String, actorName: String)
 }
 
 protocol PersonDetailViewDataPassing {
@@ -29,15 +30,31 @@ class PersonDetailViewRouter: NSObject, PersonDetailViewRoutingLogic, PersonDeta
         navigateToPage(destinationVC: destinationVC)
     }
     
+    func routeToBiographyDetail(biography: String, actorName: String) {
+        let destinationVC = BiographyViewController()
+        var destinationDS = destinationVC.router!.dataStore!
+        passDataToBiographyPage(biography, actorName, destination: &destinationDS)
+        navigateToBiographyPage(destinationVC: destinationVC)
+    }
+    
     // MARK: Navigation
   
     private func navigateToPage(destinationVC: BaseViewControlller) {
         viewController?.navigationController?.pushViewController(destinationVC, animated: true)
+    }
+    
+    private func navigateToBiographyPage(destinationVC: BaseViewControlller) {
+        viewController?.navigationController?.present(destinationVC, animated: true, completion: nil)
     }
   
     // MARK: Passing data
   
     private func passDataToMovieDetailPage(_ movieId: Int, destination: inout MovieDetailViewDataStore) {
         destination.movieId = movieId
+    }
+    
+    private func passDataToBiographyPage(_ biography: String, _ actorName: String, destination: inout BiographyViewDataStore) {
+        destination.biographyText = biography
+        destination.name = actorName
     }
 }

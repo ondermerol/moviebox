@@ -13,7 +13,7 @@ struct PersonDetailViewModel: Decodable {
     let biography: String?
     let birthday: String?
     let imageUrl: String?
-    let alsoKnownAs: [String]?
+    let knownForDepartment: String?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -21,7 +21,7 @@ struct PersonDetailViewModel: Decodable {
         case biography
         case birthday
         case imageUrl = "profile_path"
-        case alsoKnownAs = "also_known_as"
+        case knownForDepartment = "known_for_department"
     }
 }
 
