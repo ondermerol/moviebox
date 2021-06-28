@@ -29,6 +29,11 @@ class MovieDetailViewController: BaseViewControlller, MovieDetailViewDisplayLogi
     var collectionviewForVideos: UICollectionView?
     var collectionviewForCredits: UICollectionView?
     
+    var labelName: UILabel?
+    var labelAverageVote: UILabel?
+    var imageView: UIImageView?
+    var labelOverview: UILabel?
+    
     // MARK: Object lifecycle
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -43,6 +48,12 @@ class MovieDetailViewController: BaseViewControlller, MovieDetailViewDisplayLogi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // TODO:Onder mock'lar
+//        castMembersViewModel = MovieMockData.castMembers
+//        movieDetailViewModel = MovieMockData.movieDetail
+//        videoViewModel = VideoViewModel(results: [VideoModel(id: "1", name: "alo", key: "zalo")])
+        
+        setupView()
         
         if let id = router?.dataStore?.movieId {
             interactor?.getMoviewDetail(forMoviewId: id)
@@ -84,6 +95,7 @@ class MovieDetailViewController: BaseViewControlller, MovieDetailViewDisplayLogi
         scrollView.backgroundColor = ColorUtility.grayLight()
         scrollView.isScrollEnabled = true
         scrollView.delegate = self
+        scrollView.tag = 100
         view.addSubview(scrollView)
         
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -96,6 +108,7 @@ class MovieDetailViewController: BaseViewControlller, MovieDetailViewDisplayLogi
         
         let contentView = UIView()
         contentView.backgroundColor = ColorUtility.grayLight()
+        contentView.tag = 101
         scrollView.addSubview(contentView)
         
         contentView.translatesAutoresizingMaskIntoConstraints = false
@@ -111,11 +124,15 @@ class MovieDetailViewController: BaseViewControlller, MovieDetailViewDisplayLogi
         
         // Name
         
-        let labelName = UILabel()
+        labelName = UILabel()
+        
+        guard let labelName = labelName else {
+            return
+        }
+        
         labelName.font = FontUtility.titleFont()
         labelName.textColor = ColorUtility.titleColor()
         labelName.numberOfLines = 0
-        labelName.text = self.movieDetailViewModel?.title
         
         contentView.addSubview(labelName)
         
@@ -127,10 +144,14 @@ class MovieDetailViewController: BaseViewControlller, MovieDetailViewDisplayLogi
         
         // Average Vote
 
-        let labelAverageVote = UILabel()
+        labelAverageVote = UILabel()
+        
+        guard let labelAverageVote = labelAverageVote else {
+            return
+        }
+        
         labelAverageVote.font = FontUtility.voteFont()
         labelAverageVote.textColor = ColorUtility.appTopColor()
-        labelAverageVote.text = (movieDetailViewModel?.averageVote.description).stringValue + " ✭"
 
         contentView.addSubview(labelAverageVote)
 
@@ -142,7 +163,12 @@ class MovieDetailViewController: BaseViewControlller, MovieDetailViewDisplayLogi
         
         // ImageView
         
-        let imageView = UIImageView()
+        imageView = UIImageView()
+        
+        guard let imageView = imageView else {
+            return
+        }
+        
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
@@ -156,19 +182,17 @@ class MovieDetailViewController: BaseViewControlller, MovieDetailViewDisplayLogi
         imageView.heightAnchor.constraint(equalToConstant: 200).isActive = true
         imageView.topAnchor.constraint(equalTo: labelAverageVote.bottomAnchor, constant: 20).isActive = true
         
-        DispatchQueue.main.async {
-            let url = "https://image.tmdb.org/t/p/w500" +  (self.movieDetailViewModel?.imageUrl).stringValue
-            imageView.sd_setImage(with: URL(string: url),
-                                       placeholderImage: UIImage(named: "avatar"))
-        }
-        
         // Overview
         
-        let labelOverview = UILabel()
+        self.labelOverview = UILabel()
+        
+        guard let labelOverview = labelOverview else {
+            return
+        }
+        
         labelOverview.font = FontUtility.descriptionFont()
         labelOverview.textColor = ColorUtility.decriptionColor()
         labelOverview.numberOfLines = 0
-        labelOverview.text = self.movieDetailViewModel?.overview
         
         contentView.addSubview(labelOverview)
         
@@ -184,7 +208,8 @@ class MovieDetailViewController: BaseViewControlller, MovieDetailViewDisplayLogi
         
         // Trailer Videos
         
-        if (videoViewModel?.results?.count).intValue > 0 {
+        // TODO:Onder
+        // if (videoViewModel?.results?.count).intValue > 0 {
             
             // Credit Collectionview Title
             
@@ -203,29 +228,31 @@ class MovieDetailViewController: BaseViewControlller, MovieDetailViewDisplayLogi
             
             // Credit Collectionview
             
-            let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-            layout.scrollDirection = .horizontal
-            layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-            layout.itemSize = CGSize(width: 150, height: 120)
-            collectionviewForVideos = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
+            let layoutForVideoCollectionView: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+            layoutForVideoCollectionView.scrollDirection = .horizontal
+            layoutForVideoCollectionView.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+            layoutForVideoCollectionView.itemSize = CGSize(width: 150, height: 120)
+            collectionviewForVideos = UICollectionView(frame: self.view.frame, collectionViewLayout: layoutForVideoCollectionView)
             
-            if let collectionviewForVideos = collectionviewForVideos  {
-                collectionviewForVideos.dataSource = self
-                collectionviewForVideos.delegate = self
-                collectionviewForVideos.register(VideoCell.self, forCellWithReuseIdentifier: "VideoCell")
-                collectionviewForVideos.showsHorizontalScrollIndicator = true
-                collectionviewForVideos.alwaysBounceVertical = false
-                collectionviewForVideos.backgroundColor = .clear
-                self.view.addSubview(collectionviewForVideos)
-                collectionviewForVideos.contentInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
-                collectionviewForVideos.translatesAutoresizingMaskIntoConstraints = false
-                collectionviewForVideos.topAnchor.constraint(equalTo: labelTitle.bottomAnchor, constant: 30).isActive = true
-                collectionviewForVideos.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-                collectionviewForVideos.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-                collectionviewForVideos.heightAnchor.constraint(equalToConstant: 120).isActive = true
-                collectionviewForVideos.reloadData()
+            guard let collectionviewForVideos = collectionviewForVideos else {
+                return
             }
-        }
+        
+            collectionviewForVideos.dataSource = self
+            collectionviewForVideos.delegate = self
+            collectionviewForVideos.register(VideoCell.self, forCellWithReuseIdentifier: "VideoCell")
+            collectionviewForVideos.showsHorizontalScrollIndicator = true
+            collectionviewForVideos.alwaysBounceVertical = false
+            collectionviewForVideos.backgroundColor = .clear
+            collectionviewForVideos.tag = 102
+            self.view.addSubview(collectionviewForVideos)
+            collectionviewForVideos.contentInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+            collectionviewForVideos.translatesAutoresizingMaskIntoConstraints = false
+            collectionviewForVideos.topAnchor.constraint(equalTo: labelTitle.bottomAnchor, constant: 30).isActive = true
+            collectionviewForVideos.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+            collectionviewForVideos.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+            collectionviewForVideos.heightAnchor.constraint(equalToConstant: 120).isActive = true
+        // }
         
         // Movie Credits Title
         
@@ -239,11 +266,13 @@ class MovieDetailViewController: BaseViewControlller, MovieDetailViewDisplayLogi
         
         movieCreditsLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        if let view = collectionviewForVideos, (videoViewModel?.results?.count).intValue > 0 {
-            movieCreditsLabel.topAnchor.constraint(equalTo: view.bottomAnchor, constant: 40).isActive = true
-        } else {
-            movieCreditsLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 40).isActive = true
-        }
+        // TODO:Onder
+        movieCreditsLabel.topAnchor.constraint(equalTo: collectionviewForVideos.bottomAnchor, constant: 40).isActive = true
+//        if let view = collectionviewForVideos, (videoViewModel?.results?.count).intValue > 0 {
+//            movieCreditsLabel.topAnchor.constraint(equalTo: view.bottomAnchor, constant: 40).isActive = true
+//        } else {
+//            movieCreditsLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 40).isActive = true
+//        }
         
         movieCreditsLabel.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 20).isActive = true
         movieCreditsLabel.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -10).isActive = true
@@ -264,6 +293,7 @@ class MovieDetailViewController: BaseViewControlller, MovieDetailViewDisplayLogi
             collectionviewForCredits.showsHorizontalScrollIndicator = true
             collectionviewForCredits.alwaysBounceVertical = false
             collectionviewForCredits.backgroundColor = .clear
+            collectionviewForCredits.tag = 103
             self.view.addSubview(collectionviewForCredits)
             collectionviewForCredits.translatesAutoresizingMaskIntoConstraints = false
             collectionviewForCredits.topAnchor.constraint(equalTo: movieCreditsLabel.bottomAnchor, constant: 30).isActive = true
@@ -271,7 +301,6 @@ class MovieDetailViewController: BaseViewControlller, MovieDetailViewDisplayLogi
             collectionviewForCredits.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
             collectionviewForCredits.heightAnchor.constraint(equalToConstant: 220).isActive = true
             collectionviewForCredits.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -50).isActive = true
-            collectionviewForCredits.reloadData()
         }
     }
     
@@ -286,8 +315,18 @@ class MovieDetailViewController: BaseViewControlller, MovieDetailViewDisplayLogi
         self.videoViewModel = videoViewModel
         
         title = movieDetailViewModel?.title.stringValue
+        labelAverageVote?.text = (movieDetailViewModel?.averageVote.description).stringValue + " ✭"
+        labelName?.text = self.movieDetailViewModel?.title
+        labelOverview?.text = self.movieDetailViewModel?.overview
         
-        setupView()
+        DispatchQueue.main.async { [weak self] in
+            let url = "https://image.tmdb.org/t/p/w500" +  (self?.movieDetailViewModel?.imageUrl).stringValue
+            self?.imageView?.sd_setImage(with: URL(string: url),
+                                       placeholderImage: UIImage(named: "avatar"))
+        }
+        
+        collectionviewForVideos?.reloadData()
+        collectionviewForCredits?.reloadData()
     }
     
     // MARK: Action

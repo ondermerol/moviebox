@@ -45,12 +45,13 @@ extension MovieDetailViewController: UICollectionViewDelegate, UICollectionViewD
         }
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "VideoCell", for: indexPath) as! VideoCell
+        cell.videoUrl = videoViewModel?.results?[indexPath.row].key
         cell.configure(indexPath.row)
         return cell
     }
     
     
-    // MARK: - UICollectionViewDelegate protocol
+    // MARK: UICollectionViewDelegate protocol
         
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
@@ -59,7 +60,7 @@ extension MovieDetailViewController: UICollectionViewDelegate, UICollectionViewD
             let item = castMembersViewModel?.cast?[indexPath.row]
             
             if let id = item?.id {
-                router?.routeToPersonDetail(personId: id)
+                openPersonDetail(personId: id)
             }
         } else {
             
@@ -68,6 +69,12 @@ extension MovieDetailViewController: UICollectionViewDelegate, UICollectionViewD
                 UIApplication.shared.open(url)
             }
         }
+    }
+    
+    // MARK: Actions
+    
+    func openPersonDetail(personId: Int) {
+        router?.routeToPersonDetail(personId: personId)
     }
 }
 

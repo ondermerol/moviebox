@@ -13,7 +13,7 @@ import UIKit
 }
 
 protocol MovieDetailViewDataPassing {
-    var dataStore: MovieDetailViewDataStore? { get }
+    var dataStore: MovieDetailViewDataStore? { get set }
 }
 
 class MovieDetailViewRouter: NSObject, MovieDetailViewRoutingLogic, MovieDetailViewDataPassing {

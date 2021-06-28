@@ -32,7 +32,7 @@ class PersonDetailViewControllerTests: XCTestCase {
 
     // MARK: Routing Logic Spy
     
-    class PersonDetailViewRoutingLogicSpy: NSObject, PersonDetailViewDataPassing & PersonDetailViewRoutingLogic{
+    class PersonDetailViewRoutingLogicSpy: NSObject, PersonDetailViewDataPassing & PersonDetailViewRoutingLogic {
   
         var dataStore: PersonDetailViewDataStore?
         
@@ -65,7 +65,6 @@ class PersonDetailViewControllerTests: XCTestCase {
     func testCell() {
         
         let indexPath = IndexPath(item: 0, section: 0)
-        // let cell = sut.collectionView(sut.collectionView!, cellForItemAt: indexPath) as? PersonCastCell
         let cell = sut.collectionView(sut.collectionView!, cellForItemAt: indexPath) as? PersonCastCell
         let personName = cell?.viewModel?.title
 

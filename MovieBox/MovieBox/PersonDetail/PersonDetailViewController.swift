@@ -254,7 +254,7 @@ class PersonDetailViewController: BaseViewControlller, PersonDetailViewDisplayLo
         DispatchQueue.main.async { [weak self] in
             let url = "https://image.tmdb.org/t/p/w500" +  (self?.personDetailViewModel?.imageUrl).stringValue
             self?.imageView?.sd_setImage(with: URL(string: url),
-                                       placeholderImage: UIImage(named: "avatar"))
+                                         placeholderImage: UIImage(named: "avatar"))
         }
         
         collectionView?.reloadData()

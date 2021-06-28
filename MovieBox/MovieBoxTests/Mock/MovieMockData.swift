@@ -29,4 +29,15 @@ enum MovieMockData {
         
         return [movie1, movie2]
     }
+    
+    static var movieDetail: MovieDetailViewModel {
+        return MovieDetailViewModel(id: 604, title: "Life Is Beautiful", overview: "overview", averageVote: 0, genres: nil, video: nil, imageUrl: nil, imbdId: nil)
+    }
+    
+    static var castMembers: CastMembersViewModel {
+        let cast1 = CastMemberViewModel(id: 1, name: "Roberto Benigni", imageUrl: nil)
+        return CastMembersViewModel(id: 1, cast: [cast1])
+    }
+    
+    static var videoViewModel: VideoViewModel = VideoViewModel(results: [VideoModel(id: "1", name: "alo", key: "zalo")])
 }

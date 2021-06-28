@@ -35,7 +35,7 @@ class DashboardViewControllerTests: XCTestCase {
     
     // MARK: Routing Logic Spy
     
-    class DashboardViewRoutingLogicSpy: NSObject, DashboardViewDataPassing & DashboardViewRoutingLogic{
+    class DashboardViewRoutingLogicSpy: NSObject, DashboardViewDataPassing & DashboardViewRoutingLogic {
         
         var routeToMovieDetailCalled = false
         var routeToPersonDetailCalled = false
