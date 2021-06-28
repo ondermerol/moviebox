@@ -232,7 +232,8 @@ class PersonDetailViewController: BaseViewControlller, PersonDetailViewDisplayLo
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(PersonCastCell.self, forCellWithReuseIdentifier: "PersonCastCell")
-        collectionView.showsHorizontalScrollIndicator = true
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.showsVerticalScrollIndicator = false
         collectionView.alwaysBounceVertical = false
         collectionView.backgroundColor = .clear
         collectionView.tag = 100

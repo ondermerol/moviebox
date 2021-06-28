@@ -69,13 +69,18 @@ class DashboardViewController: BaseViewControlller, DashboardViewDisplayLogic {
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.translatesAutoresizingMaskIntoConstraints = false
-        cv.register(MovieCell.self, forCellWithReuseIdentifier: "MovieCell")
-        cv.register(PersonCell.self, forCellWithReuseIdentifier: "PersonCell")
-        cv.register(SectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "header")
-        cv.register(ActivityIndicatorCell.self, forCellWithReuseIdentifier: "ActivityIndicatorCell")
-        collectionView = cv
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        
+        guard let collectionView = collectionView else {
+            return
+        }
+        
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.register(MovieCell.self, forCellWithReuseIdentifier: "MovieCell")
+        collectionView.register(PersonCell.self, forCellWithReuseIdentifier: "PersonCell")
+        collectionView.register(SectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "header")
+        collectionView.register(ActivityIndicatorCell.self, forCellWithReuseIdentifier: "ActivityIndicatorCell")
+        collectionView.showsVerticalScrollIndicator = true
     }
     
     private func setupCollectionView() {

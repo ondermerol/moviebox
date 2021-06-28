@@ -238,7 +238,8 @@ class MovieDetailViewController: BaseViewControlller, MovieDetailViewDisplayLogi
         collectionviewForVideos.dataSource = self
         collectionviewForVideos.delegate = self
         collectionviewForVideos.register(VideoCell.self, forCellWithReuseIdentifier: "VideoCell")
-        collectionviewForVideos.showsHorizontalScrollIndicator = true
+        collectionviewForVideos.showsHorizontalScrollIndicator = false
+        collectionviewForVideos.showsVerticalScrollIndicator = false
         collectionviewForVideos.alwaysBounceVertical = false
         collectionviewForVideos.backgroundColor = .clear
         collectionviewForVideos.tag = 102
@@ -282,7 +283,8 @@ class MovieDetailViewController: BaseViewControlller, MovieDetailViewDisplayLogi
             collectionviewForCredits.dataSource = self
             collectionviewForCredits.delegate = self
             collectionviewForCredits.register(MovieCastCell.self, forCellWithReuseIdentifier: "MovieCastCell")
-            collectionviewForCredits.showsHorizontalScrollIndicator = true
+            collectionviewForCredits.showsHorizontalScrollIndicator = false
+            collectionviewForCredits.showsVerticalScrollIndicator = false
             collectionviewForCredits.alwaysBounceVertical = false
             collectionviewForCredits.backgroundColor = .clear
             collectionviewForCredits.tag = 103
