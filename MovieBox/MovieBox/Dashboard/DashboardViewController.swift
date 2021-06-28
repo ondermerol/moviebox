@@ -128,6 +128,8 @@ class DashboardViewController: BaseViewControlller, DashboardViewDisplayLogic {
         
         self.genreViewModel = genreViewModel
         
+        updateMovieListViewModelForGenreString()
+        
         hasActivePaginationServiceCall = false
         collectionView?.reloadData()
     }
@@ -138,9 +140,58 @@ class DashboardViewController: BaseViewControlller, DashboardViewDisplayLogic {
         self.searchedMovieListViewModel = movieListViewModel
         self.searchedPeopleListViewModel = peopleListViewModel
         
+        updateSearchedMovieListViewModelForGenreString()
+        
         isSearching = true
         hasActivePaginationServiceCall = false
         collectionView?.setContentOffset(.zero, animated: false)
         collectionView?.reloadData()
+    }
+    
+    // MARK: Private Helpers - Genre String Creation
+    
+    private func updateMovieListViewModelForGenreString() {
+        
+        guard let movieListViewModel = self.movieListViewModel else {
+            return
+        }
+        
+        for (i, item) in movieListViewModel.items.enumerated() {
+            self.movieListViewModel?.items[i].genreString = getGenreString(genreList: item.genreIds ?? [])
+        }
+    }
+    
+    private func updateSearchedMovieListViewModelForGenreString() {
+        
+        guard let searchedMovieListViewModel = self.searchedMovieListViewModel else {
+            return
+        }
+        
+        for (i, item) in searchedMovieListViewModel.items.enumerated() {
+            self.searchedMovieListViewModel?.items[i].genreString = getGenreString(genreList: item.genreIds ?? [])
+        }
+    }
+    
+    private func getGenreString(genreList: [Int]) -> String? {
+        var resultStr: String?
+        var filteredArray: [String] = []
+        
+        for genreId in genreList {
+            
+            if let name = self.genreViewModel?.genres?.filter({$0.id == genreId}).first?.name {
+                filteredArray.append(name)
+            }
+        }
+        
+        for (index, name) in filteredArray.enumerated() {
+            
+            if index == 0 {
+                resultStr = name
+            } else {
+                resultStr = resultStr.stringValue + ", " + name
+            }
+        }
+        
+        return resultStr
     }
 }
