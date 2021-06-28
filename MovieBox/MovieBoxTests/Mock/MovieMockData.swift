@@ -40,4 +40,12 @@ enum MovieMockData {
     }
     
     static var videoViewModel: VideoViewModel = VideoViewModel(results: [VideoModel(id: "1", name: "alo", key: "zalo")])
+    
+    static var movie: Movie = Movie(id: 1,
+                                    title: "Moview 1",
+                                    posterPath: "",
+                                    releaseDate: "",
+                                    averageVote: 8.2,
+                                    genreIds: nil,
+                                    genreString: "")
 }

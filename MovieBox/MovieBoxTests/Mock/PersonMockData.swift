@@ -41,4 +41,9 @@ enum PersonMockData {
         return PersonMovieCreditViewModel(id: 1,
                                           cast: [cast1])
     }
+    
+    static var person: Person = Person(id: 1,
+                                       name: "Önder",
+                                       imageUrl: nil,
+                                       knownForDepartment: nil)
 }
