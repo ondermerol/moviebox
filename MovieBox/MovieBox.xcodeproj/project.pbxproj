@@ -37,7 +37,7 @@
 		F4B34718268755A200AB6899 /* DialogBoxUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B34717268755A200AB6899 /* DialogBoxUtility.swift */; };
 		F4B3471B2687605300AB6899 /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B3471A2687605300AB6899 /* MovieCell.swift */; };
 		F4B3471D2687624D00AB6899 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B3471C2687624D00AB6899 /* Extensions.swift */; };
-		F4B347202687702E00AB6899 /* CollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B3471F2687702E00AB6899 /* CollectionView+Extension.swift */; };
+		F4B347202687702E00AB6899 /* UICollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B3471F2687702E00AB6899 /* UICollectionView+Extension.swift */; };
 		F4B34723268773E800AB6899 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B34722268773E800AB6899 /* BaseViewController.swift */; };
 		F4B34726268774A600AB6899 /* LoadingViewUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B34725268774A600AB6899 /* LoadingViewUtility.swift */; };
 		F4B347282687848900AB6899 /* ActivityIndicatorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B347272687848900AB6899 /* ActivityIndicatorCell.swift */; };
@@ -94,9 +94,9 @@
 		F4B347722688A21500AB6899 /* ColorUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B347712688A21500AB6899 /* ColorUtility.swift */; };
 		F4B347732688A21500AB6899 /* ColorUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B347712688A21500AB6899 /* ColorUtility.swift */; };
 		F4B347742688A21500AB6899 /* ColorUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B347712688A21500AB6899 /* ColorUtility.swift */; };
-		F4B347762688AA9600AB6899 /* SearchBar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B347752688AA9600AB6899 /* SearchBar+Extension.swift */; };
-		F4B347772688AA9600AB6899 /* SearchBar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B347752688AA9600AB6899 /* SearchBar+Extension.swift */; };
-		F4B347782688AA9600AB6899 /* SearchBar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B347752688AA9600AB6899 /* SearchBar+Extension.swift */; };
+		F4B347762688AA9600AB6899 /* UISearchBar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B347752688AA9600AB6899 /* UISearchBar+Extension.swift */; };
+		F4B347772688AA9600AB6899 /* UISearchBar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B347752688AA9600AB6899 /* UISearchBar+Extension.swift */; };
+		F4B347782688AA9600AB6899 /* UISearchBar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B347752688AA9600AB6899 /* UISearchBar+Extension.swift */; };
 		F4B3477A2688AF3900AB6899 /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B347792688AF3900AB6899 /* SectionHeader.swift */; };
 		F4B3477B2688AF3900AB6899 /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B347792688AF3900AB6899 /* SectionHeader.swift */; };
 		F4B3477C2688AF3900AB6899 /* SectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B347792688AF3900AB6899 /* SectionHeader.swift */; };
@@ -113,6 +113,7 @@
 		F4B3478C26890FEC00AB6899 /* BiographyViewInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B3478A26890FEC00AB6899 /* BiographyViewInteractor.swift */; };
 		F4B3478D26890FEC00AB6899 /* BiographyViewInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B3478A26890FEC00AB6899 /* BiographyViewInteractor.swift */; };
 		F4B3478F26894FE500AB6899 /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B3478E26894FE400AB6899 /* VideoCell.swift */; };
+		F4B347912689D86800AB6899 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B347902689D86800AB6899 /* UIImage+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -165,7 +166,7 @@
 		F4B34717268755A200AB6899 /* DialogBoxUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialogBoxUtility.swift; sourceTree = "<group>"; };
 		F4B3471A2687605300AB6899 /* MovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
 		F4B3471C2687624D00AB6899 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		F4B3471F2687702E00AB6899 /* CollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CollectionView+Extension.swift"; sourceTree = "<group>"; };
+		F4B3471F2687702E00AB6899 /* UICollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extension.swift"; sourceTree = "<group>"; };
 		F4B34722268773E800AB6899 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		F4B34725268774A600AB6899 /* LoadingViewUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewUtility.swift; sourceTree = "<group>"; };
 		F4B347272687848900AB6899 /* ActivityIndicatorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorCell.swift; sourceTree = "<group>"; };
@@ -188,13 +189,14 @@
 		F4B347682688936000AB6899 /* MovieDetailViewController+CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MovieDetailViewController+CollectionView.swift"; sourceTree = "<group>"; };
 		F4B3476D268894B500AB6899 /* MovieCastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCastCell.swift; sourceTree = "<group>"; };
 		F4B347712688A21500AB6899 /* ColorUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorUtility.swift; sourceTree = "<group>"; };
-		F4B347752688AA9600AB6899 /* SearchBar+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchBar+Extension.swift"; sourceTree = "<group>"; };
+		F4B347752688AA9600AB6899 /* UISearchBar+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISearchBar+Extension.swift"; sourceTree = "<group>"; };
 		F4B347792688AF3900AB6899 /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
 		F4B3477D2688B6EF00AB6899 /* FontUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontUtility.swift; sourceTree = "<group>"; };
 		F4B3478226890FAE00AB6899 /* BiographyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiographyViewController.swift; sourceTree = "<group>"; };
 		F4B3478626890FD700AB6899 /* BiographyViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiographyViewRouter.swift; sourceTree = "<group>"; };
 		F4B3478A26890FEC00AB6899 /* BiographyViewInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiographyViewInteractor.swift; sourceTree = "<group>"; };
 		F4B3478E26894FE400AB6899 /* VideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
+		F4B347902689D86800AB6899 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -346,8 +348,9 @@
 		F4B3471E2687701C00AB6899 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				F4B3471F2687702E00AB6899 /* CollectionView+Extension.swift */,
-				F4B347752688AA9600AB6899 /* SearchBar+Extension.swift */,
+				F4B3471F2687702E00AB6899 /* UICollectionView+Extension.swift */,
+				F4B347752688AA9600AB6899 /* UISearchBar+Extension.swift */,
+				F4B347902689D86800AB6899 /* UIImage+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -676,7 +679,7 @@
 				F4B34760268874DC00AB6899 /* PersonDetailViewController+CollectionView.swift in Sources */,
 				F4B34714268751A800AB6899 /* TransactionURL.swift in Sources */,
 				F4B34716268752F600AB6899 /* Constants.swift in Sources */,
-				F4B347202687702E00AB6899 /* CollectionView+Extension.swift in Sources */,
+				F4B347202687702E00AB6899 /* UICollectionView+Extension.swift in Sources */,
 				B05EA4742686329B00BCC124 /* DashboardViewWorker.swift in Sources */,
 				F4B3478F26894FE500AB6899 /* VideoCell.swift in Sources */,
 				F4B34733268845FD00AB6899 /* MovieDetailViewModels.swift in Sources */,
@@ -697,6 +700,7 @@
 				F4B3472C2687BF5D00AB6899 /* PersonCell.swift in Sources */,
 				F4B3473B2688465800AB6899 /* MovieDetailViewWorker.swift in Sources */,
 				F4B3474C26885AC000AB6899 /* PersonDetailViewRouter.swift in Sources */,
+				F4B347912689D86800AB6899 /* UIImage+Extension.swift in Sources */,
 				F4B3477A2688AF3900AB6899 /* SectionHeader.swift in Sources */,
 				F4B3473F2688466B00AB6899 /* MovieDetailViewInteractor.swift in Sources */,
 				F4B34765268875B600AB6899 /* PersonCastCell.swift in Sources */,
@@ -706,7 +710,7 @@
 				F4B3476E268894B500AB6899 /* MovieCastCell.swift in Sources */,
 				F4B3471026871AA100AB6899 /* DashboardViewController.swift in Sources */,
 				B05EA4782686329B00BCC124 /* DashboardViewModels.swift in Sources */,
-				F4B347762688AA9600AB6899 /* SearchBar+Extension.swift in Sources */,
+				F4B347762688AA9600AB6899 /* UISearchBar+Extension.swift in Sources */,
 				F4B3475826885AF600AB6899 /* PersonDetailViewWorker.swift in Sources */,
 				F4B3471D2687624D00AB6899 /* Extensions.swift in Sources */,
 			);
@@ -736,7 +740,7 @@
 				F4B34730268845DA00AB6899 /* MovieDetailViewController.swift in Sources */,
 				F4B3478C26890FEC00AB6899 /* BiographyViewInteractor.swift in Sources */,
 				F4B34761268874DC00AB6899 /* PersonDetailViewController+CollectionView.swift in Sources */,
-				F4B347772688AA9600AB6899 /* SearchBar+Extension.swift in Sources */,
+				F4B347772688AA9600AB6899 /* UISearchBar+Extension.swift in Sources */,
 				F4B3470B2687091F00AB6899 /* AppDelegate.swift in Sources */,
 				F4B3474D26885AC000AB6899 /* PersonDetailViewRouter.swift in Sources */,
 				F4B3475D26885B0200AB6899 /* PersonDetailViewModels.swift in Sources */,
@@ -772,7 +776,7 @@
 				F4B34731268845DA00AB6899 /* MovieDetailViewController.swift in Sources */,
 				F4B3478D26890FEC00AB6899 /* BiographyViewInteractor.swift in Sources */,
 				F4B34762268874DC00AB6899 /* PersonDetailViewController+CollectionView.swift in Sources */,
-				F4B347782688AA9600AB6899 /* SearchBar+Extension.swift in Sources */,
+				F4B347782688AA9600AB6899 /* UISearchBar+Extension.swift in Sources */,
 				F4B3470C2687091F00AB6899 /* AppDelegate.swift in Sources */,
 				F4B3474E26885AC000AB6899 /* PersonDetailViewRouter.swift in Sources */,
 				F4B3475E26885B0200AB6899 /* PersonDetailViewModels.swift in Sources */,

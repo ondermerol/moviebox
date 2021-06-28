@@ -22,6 +22,16 @@ class VideoCell: UICollectionViewCell {
         return label
     }()
     
+    private let imageView: UIImageView = {
+       let iv = UIImageView()
+        iv.translatesAutoresizingMaskIntoConstraints = false
+        iv.contentMode = .scaleToFill
+        iv.clipsToBounds = true
+        let tintColor = UIColor(red: 242.0/255.0, green: 242.0/255.0, blue: 242.0/255.0, alpha: 1.0)
+        iv.image = UIImage(named: "youtubePlayIcon")?.imageWithColor(tintColor: tintColor)
+        return iv
+    }()
+    
     private let view: UIView = {
         let iv = UIView()
         iv.translatesAutoresizingMaskIntoConstraints = false
@@ -36,6 +46,7 @@ class VideoCell: UICollectionViewCell {
         
         contentView.addSubview(view)
         contentView.addSubview(titleLabel)
+        contentView.addSubview(imageView)
     }
     
     func configure(_ index: Int) {
@@ -46,11 +57,16 @@ class VideoCell: UICollectionViewCell {
         view.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
         
         titleLabel.text = "Tralier \(index + 1)"
+        titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 25).isActive = true
         titleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        titleLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
-        titleLabel.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        titleLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
         titleLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
         titleLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
+        
+        imageView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 0).isActive = true
+        imageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        imageView.widthAnchor.constraint(equalToConstant: 30).isActive = true
     }
     
     required init?(coder aDecoder: NSCoder) {

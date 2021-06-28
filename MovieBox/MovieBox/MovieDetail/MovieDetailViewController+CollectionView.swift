@@ -30,7 +30,7 @@ extension MovieDetailViewController: UICollectionViewDelegate, UICollectionViewD
             return CGSize(width: 150, height: 220)
         }
         
-        return CGSize(width: 150, height: 100)
+        return CGSize(width: 150, height: 120)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

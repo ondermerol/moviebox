@@ -206,7 +206,7 @@ class MovieDetailViewController: BaseViewControlller, MovieDetailViewDisplayLogi
             let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
             layout.scrollDirection = .horizontal
             layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-            layout.itemSize = CGSize(width: 150, height: 100)
+            layout.itemSize = CGSize(width: 150, height: 120)
             collectionviewForVideos = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
             
             if let collectionviewForVideos = collectionviewForVideos  {
@@ -222,7 +222,7 @@ class MovieDetailViewController: BaseViewControlller, MovieDetailViewDisplayLogi
                 collectionviewForVideos.topAnchor.constraint(equalTo: labelTitle.bottomAnchor, constant: 30).isActive = true
                 collectionviewForVideos.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
                 collectionviewForVideos.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-                collectionviewForVideos.heightAnchor.constraint(equalToConstant: 100).isActive = true
+                collectionviewForVideos.heightAnchor.constraint(equalToConstant: 120).isActive = true
                 collectionviewForVideos.reloadData()
             }
         }
