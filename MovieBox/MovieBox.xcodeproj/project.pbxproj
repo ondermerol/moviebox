@@ -112,6 +112,7 @@
 		F4B3478B26890FEC00AB6899 /* BiographyViewInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B3478A26890FEC00AB6899 /* BiographyViewInteractor.swift */; };
 		F4B3478C26890FEC00AB6899 /* BiographyViewInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B3478A26890FEC00AB6899 /* BiographyViewInteractor.swift */; };
 		F4B3478D26890FEC00AB6899 /* BiographyViewInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B3478A26890FEC00AB6899 /* BiographyViewInteractor.swift */; };
+		F4B3478F26894FE500AB6899 /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B3478E26894FE400AB6899 /* VideoCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -193,6 +194,7 @@
 		F4B3478226890FAE00AB6899 /* BiographyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiographyViewController.swift; sourceTree = "<group>"; };
 		F4B3478626890FD700AB6899 /* BiographyViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiographyViewRouter.swift; sourceTree = "<group>"; };
 		F4B3478A26890FEC00AB6899 /* BiographyViewInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiographyViewInteractor.swift; sourceTree = "<group>"; };
+		F4B3478E26894FE400AB6899 /* VideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -412,6 +414,7 @@
 			isa = PBXGroup;
 			children = (
 				F4B3476D268894B500AB6899 /* MovieCastCell.swift */,
+				F4B3478E26894FE400AB6899 /* VideoCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -675,6 +678,7 @@
 				F4B34716268752F600AB6899 /* Constants.swift in Sources */,
 				F4B347202687702E00AB6899 /* CollectionView+Extension.swift in Sources */,
 				B05EA4742686329B00BCC124 /* DashboardViewWorker.swift in Sources */,
+				F4B3478F26894FE500AB6899 /* VideoCell.swift in Sources */,
 				F4B34733268845FD00AB6899 /* MovieDetailViewModels.swift in Sources */,
 				F4B3472A26879F0600AB6899 /* DashboardViewController+Search.swift in Sources */,
 				F4B3477E2688B6EF00AB6899 /* FontUtility.swift in Sources */,

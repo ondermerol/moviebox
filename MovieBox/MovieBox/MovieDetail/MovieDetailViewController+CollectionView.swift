@@ -17,20 +17,35 @@ extension MovieDetailViewController: UICollectionViewDelegate, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return (castMembersViewModel?.cast?.count).intValue
+        if collectionView == self.collectionviewForCredits {
+            return (castMembersViewModel?.cast?.count).intValue
+        }
+        
+        return (videoViewModel?.results?.count).intValue
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 150, height: 220)
+        
+        if collectionView == self.collectionviewForCredits {
+            return CGSize(width: 150, height: 220)
+        }
+        
+        return CGSize(width: 150, height: 100)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCastCell", for: indexPath) as! MovieCastCell
-        let item: CastMemberViewModel? = castMembersViewModel?.cast?[indexPath.row]
-        cell.viewModel = CastMemberViewModel(id: (item?.id).intValue,
-                                             name: (item?.name).stringValue,
-                                             imageUrl: (item?.imageUrl).stringValue)
+        if collectionView == self.collectionviewForCredits {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCastCell", for: indexPath) as! MovieCastCell
+            let item: CastMemberViewModel? = castMembersViewModel?.cast?[indexPath.row]
+            cell.viewModel = CastMemberViewModel(id: (item?.id).intValue,
+                                                 name: (item?.name).stringValue,
+                                                 imageUrl: (item?.imageUrl).stringValue)
+            return cell
+        }
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "VideoCell", for: indexPath) as! VideoCell
+        cell.configure(indexPath.row)
         return cell
     }
     
@@ -39,10 +54,19 @@ extension MovieDetailViewController: UICollectionViewDelegate, UICollectionViewD
         
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let item = castMembersViewModel?.cast?[indexPath.row]
-        
-        if let id = item?.id {
-            router?.routeToPersonDetail(personId: id)
+        if collectionView == self.collectionviewForCredits {
+            
+            let item = castMembersViewModel?.cast?[indexPath.row]
+            
+            if let id = item?.id {
+                router?.routeToPersonDetail(personId: id)
+            }
+        } else {
+            
+            if let item: VideoModel = videoViewModel?.results?[indexPath.row], let key = item.key {
+                let url = URL(string: "https://www.youtube.com/watch?v=\(key)")!
+                UIApplication.shared.open(url)
+            }
         }
     }
 }

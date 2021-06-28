@@ -26,6 +26,8 @@ class MovieDetailViewController: BaseViewControlller, MovieDetailViewDisplayLogi
     var videoViewModel: VideoViewModel?
     
     var scrollView: UIScrollView?
+    var collectionviewForVideos: UICollectionView?
+    var collectionviewForCredits: UICollectionView?
     
     // MARK: Object lifecycle
     
@@ -180,6 +182,51 @@ class MovieDetailViewController: BaseViewControlller, MovieDetailViewDisplayLogi
         labelOverview.isUserInteractionEnabled = true
         labelOverview.addGestureRecognizer(tap)
         
+        // Trailer Videos
+        
+        if (videoViewModel?.results?.count).intValue > 0 {
+            
+            // Credit Collectionview Title
+            
+            let labelTitle = UILabel()
+            labelTitle.font = FontUtility.titleFont()
+            labelTitle.textColor = ColorUtility.titleColor()
+            labelTitle.text = "Videos"
+            
+            contentView.addSubview(labelTitle)
+            
+            labelTitle.translatesAutoresizingMaskIntoConstraints = false
+            labelTitle.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 40).isActive = true
+            labelTitle.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 20).isActive = true
+            labelTitle.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -10).isActive = true
+            labelTitle.heightAnchor.constraint(equalToConstant: 30).isActive = true
+            
+            // Credit Collectionview
+            
+            let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+            layout.scrollDirection = .horizontal
+            layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+            layout.itemSize = CGSize(width: 150, height: 100)
+            collectionviewForVideos = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
+            
+            if let collectionviewForVideos = collectionviewForVideos  {
+                collectionviewForVideos.dataSource = self
+                collectionviewForVideos.delegate = self
+                collectionviewForVideos.register(VideoCell.self, forCellWithReuseIdentifier: "VideoCell")
+                collectionviewForVideos.showsHorizontalScrollIndicator = true
+                collectionviewForVideos.alwaysBounceVertical = false
+                collectionviewForVideos.backgroundColor = .clear
+                self.view.addSubview(collectionviewForVideos)
+                collectionviewForVideos.contentInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+                collectionviewForVideos.translatesAutoresizingMaskIntoConstraints = false
+                collectionviewForVideos.topAnchor.constraint(equalTo: labelTitle.bottomAnchor, constant: 30).isActive = true
+                collectionviewForVideos.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+                collectionviewForVideos.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+                collectionviewForVideos.heightAnchor.constraint(equalToConstant: 100).isActive = true
+                collectionviewForVideos.reloadData()
+            }
+        }
+        
         // Movie Credits Title
         
         let movieCreditsLabel = UILabel()
@@ -191,34 +238,41 @@ class MovieDetailViewController: BaseViewControlller, MovieDetailViewDisplayLogi
         contentView.addSubview(movieCreditsLabel)
         
         movieCreditsLabel.translatesAutoresizingMaskIntoConstraints = false
-        movieCreditsLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 40).isActive = true
+        
+        if let view = collectionviewForVideos, (videoViewModel?.results?.count).intValue > 0 {
+            movieCreditsLabel.topAnchor.constraint(equalTo: view.bottomAnchor, constant: 40).isActive = true
+        } else {
+            movieCreditsLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 40).isActive = true
+        }
+        
         movieCreditsLabel.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 20).isActive = true
         movieCreditsLabel.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -10).isActive = true
         movieCreditsLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
-        // Collectionview
+        // Credit Collectionview
         
-        var collectionview: UICollectionView!
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         layout.itemSize = CGSize(width: 150, height: 220)
-        collectionview = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
-        collectionview.dataSource = self
-        collectionview.delegate = self
-        collectionview.register(MovieCastCell.self, forCellWithReuseIdentifier: "MovieCastCell")
-        collectionview.showsHorizontalScrollIndicator = true
-        collectionview.alwaysBounceVertical = false
-        collectionview.backgroundColor = .clear
-        self.view.addSubview(collectionview)
-        collectionview.translatesAutoresizingMaskIntoConstraints = false
-        collectionview.topAnchor.constraint(equalTo: movieCreditsLabel.bottomAnchor, constant: 30).isActive = true
-        collectionview.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        collectionview.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        collectionview.heightAnchor.constraint(equalToConstant: 220).isActive = true
-        collectionview.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -50).isActive = true
+        collectionviewForCredits = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
         
-        collectionview.reloadData()
+        if let collectionviewForCredits = collectionviewForCredits {
+            collectionviewForCredits.dataSource = self
+            collectionviewForCredits.delegate = self
+            collectionviewForCredits.register(MovieCastCell.self, forCellWithReuseIdentifier: "MovieCastCell")
+            collectionviewForCredits.showsHorizontalScrollIndicator = true
+            collectionviewForCredits.alwaysBounceVertical = false
+            collectionviewForCredits.backgroundColor = .clear
+            self.view.addSubview(collectionviewForCredits)
+            collectionviewForCredits.translatesAutoresizingMaskIntoConstraints = false
+            collectionviewForCredits.topAnchor.constraint(equalTo: movieCreditsLabel.bottomAnchor, constant: 30).isActive = true
+            collectionviewForCredits.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+            collectionviewForCredits.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+            collectionviewForCredits.heightAnchor.constraint(equalToConstant: 220).isActive = true
+            collectionviewForCredits.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -50).isActive = true
+            collectionviewForCredits.reloadData()
+        }
     }
     
     // MARK: MovieDetailViewDisplayLogic
