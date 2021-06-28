@@ -259,6 +259,9 @@ class PersonDetailViewController: BaseViewControlller, PersonDetailViewDisplayLo
         
         if (movieCreditViewModel?.cast?.count).intValue > 0 {
             labelMovieCreditsTitle?.text = "Movie Credits"
+        } else {
+            labelMovieCreditsTitle?.heightAnchor.constraint(equalToConstant: 0).isActive = true
+            collectionView?.heightAnchor.constraint(equalToConstant: 0).isActive = true
         }
         
         DispatchQueue.main.async { [weak self] in
