@@ -25,6 +25,8 @@ class PersonDetailViewController: BaseViewControlller, PersonDetailViewDisplayLo
     var labelName: UILabel?
     var labelDepartmant: UILabel?
     var labelBiography: UILabel?
+    var labelMovieCreditsTitle: UILabel?
+    
     var collectionView: UICollectionView?
     var imageView: UIImageView?
     
@@ -197,19 +199,23 @@ class PersonDetailViewController: BaseViewControlller, PersonDetailViewDisplayLo
         
         // Movie Credits Title
         
-        let movieCreditsLabel = UILabel()
-        movieCreditsLabel.font = FontUtility.titleFont()
-        movieCreditsLabel.textColor = ColorUtility.titleColor()
-        movieCreditsLabel.numberOfLines = 0
-        movieCreditsLabel.text = "Movie Credits"
+        labelMovieCreditsTitle = UILabel()
         
-        contentView.addSubview(movieCreditsLabel)
+        guard let labelMovieCreditsTitle = labelMovieCreditsTitle else {
+            return
+        }
         
-        movieCreditsLabel.translatesAutoresizingMaskIntoConstraints = false
-        movieCreditsLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 40).isActive = true
-        movieCreditsLabel.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 20).isActive = true
-        movieCreditsLabel.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -10).isActive = true
-        movieCreditsLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        labelMovieCreditsTitle.font = FontUtility.titleFont()
+        labelMovieCreditsTitle.textColor = ColorUtility.titleColor()
+        labelMovieCreditsTitle.numberOfLines = 0
+        
+        contentView.addSubview(labelMovieCreditsTitle)
+        
+        labelMovieCreditsTitle.translatesAutoresizingMaskIntoConstraints = false
+        labelMovieCreditsTitle.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 40).isActive = true
+        labelMovieCreditsTitle.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 20).isActive = true
+        labelMovieCreditsTitle.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -10).isActive = true
+        labelMovieCreditsTitle.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
         // collectionView
         
@@ -232,7 +238,7 @@ class PersonDetailViewController: BaseViewControlller, PersonDetailViewDisplayLo
         collectionView.tag = 100
         self.view.addSubview(collectionView)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.topAnchor.constraint(equalTo: movieCreditsLabel.bottomAnchor, constant: 30).isActive = true
+        collectionView.topAnchor.constraint(equalTo: labelMovieCreditsTitle.bottomAnchor, constant: 30).isActive = true
         collectionView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         collectionView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         collectionView.heightAnchor.constraint(equalToConstant: 220).isActive = true
@@ -250,6 +256,10 @@ class PersonDetailViewController: BaseViewControlller, PersonDetailViewDisplayLo
         labelName?.text = self.personDetailViewModel?.name
         labelDepartmant?.text = self.personDetailViewModel?.knownForDepartment
         labelBiography?.text = self.personDetailViewModel?.biography
+        
+        if (movieCreditViewModel?.cast?.count).intValue > 0 {
+            labelMovieCreditsTitle?.text = "Movie Credits"
+        }
         
         DispatchQueue.main.async { [weak self] in
             let url = Constants.imagePrefixURL +  (self?.personDetailViewModel?.imageUrl).stringValue

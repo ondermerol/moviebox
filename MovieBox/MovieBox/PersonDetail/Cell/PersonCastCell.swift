@@ -17,7 +17,7 @@ class PersonCastCell: UICollectionViewCell {
             DispatchQueue.main.async {
                 let url = Constants.imagePrefixURL +  viewModel.imageUrl.stringValue
                 self.imageView.sd_setImage(with: URL(string: url),
-                                           placeholderImage: UIImage(named: "avatar"))
+                                           placeholderImage: UIImage(named: "movie"))
             }
             
             nameLabel.text = viewModel.title
