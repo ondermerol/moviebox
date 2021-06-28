@@ -8,7 +8,7 @@
 import UIKit
 
 struct PersonDetailViewModel: Decodable {
-    let id: Int
+    let id: Int?
     let name: String?
     let biography: String?
     let birthday: String?
@@ -26,12 +26,12 @@ struct PersonDetailViewModel: Decodable {
 }
 
 struct PersonMovieCreditViewModel: Decodable {
-    let id: Int
+    let id: Int?
     let cast: [MovieCreditViewModel]?
 }
 
 struct MovieCreditViewModel: Decodable {
-    let id: Int
+    let id: Int?
     let title: String?
     let imageUrl: String?
     

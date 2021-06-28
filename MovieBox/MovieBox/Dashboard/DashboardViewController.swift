@@ -125,10 +125,10 @@ class DashboardViewController: BaseViewControlller, DashboardViewDisplayLogic {
     
     func displayPopularMovies(movieListViewModel: MovieListViewModel, genreViewModel: GenreViewModel?) {
         
-        if self.movieListViewModel == nil || self.movieListViewModel?.items.count == 0 {
+        if self.movieListViewModel == nil || self.movieListViewModel?.items?.count == 0 {
             self.movieListViewModel = movieListViewModel
-        } else {
-            self.movieListViewModel?.items.append(contentsOf: movieListViewModel.items)
+        } else if movieListViewModel.items != nil {
+            self.movieListViewModel?.items?.append(contentsOf: movieListViewModel.items!)
         }
         
         self.genreViewModel = genreViewModel
@@ -163,23 +163,23 @@ class DashboardViewController: BaseViewControlller, DashboardViewDisplayLogic {
     
     private func updateMovieListViewModelForGenreString() {
         
-        guard let movieListViewModel = self.movieListViewModel else {
+        guard let movieListViewModel = self.movieListViewModel, let _ = movieListViewModel.items else {
             return
         }
         
-        for (i, item) in movieListViewModel.items.enumerated() {
-            self.movieListViewModel?.items[i].genreString = getGenreString(genreList: item.genreIds ?? [])
+        for (i, item) in movieListViewModel.items!.enumerated() {
+            self.movieListViewModel?.items?[i].genreString = getGenreString(genreList: item.genreIds ?? [])
         }
     }
     
     private func updateSearchedMovieListViewModelForGenreString() {
         
-        guard let searchedMovieListViewModel = self.searchedMovieListViewModel else {
+        guard let searchedMovieListViewModel = self.searchedMovieListViewModel, let _ = searchedMovieListViewModel.items else {
             return
         }
         
-        for (i, item) in searchedMovieListViewModel.items.enumerated() {
-            self.searchedMovieListViewModel?.items[i].genreString = getGenreString(genreList: item.genreIds ?? [])
+        for (i, item) in searchedMovieListViewModel.items!.enumerated() {
+            self.searchedMovieListViewModel?.items?[i].genreString = getGenreString(genreList: item.genreIds ?? [])
         }
     }
     

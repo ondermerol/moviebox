@@ -309,7 +309,7 @@ class MovieDetailViewController: BaseViewControlller, MovieDetailViewDisplayLogi
         self.videoViewModel = videoViewModel
         
         title = movieDetailViewModel?.title.stringValue
-        labelAverageVote?.text = (movieDetailViewModel?.averageVote.description).stringValue + " ✭"
+        labelAverageVote?.text = (movieDetailViewModel?.averageVote?.description).stringValue + " ✭"
         labelName?.text = self.movieDetailViewModel?.title
         labelOverview?.text = self.movieDetailViewModel?.overview
         

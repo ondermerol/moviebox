@@ -8,7 +8,7 @@
 import UIKit
 
 struct CastMemberViewModel: Decodable {
-    let id: Int
+    let id: Int?
     let name: String?
     let imageUrl: String?
     
@@ -20,15 +20,15 @@ struct CastMemberViewModel: Decodable {
 }
 
 struct CastMembersViewModel: Decodable {
-    let id: Int
+    let id: Int?
     let cast: [CastMemberViewModel]?
 }
 
 struct MovieDetailViewModel: Decodable {
-    let id: Int
+    let id: Int?
     let title: String?
     let overview: String?
-    let averageVote: Float
+    let averageVote: Float?
     let genres: [Genre]?
     let video: Bool?
     let imageUrl: String?

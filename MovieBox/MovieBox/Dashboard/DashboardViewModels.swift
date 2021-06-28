@@ -13,7 +13,7 @@ enum DashboardSections: Int {
 }
 
 struct Genre: Decodable {
-    let id: Int
+    let id: Int?
     let name: String?
 }
 
@@ -22,7 +22,7 @@ struct GenreViewModel: Decodable {
 }
 
 struct Person: Decodable {
-    let id: Int
+    let id: Int?
     let name: String?
     let imageUrl: String?
     let knownForDepartment: String?
@@ -36,10 +36,10 @@ struct Person: Decodable {
 }
 
 struct PeopleListViewModel: Decodable {
-    var items: [Person]
-    let totalPages: Int
-    let totalResults: Int
-    let page: Int
+    var items: [Person]?
+    let totalPages: Int?
+    let totalResults: Int?
+    let page: Int?
     
     enum CodingKeys: String, CodingKey {
         case items = "results"
@@ -50,7 +50,7 @@ struct PeopleListViewModel: Decodable {
 }
 
 struct Movie: Decodable {
-    let id: Int
+    let id: Int?
     let title: String?
     let posterPath: String?
     let releaseDate: String?
@@ -70,10 +70,10 @@ struct Movie: Decodable {
 }
 
 struct MovieListViewModel: Decodable {
-    var items: [Movie]
-    let totalPages: Int
-    let totalResults: Int
-    let page: Int
+    var items: [Movie]?
+    let totalPages: Int?
+    let totalResults: Int?
+    let page: Int?
     
     enum CodingKeys: String, CodingKey {
         case items = "results"

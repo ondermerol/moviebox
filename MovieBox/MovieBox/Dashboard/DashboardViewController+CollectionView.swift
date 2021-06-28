@@ -26,9 +26,9 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
         switch DashboardSections(rawValue: section) {
         case .Movie:
             let itemList = isSearching ? searchedMovieListViewModel : movieListViewModel
-            return (itemList?.items.count).intValue
+            return (itemList?.items?.count).intValue
         case .Person:
-            return (searchedPeopleListViewModel?.items.count).intValue
+            return (searchedPeopleListViewModel?.items?.count).intValue
         case .none:
             return .zero
         }
@@ -47,23 +47,23 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
             
             if !isSearching
                 && (itemList?.page).intValue < (itemList?.totalPages).intValue
-                && indexPath.row == ((itemList?.items.count).intValue * (itemList?.page).intValue) - 1 {
+                && indexPath.row == ((itemList?.items?.count).intValue * (itemList?.page).intValue) - 1 {
                 
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ActivityIndicatorCell", for: indexPath)
                 return cell
             }
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as! MovieCell
-            cell.viewModel = itemList?.items[indexPath.row]
-            cell.isLast = (itemList?.items.count).intValue - 1 == indexPath.row
+            cell.viewModel = itemList?.items?[indexPath.row]
+            cell.isLast = (itemList?.items?.count).intValue - 1 == indexPath.row
             return cell
             
         case .Person:
             
             if isSearching {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PersonCell", for: indexPath) as! PersonCell
-                cell.viewModel = searchedPeopleListViewModel?.items[indexPath.row]
-                cell.isLast = (searchedPeopleListViewModel?.items.count).intValue - 1 == indexPath.row
+                cell.viewModel = searchedPeopleListViewModel?.items?[indexPath.row]
+                cell.isLast = (searchedPeopleListViewModel?.items?.count).intValue - 1 == indexPath.row
                 return cell
             }
     
@@ -84,7 +84,7 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
             switch DashboardSections(rawValue: indexPath.section) {
             case .Movie:
                 let itemList = isSearching ? searchedMovieListViewModel : movieListViewModel
-                sectionHeader.label.text = (itemList?.items.count).intValue > 0 ? "Movies" : ""
+                sectionHeader.label.text = (itemList?.items?.count).intValue > 0 ? "Movies" : ""
             case .Person:
                 sectionHeader.label.text = isSearching ? "People" : ""
             case .none:
@@ -115,7 +115,7 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
         let itemList = isSearching ? searchedMovieListViewModel : movieListViewModel
         
         if (itemList?.page).intValue < (itemList?.totalPages).intValue
-            && indexPath.row == ((itemList?.items.count).intValue * (itemList?.page).intValue) - 1
+            && indexPath.row == ((itemList?.items?.count).intValue * (itemList?.page).intValue) - 1
             && !hasActivePaginationServiceCall {
             
             hasActivePaginationServiceCall = true
@@ -131,13 +131,13 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
         case .Movie:
             let itemList = isSearching ? searchedMovieListViewModel : movieListViewModel
             
-            if let id = itemList?.items[indexPath.row].id {
+            if let id = itemList?.items?[indexPath.row].id {
                 openMovieDetail(movieId: id)
             }
             
         case .Person:
             
-            if let id = searchedPeopleListViewModel?.items[indexPath.row].id {
+            if let id = searchedPeopleListViewModel?.items?[indexPath.row].id {
                 openPersonDetail(personId: id)
             }
         case .none:
@@ -159,7 +159,7 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
     
     private func showEmptyState() -> Bool {
         return isSearching
-            && (searchedMovieListViewModel?.items.count).intValue == 0
-            && (searchedPeopleListViewModel?.items.count).intValue == 0
+            && (searchedMovieListViewModel?.items?.count).intValue == 0
+            && (searchedPeopleListViewModel?.items?.count).intValue == 0
     }
 }
