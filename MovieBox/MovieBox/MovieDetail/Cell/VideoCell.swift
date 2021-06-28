@@ -9,7 +9,17 @@ import UIKit
 
 class VideoCell: UICollectionViewCell {
     
-    var videoUrl: String?
+    var viewModel: VideoCellViewModel? {
+        didSet {
+            guard let viewModel = viewModel else { return }
+            
+            initView(with: viewModel)
+        }
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -49,14 +59,14 @@ class VideoCell: UICollectionViewCell {
         contentView.addSubview(imageView)
     }
     
-    func configure(_ index: Int) {
+    private func initView(with viewModel: VideoCellViewModel) {
         
         view.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
         view.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10).isActive = true
         view.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
         view.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
         
-        titleLabel.text = "Tralier \(index + 1)"
+        titleLabel.text = "Tralier \(viewModel.index + 1)"
         titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 25).isActive = true
         titleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         titleLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
@@ -67,9 +77,5 @@ class VideoCell: UICollectionViewCell {
         imageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         imageView.heightAnchor.constraint(equalToConstant: 30).isActive = true
         imageView.widthAnchor.constraint(equalToConstant: 30).isActive = true
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }

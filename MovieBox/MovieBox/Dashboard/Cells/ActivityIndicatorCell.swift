@@ -10,7 +10,7 @@ import UIKit
 class ActivityIndicatorCell: UICollectionViewCell {
     
     private let indicatorView: UIActivityIndicatorView = {
-       let view = UIActivityIndicatorView(style: .white)
+        let view = UIActivityIndicatorView(style: .white)
         return view
     }()
     

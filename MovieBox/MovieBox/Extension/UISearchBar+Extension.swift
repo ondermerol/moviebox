@@ -23,14 +23,8 @@ extension UISearchBar {
                 if subview is UITextField {
                     
                     if let textField: UITextField = subview as? UITextField {
-
-                        // Background Color
                         textField.backgroundColor = background
-
-                        //   Text Color
                         textField.textColor = inputText
-
-                        //  Placeholder Color
                         textField.attributedPlaceholder = NSAttributedString(string: textField.placeholder ?? "", attributes: [NSAttributedString.Key.foregroundColor : placeholderText])
 
                         //  Default Image Color
@@ -51,14 +45,8 @@ extension UISearchBar {
 
         // IOS 13 only:
         if let textField = self.value(forKey: "searchField") as? UITextField {
-
-            // Background Color
             textField.backgroundColor = background
-
-            //   Text Color
             textField.textColor = inputText
-
-            //  Placeholder Color
             textField.attributedPlaceholder = NSAttributedString(string: textField.placeholder ?? "", attributes: [NSAttributedString.Key.foregroundColor : placeholderText])
 
             //  Default Image Color

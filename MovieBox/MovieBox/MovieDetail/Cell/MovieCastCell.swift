@@ -15,13 +15,17 @@ class MovieCastCell: UICollectionViewCell {
             guard let viewModel = viewModel else { return }
             
             DispatchQueue.main.async {
-                let url = "https://image.tmdb.org/t/p/w500" +  viewModel.imageUrl.stringValue
+                let url = Constants.imagePrefixURL +  viewModel.imageUrl.stringValue
                 self.imageView.sd_setImage(with: URL(string: url),
                                            placeholderImage: UIImage(named: "avatar"))
             }
             
             nameLabel.text = viewModel.name
         }
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     private let imageView: UIImageView = {
@@ -59,9 +63,5 @@ class MovieCastCell: UICollectionViewCell {
         nameLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -5).isActive = true
         nameLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 5).isActive = true
         nameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }

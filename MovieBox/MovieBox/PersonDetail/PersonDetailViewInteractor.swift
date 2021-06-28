@@ -21,7 +21,7 @@ class PersonDetailViewInteractor: PersonDetailViewBusinessLogic, PersonDetailVie
     var worker: PersonDetailViewWorker? = PersonDetailViewWorker()
     var personId: Int?
     
-    func getPersonDetail(forPersonId id: Int) {
+    func getPersonDetail(forPersonId id: Int) {
         
         LoadingViewUtility.showLoadingView()
         

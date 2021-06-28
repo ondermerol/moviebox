@@ -68,7 +68,7 @@ class MovieDetailViewControllerTests: XCTestCase {
         
         let indexPath = IndexPath(item: 0, section: 0)
         let cell = sut.collectionView(sut.collectionviewForVideos!, cellForItemAt: indexPath) as? VideoCell
-        let videoUrl = cell?.videoUrl
+        let videoUrl = cell?.viewModel?.videoUrl
 
         XCTAssertNotNil(cell)
         XCTAssertNotNil(videoUrl)

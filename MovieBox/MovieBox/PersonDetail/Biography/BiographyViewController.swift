@@ -43,12 +43,8 @@ class BiographyViewController: BaseViewControlller {
     private func setup() {
         let viewController = self
         let interactor = BiographyViewInteractor()
-        //let presenter = BiographyViewPresenter()
         let router = BiographyViewRouter()
-        //viewController.interactor = interactor
         viewController.router = router
-        //interactor.presenter = presenter
-        //presenter.viewController = viewController
         router.viewController = viewController
         router.dataStore = interactor
     }

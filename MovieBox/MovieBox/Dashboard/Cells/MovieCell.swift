@@ -14,17 +14,32 @@ class MovieCell: UICollectionViewCell {
         didSet {
             guard let viewModel = viewModel else { return }
             
-            DispatchQueue.main.async {
-                let url = "https://image.tmdb.org/t/p/w500" +  viewModel.posterPath.stringValue
-                self.imageView.sd_setImage(with: URL(string: url),
-                                           placeholderImage: UIImage(named: "movie"))
-            }
-            
-            titleLabel.text = viewModel.title
-            releaseDateLabel.text = viewModel.releaseDate
-            averageVoteLabel.text = (viewModel.averageVote?.description).stringValue + " ✭"
-            genreLabel.text = viewModel.genreString
+            initView(with: viewModel)
         }
+    }
+    
+    var isLast: Bool = false {
+        didSet {
+            
+            if !isLast {
+                addSubview(seperatorView)
+                seperatorView.translatesAutoresizingMaskIntoConstraints = false
+                seperatorView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+                seperatorView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
+                seperatorView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+                seperatorView.heightAnchor.constraint(equalToConstant: 5).isActive = true
+            } else {
+                seperatorView.removeFromSuperview()
+            }
+        }
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: .zero)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     private let imageView: UIImageView = {
@@ -76,11 +91,18 @@ class MovieCell: UICollectionViewCell {
         return view
      }()
     
-    override init(frame: CGRect) {
-        super.init(frame: .zero)
-    }
-    
-    func configureCell(_ isLastItem: Bool) {
+    private func initView(with viewModel: Movie) {
+        
+        titleLabel.text = viewModel.title
+        releaseDateLabel.text = viewModel.releaseDate
+        averageVoteLabel.text = (viewModel.averageVote?.description).stringValue + " ✭"
+        genreLabel.text = viewModel.genreString
+        
+        DispatchQueue.main.async {
+            let url = "https://image.tmdb.org/t/p/w500" +  (self.viewModel?.posterPath).stringValue
+            self.imageView.sd_setImage(with: URL(string: url),
+                                       placeholderImage: UIImage(named: "movie"))
+        }
         
         contentView.addSubview(imageView)
         contentView.addSubview(titleLabel)
@@ -95,7 +117,7 @@ class MovieCell: UICollectionViewCell {
         titleLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10).isActive = true
         titleLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
-        if (viewModel?.releaseDate) != nil {
+        if (viewModel.releaseDate) != nil {
             addSubview(releaseDateLabel)
             releaseDateLabel.translatesAutoresizingMaskIntoConstraints = false
             releaseDateLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 3.3).isActive = true
@@ -104,7 +126,7 @@ class MovieCell: UICollectionViewCell {
             releaseDateLabel.heightAnchor.constraint(equalToConstant: 25).isActive = true
         }
         
-        if (viewModel?.averageVote) != nil {
+        if (viewModel.averageVote) != nil {
             addSubview(averageVoteLabel)
             averageVoteLabel.translatesAutoresizingMaskIntoConstraints = false
             averageVoteLabel.bottomAnchor.constraint(equalTo: imageView.bottomAnchor, constant: -43.3).isActive = true
@@ -113,7 +135,7 @@ class MovieCell: UICollectionViewCell {
             averageVoteLabel.heightAnchor.constraint(equalToConstant: 25).isActive = true
         }
         
-        if (viewModel?.genreString) != nil {
+        if (viewModel.genreString) != nil {
             addSubview(genreLabel)
             genreLabel.translatesAutoresizingMaskIntoConstraints = false
             genreLabel.bottomAnchor.constraint(equalTo: imageView.bottomAnchor).isActive = true
@@ -121,20 +143,5 @@ class MovieCell: UICollectionViewCell {
             genreLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10).isActive = true
             genreLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
         }
-        
-        if !isLastItem {
-            addSubview(seperatorView)
-            seperatorView.translatesAutoresizingMaskIntoConstraints = false
-            seperatorView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-            seperatorView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
-            seperatorView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
-            seperatorView.heightAnchor.constraint(equalToConstant: 5).isActive = true
-        } else {
-            seperatorView.removeFromSuperview()
-        }
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }

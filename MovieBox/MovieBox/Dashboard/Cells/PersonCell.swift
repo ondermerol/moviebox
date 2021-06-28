@@ -14,15 +14,32 @@ class PersonCell: UICollectionViewCell {
         didSet {
             guard let viewModel = viewModel else { return }
             
-            DispatchQueue.main.async {
-                let url = "https://image.tmdb.org/t/p/w500" +  viewModel.imageUrl.stringValue
-                self.imageView.sd_setImage(with: URL(string: url),
-                                           placeholderImage: UIImage(named: "avatar"))
-            }
-            
-            titleLabel.text = viewModel.name
-            descriptionLabel.text = viewModel.knownForDepartment
+            initView(with: viewModel)
         }
+    }
+    
+    var isLast: Bool = false {
+        didSet {
+            
+            if !isLast {
+                addSubview(seperatorView)
+                seperatorView.translatesAutoresizingMaskIntoConstraints = false
+                seperatorView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+                seperatorView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
+                seperatorView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
+                seperatorView.heightAnchor.constraint(equalToConstant: 5).isActive = true
+            } else {
+                seperatorView.removeFromSuperview()
+            }
+        }
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: .zero)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     private let imageView: UIImageView = {
@@ -57,11 +74,16 @@ class PersonCell: UICollectionViewCell {
         return view
      }()
     
-    override init(frame: CGRect) {
-        super.init(frame: .zero)
-    }
-    
-    func configureCell(_ isLastItem: Bool) {
+    private func initView(with viewModel: Person) {
+        
+        DispatchQueue.main.async {
+            let url = Constants.imagePrefixURL +  viewModel.imageUrl.stringValue
+            self.imageView.sd_setImage(with: URL(string: url),
+                                       placeholderImage: UIImage(named: "avatar"))
+        }
+        
+        titleLabel.text = viewModel.name
+        descriptionLabel.text = viewModel.knownForDepartment
         
         contentView.addSubview(imageView)
         contentView.addSubview(titleLabel)
@@ -76,7 +98,7 @@ class PersonCell: UICollectionViewCell {
         titleLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10).isActive = true
         titleLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
-        if (viewModel?.knownForDepartment) != nil {
+        if (viewModel.knownForDepartment) != nil {
             addSubview(descriptionLabel)
             descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
             descriptionLabel.topAnchor.constraint(equalTo: titleLabel.topAnchor, constant: 40).isActive = true
@@ -84,20 +106,5 @@ class PersonCell: UICollectionViewCell {
             descriptionLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -10).isActive = true
             descriptionLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
         }
-        
-        if !isLastItem {
-            addSubview(seperatorView)
-            seperatorView.translatesAutoresizingMaskIntoConstraints = false
-            seperatorView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-            seperatorView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
-            seperatorView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
-            seperatorView.heightAnchor.constraint(equalToConstant: 5).isActive = true
-        } else {
-            seperatorView.removeFromSuperview()
-        }
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }

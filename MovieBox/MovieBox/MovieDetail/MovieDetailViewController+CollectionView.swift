@@ -45,8 +45,8 @@ extension MovieDetailViewController: UICollectionViewDelegate, UICollectionViewD
         }
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "VideoCell", for: indexPath) as! VideoCell
-        cell.videoUrl = videoViewModel?.results?[indexPath.row].key
-        cell.configure(indexPath.row)
+        cell.viewModel = VideoCellViewModel(videoUrl: videoViewModel?.results?[indexPath.row].key,
+                                            index: indexPath.row)
         return cell
     }
     
@@ -56,10 +56,8 @@ extension MovieDetailViewController: UICollectionViewDelegate, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         if collectionView == self.collectionviewForCredits {
-            
-            let item = castMembersViewModel?.cast?[indexPath.row]
-            
-            if let id = item?.id {
+    
+            if let id = castMembersViewModel?.cast?[indexPath.row].id {
                 openPersonDetail(personId: id)
             }
         } else {

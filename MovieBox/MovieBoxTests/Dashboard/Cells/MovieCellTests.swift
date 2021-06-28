@@ -36,7 +36,6 @@ class MovieCellTests: XCTestCase {
         func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as! MovieCell
             cell.viewModel = mockData[indexPath.row]
-            cell.configureCell(mockData.count - 1 == indexPath.row)
             return cell
         }
     }
@@ -58,7 +57,6 @@ class MovieCellTests: XCTestCase {
         
         XCTAssertNotNil(cell)
         cell.viewModel = MovieMockData.popularMovieList[0]
-        cell.configureCell(false)
         
         XCTAssert(cell.viewModel?.id == MovieMockData.popularMovieList[0].id)
     }

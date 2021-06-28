@@ -320,7 +320,7 @@ class MovieDetailViewController: BaseViewControlller, MovieDetailViewDisplayLogi
         labelOverview?.text = self.movieDetailViewModel?.overview
         
         DispatchQueue.main.async { [weak self] in
-            let url = "https://image.tmdb.org/t/p/w500" +  (self?.movieDetailViewModel?.imageUrl).stringValue
+            let url = Constants.imagePrefixURL +  (self?.movieDetailViewModel?.imageUrl).stringValue
             self?.imageView?.sd_setImage(with: URL(string: url),
                                        placeholderImage: UIImage(named: "avatar"))
         }

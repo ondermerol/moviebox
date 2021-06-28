@@ -38,7 +38,6 @@ class PersonCellTests: XCTestCase {
         func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PersonCell", for: indexPath) as! PersonCell
             cell.viewModel = mockData[indexPath.row]
-            cell.configureCell(mockData.count - 1 == indexPath.row)
             return cell
         }
     }
@@ -60,7 +59,6 @@ class PersonCellTests: XCTestCase {
         
         XCTAssertNotNil(cell)
         cell.viewModel = PersonMockData.personList[0]
-        cell.configureCell(false)
         
         XCTAssert(cell.viewModel?.id == PersonMockData.personList[0].id)
     }

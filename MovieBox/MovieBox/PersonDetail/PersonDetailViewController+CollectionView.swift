@@ -39,9 +39,7 @@ extension PersonDetailViewController: UICollectionViewDelegate, UICollectionView
         
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let item = movieCreditViewModel?.cast?[indexPath.row]
-        
-        if let id = item?.id {
+        if let id = movieCreditViewModel?.cast?[indexPath.row].id {
             openMovieDetail(movieId: id)
         }
     }

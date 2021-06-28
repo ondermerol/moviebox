@@ -65,3 +65,8 @@ struct VideoViewModel: Decodable {
         case results
     }
 }
+
+struct VideoCellViewModel: Decodable {
+    let videoUrl: String?
+    let index: Int
+}
