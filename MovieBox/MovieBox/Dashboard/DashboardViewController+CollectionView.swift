@@ -140,22 +140,28 @@ extension DashboardViewController: UICollectionViewDelegate, UICollectionViewDat
             let movie = itemList?.items[indexPath.row]
             
             if let id = movie?.id {
-                router?.routeToMovieDetail(movieId: id)
+                openMovieDetail(movieId: id)
             }
             
         case .Person:
             let peopleItem = searchedPeopleListViewModel?.items[indexPath.row]
             
             if let id = peopleItem?.id {
-                router?.routeToPersonDetail(personId: id)
+                openPersonDetail(personId: id)
             }
         case .none:
             break
         }
     }
     
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        searchBar?.endEditing(true)
+    // MARK: Actions
+    
+    func openMovieDetail(movieId: Int) {
+        router?.routeToMovieDetail(movieId: movieId)
+    }
+    
+    func openPersonDetail(personId: Int) {
+        router?.routeToPersonDetail(personId: personId)
     }
     
     // MARK: Private Helpers

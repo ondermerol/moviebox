@@ -19,7 +19,7 @@ class MovieDetailViewController: BaseViewControlller, MovieDetailViewDisplayLogi
     // MARK: Properties
     
     var interactor: MovieDetailViewBusinessLogic?
-    var router: (NSObjectProtocol & MovieDetailViewRoutingLogic & MovieDetailViewDataPassing)?
+    var router: (NSObject & MovieDetailViewRoutingLogic & MovieDetailViewDataPassing)?
     
     var movieDetailViewModel: MovieDetailViewModel?
     var castMembersViewModel: CastMembersViewModel?

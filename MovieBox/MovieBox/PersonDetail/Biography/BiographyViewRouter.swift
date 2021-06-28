@@ -12,7 +12,7 @@ import UIKit
 }
 
 protocol BiographyViewDataPassing {
-    var dataStore: BiographyViewDataStore? { get }
+    var dataStore: BiographyViewDataStore? { get set }
 }
 
 class BiographyViewRouter: NSObject, BiographyViewRoutingLogic, BiographyViewDataPassing {

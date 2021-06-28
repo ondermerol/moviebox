@@ -16,7 +16,7 @@ class PersonDetailViewController: BaseViewControlller, PersonDetailViewDisplayLo
     // MARK: Properties
     
     var interactor: PersonDetailViewBusinessLogic?
-    var router: (NSObjectProtocol & PersonDetailViewRoutingLogic & PersonDetailViewDataPassing)?
+    var router: (NSObject & PersonDetailViewRoutingLogic & PersonDetailViewDataPassing)?
     
     var personDetailViewModel: PersonDetailViewModel?
     var movieCreditViewModel: PersonMovieCreditViewModel?

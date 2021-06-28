@@ -12,7 +12,7 @@ class BiographyViewController: BaseViewControlller {
 
     // MARK: Properties
     
-    var router: (NSObjectProtocol & BiographyViewRoutingLogic & BiographyViewDataPassing)?
+    var router: (NSObject & BiographyViewRoutingLogic & BiographyViewDataPassing)?
     
     // MARK: Object lifecycle
     
@@ -91,6 +91,7 @@ class BiographyViewController: BaseViewControlller {
         labelBiography.textColor = ColorUtility.decriptionColor()
         labelBiography.numberOfLines = 0
         labelBiography.text = biographyText
+        labelBiography.tag = 100
         
         view.addSubview(labelBiography)
         

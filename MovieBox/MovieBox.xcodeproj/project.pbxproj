@@ -103,6 +103,10 @@
 		F4B347A22689EB7800AB6899 /* DashboardViewController+CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B3471126871B3F00AB6899 /* DashboardViewController+CollectionView.swift */; };
 		F4B347A32689EB7B00AB6899 /* DashboardViewController+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B3472926879F0600AB6899 /* DashboardViewController+Search.swift */; };
 		F4B347A42689EB8800AB6899 /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B3478E26894FE400AB6899 /* VideoCell.swift */; };
+		F4B347A72689EFA500AB6899 /* MovieMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B347A62689EFA500AB6899 /* MovieMockData.swift */; };
+		F4B347A9268A00E100AB6899 /* DashboardViewInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B347A8268A00E100AB6899 /* DashboardViewInteractorTests.swift */; };
+		F4B347AB268A03FA00AB6899 /* PersonMockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B347AA268A03FA00AB6899 /* PersonMockData.swift */; };
+		F4B347AD268A046700AB6899 /* DashboardViewPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B347AC268A046700AB6899 /* DashboardViewPresenterTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -187,6 +191,10 @@
 		F4B3478E26894FE400AB6899 /* VideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
 		F4B347902689D86800AB6899 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		F4B347932689EAE900AB6899 /* DashboardViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewControllerTests.swift; sourceTree = "<group>"; };
+		F4B347A62689EFA500AB6899 /* MovieMockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieMockData.swift; sourceTree = "<group>"; };
+		F4B347A8268A00E100AB6899 /* DashboardViewInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewInteractorTests.swift; sourceTree = "<group>"; };
+		F4B347AA268A03FA00AB6899 /* PersonMockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonMockData.swift; sourceTree = "<group>"; };
+		F4B347AC268A046700AB6899 /* DashboardViewPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewPresenterTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -283,6 +291,7 @@
 		B0EEB397268621EB00EF5BEC /* MovieBoxTests */ = {
 			isa = PBXGroup;
 			children = (
+				F4B347A52689EF6400AB6899 /* Mock */,
 				F4B347922689EAA900AB6899 /* Dashboard */,
 				B0EEB398268621EB00EF5BEC /* MovieBoxTests.swift */,
 				B0EEB39A268621EB00EF5BEC /* Info.plist */,
@@ -427,8 +436,19 @@
 			isa = PBXGroup;
 			children = (
 				F4B347932689EAE900AB6899 /* DashboardViewControllerTests.swift */,
+				F4B347A8268A00E100AB6899 /* DashboardViewInteractorTests.swift */,
+				F4B347AC268A046700AB6899 /* DashboardViewPresenterTests.swift */,
 			);
 			path = Dashboard;
+			sourceTree = "<group>";
+		};
+		F4B347A52689EF6400AB6899 /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				F4B347A62689EFA500AB6899 /* MovieMockData.swift */,
+				F4B347AA268A03FA00AB6899 /* PersonMockData.swift */,
+			);
+			path = Mock;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -719,6 +739,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4B347AB268A03FA00AB6899 /* PersonMockData.swift in Sources */,
 				B05EA47D2686329B00BCC124 /* DashboardViewInteractor.swift in Sources */,
 				F4B3479C2689EB5A00AB6899 /* Constants.swift in Sources */,
 				F4B347992689EB4F00AB6899 /* UICollectionView+Extension.swift in Sources */,
@@ -746,6 +767,7 @@
 				F4B3475926885AF600AB6899 /* PersonDetailViewWorker.swift in Sources */,
 				F4B3479F2689EB6300AB6899 /* ActivityIndicatorCell.swift in Sources */,
 				B05EA4752686329B00BCC124 /* DashboardViewWorker.swift in Sources */,
+				F4B347A72689EFA500AB6899 /* MovieMockData.swift in Sources */,
 				F4B347952689EB3C00AB6899 /* DashboardViewModels.swift in Sources */,
 				F4B3477F2688B6EF00AB6899 /* FontUtility.swift in Sources */,
 				F4B3473C2688465800AB6899 /* MovieDetailViewWorker.swift in Sources */,
@@ -756,12 +778,14 @@
 				F4B34761268874DC00AB6899 /* PersonDetailViewController+CollectionView.swift in Sources */,
 				F4B347772688AA9600AB6899 /* UISearchBar+Extension.swift in Sources */,
 				F4B3470B2687091F00AB6899 /* AppDelegate.swift in Sources */,
+				F4B347A9268A00E100AB6899 /* DashboardViewInteractorTests.swift in Sources */,
 				F4B3474D26885AC000AB6899 /* PersonDetailViewRouter.swift in Sources */,
 				F4B3475D26885B0200AB6899 /* PersonDetailViewModels.swift in Sources */,
 				F4B3476A2688936000AB6899 /* MovieDetailViewController+CollectionView.swift in Sources */,
 				F4B347732688A21500AB6899 /* ColorUtility.swift in Sources */,
 				F4B3479D2689EB5D00AB6899 /* Extensions.swift in Sources */,
 				F4B3474926885AB400AB6899 /* PersonDetailViewController.swift in Sources */,
+				F4B347AD268A046700AB6899 /* DashboardViewPresenterTests.swift in Sources */,
 				B0EEB399268621EB00EF5BEC /* MovieBoxTests.swift in Sources */,
 				F4B347962689EB3F00AB6899 /* DialogBoxUtility.swift in Sources */,
 				F4B347442688468200AB6899 /* MovieDetailViewPresenter.swift in Sources */,

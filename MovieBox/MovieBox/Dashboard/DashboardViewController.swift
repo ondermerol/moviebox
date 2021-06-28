@@ -18,7 +18,7 @@ class DashboardViewController: BaseViewControlller, DashboardViewDisplayLogic {
     // MARK: Properties
     
     var interactor: DashboardViewBusinessLogic?
-    var router: (NSObjectProtocol & DashboardViewRoutingLogic & DashboardViewDataPassing)?
+    var router: (NSObject & DashboardViewRoutingLogic & DashboardViewDataPassing)?
     
     var movieListViewModel: MovieListViewModel?
     var searchedMovieListViewModel: MovieListViewModel?
@@ -146,6 +146,12 @@ class DashboardViewController: BaseViewControlller, DashboardViewDisplayLogic {
         hasActivePaginationServiceCall = false
         collectionView?.setContentOffset(.zero, animated: false)
         collectionView?.reloadData()
+    }
+    
+    // MARK: UIScrollViewDelegate
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        searchBar?.endEditing(true)
     }
     
     // MARK: Private Helpers - Genre String Creation
