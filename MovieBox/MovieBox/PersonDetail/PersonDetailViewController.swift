@@ -22,6 +22,11 @@ class PersonDetailViewController: BaseViewControlller, PersonDetailViewDisplayLo
     var movieCreditViewModel: PersonMovieCreditViewModel?
     
     var scrollView: UIScrollView?
+    var labelName: UILabel?
+    var labelDepartmant: UILabel?
+    var labelBiography: UILabel?
+    var collectionView: UICollectionView?
+    var imageView: UIImageView?
     
     // MARK: Object lifecycle
     
@@ -37,6 +42,8 @@ class PersonDetailViewController: BaseViewControlller, PersonDetailViewDisplayLo
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupView()
         
         if let id = router?.dataStore?.personId {
             interactor?.getPersonDetail(forPersonId: id)
@@ -105,11 +112,15 @@ class PersonDetailViewController: BaseViewControlller, PersonDetailViewDisplayLo
         
         // Name
         
-        let labelName = UILabel()
+        labelName = UILabel()
+        
+        guard let labelName = labelName else {
+            return
+        }
+        
         labelName.font = FontUtility.titleFont()
         labelName.textColor = ColorUtility.titleColor()
         labelName.numberOfLines = 0
-        labelName.text = self.personDetailViewModel?.name
         
         contentView.addSubview(labelName)
         
@@ -121,11 +132,15 @@ class PersonDetailViewController: BaseViewControlller, PersonDetailViewDisplayLo
         
         // Known For Department
         
-        let labelDepartmant = UILabel()
+        labelDepartmant = UILabel()
+        
+        guard let labelDepartmant = labelDepartmant else {
+            return
+        }
+        
         labelDepartmant.font = FontUtility.descriptionFont()
         labelDepartmant.textColor = ColorUtility.decriptionColor()
         labelDepartmant.numberOfLines = 0
-        labelDepartmant.text = self.personDetailViewModel?.knownForDepartment
         
         contentView.addSubview(labelDepartmant)
         
@@ -137,7 +152,12 @@ class PersonDetailViewController: BaseViewControlller, PersonDetailViewDisplayLo
         
         // ImageView
         
-        let imageView = UIImageView()
+        imageView = UIImageView()
+        
+        guard let imageView = imageView else {
+            return
+        }
+        
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
@@ -151,19 +171,17 @@ class PersonDetailViewController: BaseViewControlller, PersonDetailViewDisplayLo
         imageView.heightAnchor.constraint(equalToConstant: 200).isActive = true
         imageView.topAnchor.constraint(equalTo: labelDepartmant.bottomAnchor, constant: 20).isActive = true
         
-        DispatchQueue.main.async {
-            let url = "https://image.tmdb.org/t/p/w500" +  (self.personDetailViewModel?.imageUrl).stringValue
-            imageView.sd_setImage(with: URL(string: url),
-                                       placeholderImage: UIImage(named: "avatar"))
-        }
-        
         // Biography
         
-        let labelBiography = UILabel()
+        labelBiography = UILabel()
+        
+        guard let labelBiography = labelBiography else {
+            return
+        }
+        
         labelBiography.font = FontUtility.descriptionFont()
         labelBiography.textColor = ColorUtility.decriptionColor()
         labelBiography.numberOfLines = 0
-        labelBiography.text = self.personDetailViewModel?.biography
         
         contentView.addSubview(labelBiography)
         
@@ -193,29 +211,32 @@ class PersonDetailViewController: BaseViewControlller, PersonDetailViewDisplayLo
         movieCreditsLabel.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -10).isActive = true
         movieCreditsLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
-        // Collectionview
+        // collectionView
         
-        var collectionview: UICollectionView!
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         layout.itemSize = CGSize(width: 150, height: 220)
-        collectionview = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
-        collectionview.dataSource = self
-        collectionview.delegate = self
-        collectionview.register(PersonCastCell.self, forCellWithReuseIdentifier: "PersonCastCell")
-        collectionview.showsHorizontalScrollIndicator = true
-        collectionview.alwaysBounceVertical = false
-        collectionview.backgroundColor = .clear
-        self.view.addSubview(collectionview)
-        collectionview.translatesAutoresizingMaskIntoConstraints = false
-        collectionview.topAnchor.constraint(equalTo: movieCreditsLabel.bottomAnchor, constant: 30).isActive = true
-        collectionview.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        collectionview.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        collectionview.heightAnchor.constraint(equalToConstant: 220).isActive = true
-        collectionview.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -50).isActive = true
+        collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
         
-        collectionview.reloadData()
+        guard let collectionView = collectionView else {
+            return
+        }
+        
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.register(PersonCastCell.self, forCellWithReuseIdentifier: "PersonCastCell")
+        collectionView.showsHorizontalScrollIndicator = true
+        collectionView.alwaysBounceVertical = false
+        collectionView.backgroundColor = .clear
+        collectionView.tag = 100
+        self.view.addSubview(collectionView)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.topAnchor.constraint(equalTo: movieCreditsLabel.bottomAnchor, constant: 30).isActive = true
+        collectionView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        collectionView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        collectionView.heightAnchor.constraint(equalToConstant: 220).isActive = true
+        collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -50).isActive = true
     }
     
     // MARK: PersonDetailViewDisplayLogic
@@ -226,7 +247,17 @@ class PersonDetailViewController: BaseViewControlller, PersonDetailViewDisplayLo
         
         title = personDetailViewModel?.name.stringValue
         
-        setupView()
+        labelName?.text = self.personDetailViewModel?.name
+        labelDepartmant?.text = self.personDetailViewModel?.knownForDepartment
+        labelBiography?.text = self.personDetailViewModel?.biography
+        
+        DispatchQueue.main.async { [weak self] in
+            let url = "https://image.tmdb.org/t/p/w500" +  (self?.personDetailViewModel?.imageUrl).stringValue
+            self?.imageView?.sd_setImage(with: URL(string: url),
+                                       placeholderImage: UIImage(named: "avatar"))
+        }
+        
+        collectionView?.reloadData()
     }
     
     // MARK: Action

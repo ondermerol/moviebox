@@ -28,7 +28,7 @@ enum PersonMockData {
         
         return PersonDetailViewModel(id: 1,
                                      name: "Önder",
-                                     biography: nil,
+                                     biography: "Biography information...",
                                      birthday: nil,
                                      imageUrl: nil,
                                      knownForDepartment: nil)
@@ -36,7 +36,9 @@ enum PersonMockData {
     
     static var personMovieCredit: PersonMovieCreditViewModel {
         
+        let cast1 = MovieCreditViewModel(id: 1, title: "Robert De Niro", imageUrl: nil)
+        
         return PersonMovieCreditViewModel(id: 1,
-                                          cast: nil)
+                                          cast: [cast1])
     }
 }

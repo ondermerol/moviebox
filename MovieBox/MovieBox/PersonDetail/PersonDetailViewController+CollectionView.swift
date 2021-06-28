@@ -42,7 +42,13 @@ extension PersonDetailViewController: UICollectionViewDelegate, UICollectionView
         let item = movieCreditViewModel?.cast?[indexPath.row]
         
         if let id = item?.id {
-            router?.routeToMovieDetail(movieId: id)
+            openMovieDetail(movieId: id)
         }
+    }
+    
+    // MARK: Actions
+    
+    func openMovieDetail(movieId: Int) {
+        router?.routeToMovieDetail(movieId: movieId)
     }
 }
