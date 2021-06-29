@@ -329,10 +329,16 @@ class MovieDetailViewController: BaseViewControlller, MovieDetailViewDisplayLogi
             collectionviewForCredits?.heightAnchor.constraint(equalToConstant: 0).isActive = true
         }
         
-        DispatchQueue.main.async { [weak self] in
-            let url = Constants.imagePrefixURL +  (self?.movieDetailViewModel?.imageUrl).stringValue
-            self?.imageView?.sd_setImage(with: URL(string: url),
-                                       placeholderImage: UIImage(named: "avatar"))
+        if let imageUrl = movieDetailViewModel?.imageUrl {
+            DispatchQueue.main.async { [weak self] in
+                let url = Constants.imagePrefixURL +  imageUrl
+                self?.imageView?.sd_setImage(with: URL(string: url),
+                                           placeholderImage: UIImage(named: "movie"))
+            }
+        }
+        else {
+            imageView?.contentMode = .scaleAspectFill
+            imageView?.image = UIImage(named: "movie")
         }
         
         collectionviewForVideos?.reloadData()
