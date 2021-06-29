@@ -311,7 +311,9 @@ class MovieDetailViewController: BaseViewControlller, MovieDetailViewDisplayLogi
         title = movieDetailViewModel?.title.stringValue
         labelAverageVote?.text = (movieDetailViewModel?.averageVote?.description).stringValue + " ✭"
         labelName?.text = self.movieDetailViewModel?.title
+         
         labelOverview?.text = self.movieDetailViewModel?.overview
+        labelOverview?.isUserInteractionEnabled = (labelOverview?.text?.count).intValue > 0
         
         if (videoViewModel?.results?.count).intValue > 0 {
             labelVideosTitle?.text = "Videos"

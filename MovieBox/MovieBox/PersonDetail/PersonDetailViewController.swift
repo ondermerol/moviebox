@@ -256,7 +256,9 @@ class PersonDetailViewController: BaseViewControlller, PersonDetailViewDisplayLo
         
         labelName?.text = self.personDetailViewModel?.name
         labelDepartmant?.text = self.personDetailViewModel?.knownForDepartment
+        
         labelBiography?.text = self.personDetailViewModel?.biography
+        labelBiography?.isUserInteractionEnabled = (labelBiography?.text?.count).intValue > 0
         
         if (movieCreditViewModel?.cast?.count).intValue > 0 {
             labelMovieCreditsTitle?.text = "Movie Credits"
