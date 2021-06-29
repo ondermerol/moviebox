@@ -82,20 +82,20 @@ class BiographyViewController: BaseViewControlller {
         closeLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
         closeLabel.widthAnchor.constraint(equalToConstant: 40).isActive = true
         
-        let labelBiography = UILabel()
-        labelBiography.font = FontUtility.descriptionFont()
-        labelBiography.textColor = ColorUtility.decriptionColor()
-        labelBiography.numberOfLines = 0
-        labelBiography.text = biographyText
-        labelBiography.tag = 100
+        let textViewBiography = UITextView()
+        textViewBiography.backgroundColor = .clear
+        textViewBiography.font = FontUtility.descriptionFont()
+        textViewBiography.textColor = ColorUtility.decriptionColor()
+        textViewBiography.text = biographyText
+        textViewBiography.tag = 100
         
-        view.addSubview(labelBiography)
+        view.addSubview(textViewBiography)
         
-        labelBiography.translatesAutoresizingMaskIntoConstraints = false
-        labelBiography.topAnchor.constraint(equalTo: labelName.bottomAnchor, constant: 20).isActive = true
-        labelBiography.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
-        labelBiography.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
-        labelBiography.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 20).isActive = true
+        textViewBiography.translatesAutoresizingMaskIntoConstraints = false
+        textViewBiography.topAnchor.constraint(equalTo: labelName.bottomAnchor, constant: 20).isActive = true
+        textViewBiography.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
+        textViewBiography.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
+        textViewBiography.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30).isActive = true
     }
     
     @objc func closeAction(sender: UIBarButtonItem) {

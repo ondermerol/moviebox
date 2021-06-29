@@ -54,10 +54,10 @@ class BiographyViewControllerTests: XCTestCase {
     }
     
     func testBiographyText() {
-        let labelBiography = sut.view.viewWithTag(100) as? UILabel
+        let textVewBiography = sut.view.viewWithTag(100) as? UITextView
         
-        XCTAssertNotNil(labelBiography)
-        XCTAssert(biographyExampleText == labelBiography?.text)
+        XCTAssertNotNil(textVewBiography)
+        XCTAssert(biographyExampleText == textVewBiography?.text)
     }
     
     func testRouteBack() {
