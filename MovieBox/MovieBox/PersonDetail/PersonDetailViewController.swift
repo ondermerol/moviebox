@@ -161,7 +161,7 @@ class PersonDetailViewController: BaseViewControlller, PersonDetailViewDisplayLo
         }
         
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 12
         
@@ -169,7 +169,7 @@ class PersonDetailViewController: BaseViewControlller, PersonDetailViewDisplayLo
         
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 20).isActive = true
-        imageView.widthAnchor.constraint(equalToConstant: 150).isActive = true
+        imageView.widthAnchor.constraint(equalToConstant: 130).isActive = true
         imageView.heightAnchor.constraint(equalToConstant: 200).isActive = true
         imageView.topAnchor.constraint(equalTo: labelDepartmant.bottomAnchor, constant: 20).isActive = true
         

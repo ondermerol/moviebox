@@ -35,7 +35,7 @@ class VideoCell: UICollectionViewCell {
     private let imageView: UIImageView = {
        let iv = UIImageView()
         iv.translatesAutoresizingMaskIntoConstraints = false
-        iv.contentMode = .scaleToFill
+        iv.contentMode = .scaleAspectFit
         iv.clipsToBounds = true
         let tintColor = UIColor(red: 242.0/255.0, green: 242.0/255.0, blue: 242.0/255.0, alpha: 1.0)
         iv.image = UIImage(named: "youtubePlayIcon")?.imageWithColor(tintColor: tintColor)
